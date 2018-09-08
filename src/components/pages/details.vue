@@ -36,6 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .intro{
+  margin: -20px;
   p{
     font-size: 16px;
     line-height: 2;

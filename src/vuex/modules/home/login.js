@@ -1,4 +1,4 @@
-import api from 'assets/js/api'
+// import api from 'assets/js/api'
 
 export default {
   state: {
@@ -9,15 +9,15 @@ export default {
   },
   actions: {
     login: ({ commit }, key) => {
-      let nowData
-      let URL = ''
-      let data = {
+      // let nowData
+      // let URL = ''
+      // let data = {
 
-      }
-      api.post(URL, data).then((res) => {
-        console.log(res)
-        commit('login', nowData)
-      })
+      // }
+      // api.post(URL, data).then((res) => {
+      //   console.log(res)
+      // })
+      commit('login')
     }
   },
   mutations: {

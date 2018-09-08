@@ -15,7 +15,7 @@
       <p>现在就开始。浏览质量，免费内容或通过SAE MOBILUS订阅扩展您的访问权限。 <router-link to="">单击此处</router-link>以建议未来的知识中心</p>
     </div>
     <div class="right">
-      <router-link to="">了解关于翱坤数据库的更多信息</router-link>
+      <router-link to="/help">了解关于翱坤数据库的更多信息</router-link>
     </div>
   </div>
 </template>
