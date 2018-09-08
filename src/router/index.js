@@ -29,7 +29,7 @@ const router = new Router({
             title: '首页'
           }
         }, {
-          path: '/search/:key',
+          path: '/search/',
           name: 'search',
           component: search,
           meta: {

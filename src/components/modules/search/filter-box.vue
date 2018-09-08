@@ -13,17 +13,7 @@
         <button class="save" @click="refresh">重置</button>
       </div>
       <div class="show">
-        <div class="show-title">
-          <h2>只显示</h2>
-          <ul>
-            <li v-for="(li,index) in showTitle" :key="index" :class="{active:li.type}" @click="selectTitle(li)">
-              <Icon :type="li.type?'ios-checkbox':'ios-square-outline'" />
-              <p>{{li.name}}</p>
-            </li>
-          </ul>
-        </div>
         <div class="show-box">
-          <h2>过滤器</h2>
           <dl v-for="(li,index) in showBox" :key="index">
             <dt @click="li.type=!li.type">
               <p>{{li.name}}</p>
@@ -46,40 +36,24 @@
 
 <script>
 export default {
-  props: ['showTitle', 'showBox'],
+  props: ['showBox'],
   data () {
     return {
       hideBox: true,
-      select: {
-        title: [],
-        box: []
-      }
+      select: []
     }
   },
   methods: {
-    selectTitle (key) {
-      key.type = !key.type
-      if (key.type) {
-        this.select.title.push(key)
-      }
-      let now = this.select.title
-      for (let i = 0; i < now.length; i++) {
-        const element = now[i].type
-        if (!element) {
-          this.select.title.splice(i, 1)
-        }
-      }
-    },
     selectBox (key) {
       key.type = !key.type
       if (key.type) {
-        this.select.box.push(key)
+        this.select.push(key)
       }
-      let now = this.select.box
+      let now = this.select
       for (let i = 0; i < now.length; i++) {
         const element = now[i].type
         if (!element) {
-          this.select.box.splice(i, 1)
+          this.select.splice(i, 1)
         }
       }
     },
@@ -89,13 +63,7 @@ export default {
     },
     // 重置
     refresh () {
-      let titleList = this.showTitle
       let boxList = this.showBox
-      for (const key in titleList) {
-        if (titleList.hasOwnProperty(key)) {
-          titleList[key].type = false
-        }
-      }
       for (let i = 0; i < boxList.length; i++) {
         const element = boxList[i].box
         for (const key in element) {
@@ -104,10 +72,7 @@ export default {
           }
         }
       }
-      this.select = {
-        title: [],
-        box: []
-      }
+      this.select = []
       this.$emit('on-click', this.select)
     }
   }
@@ -118,10 +83,6 @@ export default {
 .filter-box{
   box-sizing: border-box;
   width: 300px;
-  h2{
-    margin-top: 20px;
-    font-size: 16px;
-  }
   .active{
     color:#316EC3;
   }
@@ -166,28 +127,8 @@ export default {
     }
   }
 }
-.show-title{
-  ul{
-    padding-left: 10px;
-    li{
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      margin: 4px 0;
-      cursor: pointer;
-
-      user-select: none;
-      i{
-        font-size: 16px;
-      }
-      p{
-        margin-left: 4px;
-        font-size: 14px;
-      }
-    }
-  }
-}
 .show-box{
+  padding: 10px 0;
   dl{
     padding-left: 10px;
 

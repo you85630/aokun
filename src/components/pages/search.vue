@@ -3,17 +3,11 @@
     <bg-color>
       <search-box></search-box>
       <div class="result">
-        <filter-box :showTitle="showTitle" :showBox="showBox" @on-click="filterBox"></filter-box>
+        <filter-box :showBox="showBox" @on-click="filterBox"></filter-box>
         <div class="result-box">
           <div class="title">搜索结果（<span>{{resultList.num}}</span>）</span></div>
           <div class="box">
             <div class="page-box">
-              <div class="sort">
-                <h2>排序方法：</h2>
-                <div class="select">
-                  <y-select v-model="resultList.sort.active" :select="resultList.sort" @on-click="nowSort"></y-select>
-                </div>
-              </div>
               <div class="page">
                 <y-page :page="resultList.page" @on-click="nowPage"></y-page>
                 <div class="select">
@@ -71,18 +65,6 @@ export default {
               name: 50
             }
           ]
-        },
-        sort: {
-          active: '关联',
-          list: [
-            {
-              name: '关联'
-            }, {
-              name: '最新'
-            }, {
-              name: '标题'
-            }
-          ]
         }
       },
       itemList: [
@@ -96,18 +78,6 @@ export default {
           number: '中华人民共和国主席令第81号',
           time: '2017年11月04日',
           key: 2
-        }
-      ],
-      showTitle: [
-        {
-          type: false,
-          name: '新增内容'
-        }, {
-          type: false,
-          name: '我的访问'
-        }, {
-          type: false,
-          name: '全文搜索'
         }
       ],
       showBox: [
@@ -199,10 +169,6 @@ export default {
     // 当前页面个数
     nowPageSelect (key) {
       console.log(key)
-    },
-    // 排序
-    nowSort (key) {
-      console.log(key)
     }
   }
 }
@@ -237,21 +203,6 @@ export default {
 }
 .page-box{
   font-size: 14px;
-  .sort{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    h2{
-      font-size: 14px;
-    }
-    .select{
-      width: 80px;
-      height: 25px;
-      font-size: 14px;
-    }
-  }
   .page{
     display: flex;
     align-items: center;
