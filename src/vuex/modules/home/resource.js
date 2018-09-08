@@ -40,8 +40,7 @@ export default {
                 if (e.parent_id === s.id) {
                   s.item.push({
                     name: e.name,
-                    id: e.parent_id,
-                    link: '' // 这里缺少链接
+                    id: e.parent_id
                   })
                 }
               }

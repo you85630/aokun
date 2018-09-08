@@ -4,7 +4,7 @@
     <div class="box">
       <div class="list" v-for="(li,index) in list" :key="index">
         <div class="name">{{li.name}}</div>
-        <router-link class="item" v-for="(i,val) in li.item" :key="val" :to="i.link">{{i.name}}</router-link>
+        <router-link class="item" v-for="(i,val) in li.item" :key="val" :to="'/search/'+i.id">{{i.name}}</router-link>
       </div>
     </div>
   </div>

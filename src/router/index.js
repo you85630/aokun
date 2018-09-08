@@ -22,15 +22,15 @@ const router = new Router({
       children: [
         {
           path: '/home',
-          name: '/home',
+          name: 'home',
           component: home,
           meta: {
             requireAuth: true,
             title: '首页'
           }
         }, {
-          path: '/search',
-          name: '/search',
+          path: '/search/:key',
+          name: 'search',
           component: search,
           meta: {
             requireAuth: true,
@@ -38,7 +38,7 @@ const router = new Router({
           }
         }, {
           path: '/search/details/:key',
-          name: '/details',
+          name: 'details',
           component: details,
           meta: {
             requireAuth: true,
@@ -46,7 +46,7 @@ const router = new Router({
           }
         }, {
           path: '/data',
-          name: '/data',
+          name: 'data',
           component: data,
           meta: {
             requireAuth: true,
@@ -54,7 +54,7 @@ const router = new Router({
           }
         }, {
           path: '/learn',
-          name: '/learn',
+          name: 'learn',
           component: learn,
           meta: {
             requireAuth: true,
@@ -62,7 +62,7 @@ const router = new Router({
           }
         }, {
           path: '/help',
-          name: '/help',
+          name: 'help',
           component: help,
           meta: {
             requireAuth: true,
@@ -70,7 +70,7 @@ const router = new Router({
           }
         }, {
           path: '/register',
-          name: '/register',
+          name: 'register',
           component: register,
           meta: {
             requireAuth: true,
