@@ -16,7 +16,7 @@
         </ul>
       </div>
       <div class="more" v-if="!more">
-        <button>搜索</button>
+        <button @click="simpleSearch(key)">搜索</button>
         <Icon class="help" type="ios-help-circle" />
         <p class="advanced" @click="more=true">高级搜索</p>
       </div>
@@ -35,14 +35,14 @@
       <li>
         <p>发文日期：</p>
         <div class="time">
-          <date-picker v-model="stime"></date-picker>
+          <date-picker v-model="key.stime"></date-picker>
           <span>至</span>
-          <date-picker v-model="etime"></date-picker>
+          <date-picker v-model="key.etime"></date-picker>
         </div>
       </li>
       <li>
         <p></p>
-        <button>搜索</button>
+        <button @click="advancedSearch(key)">搜索</button>
       </li>
     </ul>
   </div>
@@ -102,7 +102,6 @@ export default {
     width: 625px;
     height: 45px;
     border: none;
-    border-radius: 2px;
     background-color: #fff;
     font-size: 18px;
   }
@@ -202,7 +201,7 @@ export default {
     align-items: center;
     flex-direction: row;
     box-sizing: border-box;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 50%;
     p{
       width: 90px;
@@ -214,13 +213,13 @@ export default {
       font-size: 14px;
     }
     button{
-      width: 116px;
-      height: 45px;
+      width: 80px;
+      height: 30px;
       border: none;
       border-radius: 2px;
       background: #316EC3;
       color: #FFFFFF;
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   .time{

@@ -301,9 +301,7 @@ export default {
   align-items: center;
   flex-direction: row;
   box-sizing: border-box;
-  padding: 4px 10px;
-  border: 1px solid #eee;
-  border-radius: 2px;
+  padding: 6px 10px;
   input {
     width: 96%;
     border: none;
