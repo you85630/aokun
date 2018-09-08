@@ -35,7 +35,9 @@
       <li>
         <p>发文日期：</p>
         <div class="time">
-          至
+          <date-picker v-model="stime"></date-picker>
+          <span>至</span>
+          <date-picker v-model="etime"></date-picker>
         </div>
       </li>
       <li>
@@ -47,14 +49,18 @@
 </template>
 
 <script>
+import datePicker from 'components/common/datepicker'
 export default {
+  components: {
+    datePicker
+  },
   data () {
     return {
       select: false,
       more: false,
       key: {
         key: '',
-        select: '全文',
+        select: '全部',
         unit: '',
         number: '',
         stime: '',
@@ -62,12 +68,12 @@ export default {
       },
       rangeList: [
         {
-          name: '全文'
+          name: '全部'
         },
         {
-          name: '关联'
+          name: '标题'
         }, {
-          name: '最新'
+          name: '正文'
         }
       ]
     }
@@ -204,6 +210,8 @@ export default {
     }
     input{
       width: 400px;
+      height: 30px;
+      font-size: 14px;
     }
     button{
       width: 116px;
@@ -214,8 +222,17 @@ export default {
       color: #FFFFFF;
       font-size: 18px;
     }
-    .time{
+  }
+  .time{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    span{
       color:#fff;
+      margin: 0 10px;
+    }
+    .date-picker{
+      background-color: #fff;
     }
   }
 }

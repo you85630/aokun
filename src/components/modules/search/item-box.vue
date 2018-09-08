@@ -1,21 +1,25 @@
 <template>
   <div class="item-box">
     <ul>
-      <li v-for="(li,index) in item.list" :key="index" :class="{all:index<2}" @click="linkTo(li)">
-        <span>{{li.name}}：</span>
-        <p>{{li.info}}</p>
+      <li>
+        <span>名称：</span>
+        <p><router-link :to="'/search/details/'+item.key">{{item.name}}</router-link></p>
+      </li>
+      <li>
+        <span>文号：</span>
+        <p>{{item.number}}</p>
+      </li>
+      <li>
+        <span>发文时间：</span>
+        <p>{{item.time}}</p>
       </li>
     </ul>
-    <div class="content">{{item.content}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['item'],
-  methods: {
-    linkTo (key) {}
-  }
+  props: ['item']
 }
 </script>
 
@@ -26,21 +30,12 @@ export default {
   width: 100%;
   border-top: 1px solid #eee;
   ul{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
     li{
       display: flex;
       align-items: center;
       flex-direction: row;
       box-sizing: border-box;
       margin-bottom: 6px;
-      width: 50%;
-      &:nth-child(6),
-      &:nth-child(4){
-        padding-left: 10px;
-      }
       span{
         text-align: right;
         white-space: nowrap;
@@ -51,12 +46,6 @@ export default {
         font-size: 14px;
       }
     }
-    .all{
-      width: 100%;
-    }
-  }
-  .content{
-    font-size: 14px;
   }
 }
 </style>

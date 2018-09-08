@@ -9,6 +9,7 @@ const data = () => import('components/pages/data')
 const learn = () => import('components/pages/learn')
 const help = () => import('components/pages/help')
 const register = () => import('components/pages/register')
+const details = () => import('components/pages/details')
 
 const router = new Router({
   routes: [
@@ -34,6 +35,14 @@ const router = new Router({
           meta: {
             requireAuth: true,
             title: '搜索'
+          }
+        }, {
+          path: '/search/details/:key',
+          name: '/details',
+          component: details,
+          meta: {
+            requireAuth: true,
+            title: '详情'
           }
         }, {
           path: '/data',
