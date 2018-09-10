@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <div class="header">{{header}}</div>
+    <div class="header">翱坤知识库</div>
     <div class="slide-box">
       <div class="img-box">
         <router-link v-for="(li,index) in list" :key="index" :to="li.link" v-if="index+1===num">
@@ -22,11 +22,6 @@ export default {
   props: {
     list: {
       type: Array, // String, Number, Boolean, Function, Object, Array
-      required: true,
-      default: null
-    },
-    header: {
-      type: String,
       required: true,
       default: null
     }

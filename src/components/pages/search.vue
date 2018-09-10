@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <bg-color>
-      <search-box></search-box>
+      <search-box :selectBox="searchSelect" @on-search="searchData"></search-box>
       <div class="result">
         <filter-box :showBox="showBox" @on-click="filterBox"></filter-box>
         <div class="result-box">
@@ -33,6 +33,8 @@ import searchBox from 'components/common/search'
 import filterBox from 'components/modules/search/filter-box'
 import itemBox from 'components/modules/search/item-box'
 
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   components: {
     searchBox,
@@ -40,6 +42,9 @@ export default {
     itemBox
   },
   computed: {
+    ...mapGetters([
+      'searchSelect'
+    ]),
     resultbtn: function () {
       let now = {
         active: this.resultList.page.active,
@@ -158,6 +163,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'searchData'
+    ]),
     // 过滤器
     filterBox (key) {
       console.log(key)

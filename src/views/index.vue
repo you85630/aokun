@@ -18,6 +18,9 @@ export default {
     yHeader,
     yFooter
   },
+  mounted () {
+    this.getCompany()
+  },
   computed: {
     ...mapGetters([
       'navList',
@@ -30,7 +33,8 @@ export default {
   methods: {
     ...mapActions([
       'exit',
-      'login'
+      'login',
+      'getCompany'
     ])
   }
 }

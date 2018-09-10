@@ -2,23 +2,19 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from 'router'
 
-import login from './modules/home/login'
-import resource from './modules/home/resource'
-import indexSearch from './modules/home/index-search'
-import carousel from './modules/home/carousel'
+import login from './modules/login'
+import home from './modules/home'
+import search from './modules/search'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    login,
-    resource,
-    indexSearch,
-    carousel
+    home,
+    search,
+    login
   },
   state: {
-    bgimg: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg',
-    imgtitle: '翱坤知识库',
     navList: [
       {
         name: ' 首页',
@@ -57,21 +53,6 @@ export default new Vuex.Store({
         link: ''
       }
     ],
-    imgList: [
-      {
-        link: '',
-        img: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg',
-        info: '1Explore timely, authoritative and trusted cybersecurity resources to improve your cybersecurity knowledge and product design.'
-      }, {
-        link: '',
-        img: 'http://pbsbjhfvy.bkt.clouddn.com/img-5.jpeg',
-        info: '2Explore timely, authoritative and trusted cybersecurity resources to improve your cybersecurity knowledge and product design.'
-      }, {
-        link: '',
-        img: 'http://pbsbjhfvy.bkt.clouddn.com/img-4.jpeg',
-        info: '3Explore timely, authoritative and trusted cybersecurity resources to improve your cybersecurity knowledge and product design.'
-      }
-    ],
     sublist: [
       {
         name: '首页',
@@ -97,14 +78,11 @@ export default new Vuex.Store({
     ]
   },
   getters: {
-    bgimg: state => state.bgimg,
-    imgtitle: state => state.imgtitle,
     navList: state => state.navList,
     user: state => state.user,
     title: state => state.title,
     iconList: state => state.iconList,
     footerList: state => state.footerList,
-    imgList: state => state.imgList,
     sublist: state => state.sublist
   },
   actions: {

@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <bg-color>
-      <bg-img :img="bgimg">
-        <index-search :searchkey="searchkey" @search="search"></index-search>
+      <bg-img :img="searchkey.bgimg">
+        <index-search :searchkey="searchkey" @on-search="searchHome"></index-search>
       </bg-img>
     </bg-color>
 
     <bg-color>
-      <bg-img :img="bgimg">
-        <y-carousel :header="imgtitle" :list='imgList'></y-carousel>
+      <bg-img :img="searchkey.bgimg">
+        <y-carousel :list='imgList'></y-carousel>
       </bg-img>
     </bg-color>
 
@@ -39,9 +39,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'bgimg',
       'searchkey',
-      'imgtitle',
       'imgList',
       'linklist',
       'sublist'
@@ -49,13 +47,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      'search',
-      'getCarousel',
+      'getImg',
+      'getiImgList',
+      'searchHome',
       'getResource'
     ])
   },
   created () {
-    // this.getCarousel()
+    this.getImg()
+    this.getiImgList()
     this.getResource()
   }
 }

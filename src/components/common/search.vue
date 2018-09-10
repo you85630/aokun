@@ -51,37 +51,49 @@
 <script>
 import datePicker from 'components/common/datepicker'
 export default {
+  props: ['selectBox'],
   components: {
     datePicker
+  },
+  computed: {
+    rangeList: function () {
+      return this.selectBox
+    }
   },
   data () {
     return {
       select: false,
       more: false,
       key: {
+        categry: -1,
+        page: 1,
         key: '',
         select: '全部',
+        selectid: '-1',
         unit: '',
         number: '',
         stime: '',
         etime: ''
-      },
-      rangeList: [
-        {
-          name: '全部'
-        },
-        {
-          name: '标题'
-        }, {
-          name: '正文'
-        }
-      ]
+      }
     }
   },
   methods: {
     showSelect (key) {
       this.select = false
       this.key.select = key.name
+      this.key.selectid = key.id
+    },
+    simpleSearch (key) {
+      this.$emit('on-search', key)
+    },
+    advancedSearch (key) {
+      this.$emit('on-search', key)
+    }
+  },
+  created () {
+    let key = this.$router.currentRoute.query.categry
+    if (key) {
+      this.key.categry = this.$router.currentRoute.query.categry
     }
   }
 }
@@ -99,14 +111,14 @@ export default {
   input{
     box-sizing: border-box;
     padding: 0 10px;
-    width: 625px;
+    width: 580px;
     height: 45px;
     border: none;
     background-color: #fff;
     font-size: 18px;
   }
   .all{
-    width: 752px;
+    width: 700px;
   }
   .in{
     margin: 0 10px 0 20px;
@@ -123,7 +135,7 @@ export default {
     box-sizing: border-box;
     margin: 0 10px;
     padding: 0 10px;
-    width: 104px;
+    width: 160px;
     height: 45px;
     border-radius: 2px;
     background-color: #fff;
@@ -137,6 +149,9 @@ export default {
       p{
         margin-right: 10px;
         width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .icon{
         display: flex;
@@ -155,6 +170,8 @@ export default {
       z-index: 2;
       width: 100%;
       background-color: #fff;
+      max-height: 200px;
+      overflow-y: auto;
       cursor: pointer;
       li{
         padding: 4px 10px;

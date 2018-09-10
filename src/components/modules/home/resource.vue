@@ -22,7 +22,7 @@ export default {
   methods: {
     linkTo (key) {
       let router = this.$router
-      router.push({name: 'search', query: {id: key.id}})
+      router.push({name: 'search', query: {categry: key.id}})
     }
   }
 }

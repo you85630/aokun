@@ -6,12 +6,12 @@
       <div class="search-box">
         <div class="search">
           <Icon class="icon" type="ios-search" />
-          <input type="text" v-model="searchkey.nowkey" placeholder="输入关键字，作者，产品代码…">
+          <input type="text" v-model="key" placeholder="输入关键字，作者，产品代码…">
         </div>
-        <div class="btn" @click="search(searchkey.nowkey)">Search</div>
+        <div class="btn" @click="search(key)">Search</div>
       </div>
     </div>
-    <div class="inspect"><router-link to="">检查我的访问</router-link></div>
+    <div class="inspect"><router-link to="/learn">检查我的访问</router-link></div>
   </div>
 </template>
 
@@ -24,9 +24,14 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      key: ''
+    }
+  },
   methods: {
     search (key) {
-      this.$emit('search', key)
+      this.$emit('on-search', key)
     }
   }
 }
