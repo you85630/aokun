@@ -10,9 +10,6 @@
             <div class="page-box">
               <div class="page">
                 <y-page :page="resultList.page" @on-click="nowPage"></y-page>
-                <div class="select">
-                  <y-select v-model="resultList.pageNum.active" :select="resultList.pageNum" @on-click="nowPageSelect"></y-select>
-                </div>
               </div>
             </div>
             <div class="list-box">
@@ -62,35 +59,42 @@ export default {
         page: {
           all: 10,
           active: 1
-        },
-        pageNum: {
-          active: 10,
-          list: [
-            {
-              name: 20
-            }, {
-              name: 50
-            }
-          ]
         }
+      },
+      key: {
+        page: 1,
+        categry: -1,
+        key: -1,
+        number: -1,
+        selectid: -1,
+        stime: -1,
+        etime: -1
       }
     }
+  },
+  mounted () {
+    this.init(this.key)
   },
   methods: {
     ...mapActions([
       'searchData'
     ]),
+    init (key) {
+      let router = this.$router.currentRoute.query.categry
+      if (router) {
+        key.categry = router
+      }
+      this.searchData(key)
+    },
     // 过滤器
     filterBox (key) {
-      console.log(key)
+      this.key.categry = key.id
+      this.searchData(this.key)
     },
     // 翻页
     nowPage (key) {
-      console.log(key)
-    },
-    // 当前页面个数
-    nowPageSelect (key) {
-      console.log(key)
+      this.key.page = key
+      this.searchData(this.key)
     }
   }
 }
@@ -130,11 +134,6 @@ export default {
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    .select{
-      width: 60px;
-      height: 25px;
-      font-size: 14px;
-    }
   }
 }
 </style>

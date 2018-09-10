@@ -5,14 +5,16 @@ import router from 'router'
 import login from './modules/login'
 import home from './modules/home'
 import search from './modules/search'
+import details from './modules/details'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    login,
     home,
     search,
-    login
+    details
   },
   state: {
     navList: [

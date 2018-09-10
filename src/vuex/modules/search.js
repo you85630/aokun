@@ -3,19 +3,7 @@ import api from 'assets/js/api'
 export default {
   state: {
     searchSelect: [],
-    itemList: [
-      {
-        name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
-        number: '中华人民共和国主席令第81号',
-        time: '2017年11月04日',
-        key: 1
-      }, {
-        name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
-        number: '中华人民共和国主席令第81号',
-        time: '2017年11月04日',
-        key: 2
-      }
-    ]
+    itemList: []
   },
   getters: {
     searchSelect: state => state.searchSelect,
@@ -87,7 +75,27 @@ export default {
     },
     // 搜索
     searchData: (state, key) => {
-      console.log(key)
+      state.itemList = []
+      let list = key
+      for (const e in list) {
+        if (list.hasOwnProperty(e)) {
+          const element = list[e]
+          let time = this.a.mutations.timestampToTime(element.post_time)
+          state.itemList.push({
+            name: element.title,
+            number: element.wenhao,
+            time: time,
+            key: element.id
+          })
+        }
+      }
+    },
+    timestampToTime (timestamp) {
+      let date = new Date(timestamp * 1000)
+      let Y = date.getFullYear() + '-'
+      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+      let D = date.getDate() + ' '
+      return Y + M + D
     }
   }
 }

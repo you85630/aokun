@@ -64,6 +64,7 @@ export default {
       padding-bottom: 8px;
       color: #92B0D6;
       font-size: 16px;
+      cursor: pointer;
     }
   }
 }

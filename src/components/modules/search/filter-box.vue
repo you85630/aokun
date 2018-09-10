@@ -8,19 +8,15 @@
       </span>
     </div>
     <div class="filter" v-if="hideBox">
-      <div class="btn">
-        <button @click="filter">应用</button>
-        <button class="save" @click="refresh">重置</button>
-      </div>
       <div class="show">
         <div class="show-box">
-          <dl v-for="(li,index) in showBox" :key="index">
+          <dl v-for="(li,index) in showBoxNow" :key="index">
             <dt @click="li.type=!li.type">
               <p>{{li.name}}</p>
               <Icon :type="li.type?'ios-add':'ios-remove'" />
             </dt>
-            <dd v-for="(i,val) in li.box" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
-              <Icon :type="i.type?'ios-checkbox':'ios-square-outline'" />
+            <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
+              <Icon :type="i.type?'md-radio-button-on':'md-radio-button-off'" />
               <p>{{i.name}}</p>
             </dd>
           </dl>
@@ -28,7 +24,6 @@
       </div>
       <div class="btn">
         <button @click="filter">应用</button>
-        <button class="save" @click="refresh">重置</button>
       </div>
     </div>
   </div>
@@ -40,40 +35,47 @@ export default {
   data () {
     return {
       hideBox: true,
-      select: []
+      select: ''
+    }
+  },
+  computed: {
+    showBoxNow: function (param) {
+      let list = this.showBox
+      let router = parseInt(this.$router.currentRoute.query.categry)
+      for (const key in list) {
+        if (list.hasOwnProperty(key)) {
+          const element = list[key].item
+          for (let i = 0; i < element.length; i++) {
+            const e = element[i]
+            if (e.id === router) {
+              e.type = true
+            }
+          }
+        }
+      }
+
+      return list
     }
   },
   methods: {
     selectBox (key) {
-      key.type = !key.type
-      if (key.type) {
-        this.select.push(key)
-      }
-      let now = this.select
-      for (let i = 0; i < now.length; i++) {
-        const element = now[i].type
-        if (!element) {
-          this.select.splice(i, 1)
-        }
-      }
-    },
-    // 应用
-    filter () {
-      this.$emit('on-click', this.select)
-    },
-    // 重置
-    refresh () {
-      let boxList = this.showBox
-      for (let i = 0; i < boxList.length; i++) {
-        const element = boxList[i].box
-        for (const key in element) {
-          if (element.hasOwnProperty(key)) {
-            element[key].type = false
+      let list = this.showBoxNow
+      for (let i = 0; i < list.length; i++) {
+        const element = list[i].item
+        for (const e in element) {
+          if (element.hasOwnProperty(e)) {
+            element[e].type = false
           }
         }
       }
-      this.select = []
-      this.$emit('on-click', this.select)
+      key.type = !key.type
+      this.select = key
+    },
+    // 应用
+    filter () {
+      if (this.select !== '') {
+        this.$emit('on-click', this.select)
+      }
     }
   }
 }

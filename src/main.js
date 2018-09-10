@@ -17,6 +17,10 @@ import 'iview/dist/styles/iview.css'
 // 全局引用自定义模板
 import moduleBox from 'components/common/modulebox'
 
+// 全局事件
+import utils from './assets/js/utils.js'
+Vue.prototype.utils = utils
+
 Vue.use(iView)
 Vue.use(moduleBox)
 

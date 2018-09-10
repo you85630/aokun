@@ -102,7 +102,7 @@ export default {
                 if (e.parent_id === s.id) {
                   s.item.push({
                     name: e.name,
-                    id: e.parent_id,
+                    id: e.id,
                     type: false
                   })
                 }
@@ -111,6 +111,7 @@ export default {
           }
         }
       }
+
       state.linklist = list
     }
   }
