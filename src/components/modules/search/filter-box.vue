@@ -34,6 +34,7 @@ export default {
   props: ['showBox'],
   data () {
     return {
+      status: true,
       hideBox: true,
       select: ''
     }
@@ -47,8 +48,11 @@ export default {
           const element = list[key].item
           for (let i = 0; i < element.length; i++) {
             const e = element[i]
-            if (e.id === router) {
-              e.type = true
+            if (router) {
+              e.type = false
+              if (e.id === router) {
+                e.type = true
+              }
             }
           }
         }
@@ -132,6 +136,7 @@ export default {
 .show-box{
   padding: 10px 0;
   dl{
+    margin-bottom: 10px;
     padding-left: 10px;
 
     user-select: none;
@@ -141,6 +146,7 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       margin: 4px 0;
+      font-weight: bold;
       cursor: pointer;
       i{
         font-size: 20px;

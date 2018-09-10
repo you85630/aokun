@@ -33,25 +33,6 @@ import itemBox from 'components/modules/search/item-box'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  components: {
-    searchBox,
-    filterBox,
-    itemBox
-  },
-  computed: {
-    ...mapGetters([
-      'searchSelect',
-      'linklist',
-      'itemList'
-    ]),
-    resultbtn: function () {
-      let now = {
-        active: this.resultList.page.active,
-        all: this.resultList.page.all
-      }
-      return now
-    }
-  },
   data () {
     return {
       resultList: {
@@ -70,6 +51,25 @@ export default {
         stime: -1,
         etime: -1
       }
+    }
+  },
+  components: {
+    searchBox,
+    filterBox,
+    itemBox
+  },
+  computed: {
+    ...mapGetters([
+      'searchSelect',
+      'linklist',
+      'itemList'
+    ]),
+    resultbtn: function () {
+      let now = {
+        active: this.resultList.page.active,
+        all: this.resultList.page.all
+      }
+      return now
     }
   },
   mounted () {

@@ -3,7 +3,7 @@
     <div class="left">
       <div class="logo">翱坤数据库</div>
       <div class="nav">
-        <router-link v-for="(li,index) in nav" :key="index" :to="li.link">{{li.name}}</router-link>
+        <router-link v-for="(li,index) in nav" :key="index" :to="li.link"><p @click="linkTo">{{li.name}}</p></router-link>
       </div>
     </div>
     <div class="right" v-if="user.name">
@@ -33,6 +33,18 @@ export default {
     },
     login () {
       this.$emit('go')
+    },
+    linkTo () {
+      let list = this.$store.state.home.linklist
+      for (let i = 0; i < list.length; i++) {
+        const element = list[i].item
+        for (const key in element) {
+          if (element.hasOwnProperty(key)) {
+            const e = element[key]
+            e.type = false
+          }
+        }
+      }
     }
   }
 }
