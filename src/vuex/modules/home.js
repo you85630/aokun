@@ -88,6 +88,7 @@ export default {
             for (let i = 0; i < element.length; i++) {
               const e = element[i]
               list.push({
+                type: false,
                 name: e.name,
                 id: e.id,
                 item: []
@@ -101,7 +102,8 @@ export default {
                 if (e.parent_id === s.id) {
                   s.item.push({
                     name: e.name,
-                    id: e.parent_id
+                    id: e.parent_id,
+                    type: false
                   })
                 }
               }

@@ -3,7 +3,7 @@
     <bg-color>
       <search-box :selectBox="searchSelect" @on-search="searchData"></search-box>
       <div class="result">
-        <filter-box :showBox="showBox" @on-click="filterBox"></filter-box>
+        <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
           <div class="title">搜索结果（<span>{{resultList.num}}</span>）</span></div>
           <div class="box">
@@ -43,7 +43,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'searchSelect'
+      'searchSelect',
+      'linklist',
+      'itemList'
     ]),
     resultbtn: function () {
       let now = {
@@ -71,95 +73,7 @@ export default {
             }
           ]
         }
-      },
-      itemList: [
-        {
-          name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
-          number: '中华人民共和国主席令第81号',
-          time: '2017年11月04日',
-          key: 1
-        }, {
-          name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
-          number: '中华人民共和国主席令第81号',
-          time: '2017年11月04日',
-          key: 2
-        }
-      ],
-      showBox: [
-        {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }, {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }, {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }, {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }, {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }, {
-          type: false,
-          name: '类别1',
-          box: [
-            {
-              type: false,
-              name: '内容1'
-            }, {
-              type: false,
-              name: '内容2'
-            }
-          ]
-        }
-      ]
+      }
     }
   },
   methods: {

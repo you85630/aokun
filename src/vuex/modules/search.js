@@ -2,10 +2,24 @@ import api from 'assets/js/api'
 
 export default {
   state: {
-    searchSelect: []
+    searchSelect: [],
+    itemList: [
+      {
+        name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
+        number: '中华人民共和国主席令第81号',
+        time: '2017年11月04日',
+        key: 1
+      }, {
+        name: '全国人民代表大会常务委员会关于修改《中华人民共和国会计法》等十一部法律的决定',
+        number: '中华人民共和国主席令第81号',
+        time: '2017年11月04日',
+        key: 2
+      }
+    ]
   },
   getters: {
-    searchSelect: state => state.searchSelect
+    searchSelect: state => state.searchSelect,
+    itemList: state => state.itemList
   },
   actions: {
     // 分类
@@ -24,7 +38,7 @@ export default {
       // wenhao：文号苏索：没有填-1
       // company：发文单位Id:没有-1
       // startTime/endTime：发文开始结束日期
-      let URL = '/serach'
+
       let data = {
         page: key.page,
         categry: key.categry,
@@ -35,7 +49,29 @@ export default {
         startTime: key.stime,
         endTime: key.etime
       }
-      api.post(URL, data).then((res) => {
+      if (data.categry === '') {
+        data.categry = -1
+      }
+      if (data.title === '') {
+        data.title = -1
+      }
+      if (data.content === '') {
+        data.content = -1
+      }
+      if (data.wenhao === '') {
+        data.wenhao = -1
+      }
+      if (data.company === '') {
+        data.company = -1
+      }
+      if (data.startTime === '') {
+        data.startTime = -1
+      }
+      if (data.endTime === '') {
+        data.endTime = -1
+      }
+      let URL = '/serach/' + data.page + '/' + data.categry + '/' + data.title + '/' + data.content + '/' + data.wenhao + '/' + data.company + '/' + data.startTime + '/' + data.endTime
+      api.get(URL).then((res) => {
         commit('searchData', res.data)
       })
     }

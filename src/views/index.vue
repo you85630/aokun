@@ -20,6 +20,7 @@ export default {
   },
   mounted () {
     this.getCompany()
+    this.getResource()
   },
   computed: {
     ...mapGetters([
@@ -34,7 +35,8 @@ export default {
     ...mapActions([
       'exit',
       'login',
-      'getCompany'
+      'getCompany',
+      'getResource'
     ])
   }
 }

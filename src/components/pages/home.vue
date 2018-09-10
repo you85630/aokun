@@ -49,14 +49,12 @@ export default {
     ...mapActions([
       'getImg',
       'getiImgList',
-      'searchHome',
-      'getResource'
+      'searchHome'
     ])
   },
   created () {
     this.getImg()
     this.getiImgList()
-    this.getResource()
   }
 }
 </script>

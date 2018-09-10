@@ -65,11 +65,11 @@ export default {
       select: false,
       more: false,
       key: {
-        categry: -1,
+        categry: '',
         page: 1,
         key: '',
         select: '全部',
-        selectid: '-1',
+        selectid: '',
         unit: '',
         number: '',
         stime: '',
