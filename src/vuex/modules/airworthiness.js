@@ -2,10 +2,12 @@ import api from 'assets/js/api'
 
 export default {
   state: {
-    shzlList: []
+    shzlList: [],
+    allList: 0
   },
   getters: {
-    shzlList: state => state.shzlList
+    shzlList: state => state.shzlList,
+    allList: state => state.allList
   },
   actions: {
     getShzl: ({ commit }, key) => {
@@ -17,19 +19,18 @@ export default {
   },
   mutations: {
     getShzl: (state, key) => {
-      state.shzlList = key
-      for (const key in state.shzlList) {
-        if (state.shzlList.hasOwnProperty(key)) {
-          const e = state.shzlList[key]
+      state.shzlList = key.shzl
+      state.allList = key.count
+      for (const k in state.shzlList) {
+        if (state.shzlList.hasOwnProperty(k)) {
+          const e = state.shzlList[k]
           e.time = this.a.mutations.timestampToTime(e.date)
           let list = JSON.parse(e.ck_titile)
           for (const i in list) {
             if (list.hasOwnProperty(i)) {
               const n = list[i]
-              e.pdf = {
-                name: i,
-                link: n
-              }
+              e.pdfname = i
+              e.pdflink = n
             }
           }
         }

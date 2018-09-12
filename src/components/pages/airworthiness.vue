@@ -10,7 +10,7 @@
           <td>{{tr.xzno}}</td>
           <td>{{tr.title}}</td>
           <td>{{tr.company}}</td>
-          <td> <a :href="tr.pdf.link" target="_blank">{{tr.pdf.name}}</a></td>
+          <td> <a :href="tr.pdflink" target="_blank">{{tr.pdfname}}</a></td>
           <td>{{tr.time}}</td>
         </tr>
       </table>
@@ -26,17 +26,21 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      headline: ['指令编号', '修正案号', '标题', '颁发单位', '参考文件', '生效日期'],
-      tablePage: {
-        all: 10,
-        active: 1
-      }
+      headline: ['指令编号', '修正案号', '标题', '颁发单位', '参考文件', '生效日期']
     }
   },
   computed: {
     ...mapGetters([
-      'shzlList'
-    ])
+      'shzlList',
+      'allList'
+    ]),
+    tablePage: function () {
+      let now = {
+        all: Math.ceil(this.allList / 10),
+        active: 1
+      }
+      return now
+    }
   },
   methods: {
     ...mapActions([

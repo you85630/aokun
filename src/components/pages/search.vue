@@ -79,6 +79,8 @@ export default {
         key.categry = router
         if (router === 1100004) {
           this.$router.push('/search/airworthiness')
+        } else if (key.id === 5100002) {
+          this.$router.push('/search/relation')
         }
       }
       this.searchData(key)
@@ -87,8 +89,11 @@ export default {
     filterBox (key) {
       if (key.id === 1100004) {
         this.$router.push('/search/airworthiness')
+      } else if (key.id === 5100002) {
+        this.$router.push('/search/relation')
       } else {
         this.key.categry = key.id
+        this.$router.push({name: 'search', query: {categry: key.id}})
       }
       this.searchData(this.key)
     },

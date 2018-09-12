@@ -11,6 +11,7 @@ const help = () => import('components/pages/help')
 const register = () => import('components/pages/register')
 const details = () => import('components/pages/details')
 const airworthiness = () => import('components/pages/airworthiness')
+const relation = () => import('components/pages/relation')
 
 const router = new Router({
   routes: [
@@ -84,6 +85,14 @@ const router = new Router({
           meta: {
             requireAuth: true,
             title: '适航指令'
+          }
+        }, {
+          path: '/search/relation',
+          name: 'relation',
+          component: relation,
+          meta: {
+            requireAuth: true,
+            title: '双边关系'
           }
         }
       ]
