@@ -9,13 +9,8 @@ export default {
   },
   actions: {
     login: ({ commit }, key) => {
-      // let nowData
       // let URL = ''
-      // let data = {
-
-      // }
-      // api.post(URL, data).then((res) => {
-      //   console.log(res)
+      // api.get(URL).then((res) => {
       // })
       commit('login')
     }

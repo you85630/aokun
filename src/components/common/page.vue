@@ -36,6 +36,8 @@ export default {
       }
       this.$emit('on-click', key)
     }
+  },
+  mounted () {
   }
 }
 </script>

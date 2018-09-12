@@ -26,11 +26,11 @@
           <div class="issue-box">
             <h2>经常问的问题：</h2>
             <ul>
-              <li v-for="(li,val) in issue" :key="val">
-                <div class="title" @click="show(li)"><Icon :type="li.show?'ios-remove':'ios-add'" />{{li.title}}</div>
+              <li v-for="(li,val) in issueBox" :key="val">
+                <div class="title" @click="show(val)"><Icon :type="li.show?'ios-remove':'ios-add'" />{{li.title}}</div>
                 <div class="content" v-if="li.show">
                   <p>{{li.desc}}</p>
-                  <div v-html="li.content"></div>
+                  <p>{{li.content}}</p>
                 </div>
               </li>
             </ul>
@@ -46,11 +46,6 @@ import searchBox from 'components/common/search'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  data () {
-    return {
-      key: {}
-    }
-  },
   components: {
     searchBox
   },
@@ -59,22 +54,16 @@ export default {
       'leftNav',
       'helpTips',
       'issueBox'
-    ]),
-    issue: function () {
-      let list = this.issueBox
-      let active = this.key
-      active.show = !active.show
-
-      return list
-    }
+    ])
   },
   methods: {
     ...mapActions([
       'getHelp',
       'getAsk'
     ]),
-    show (item) {
-      this.key = item
+    show (key) {
+      let list = this.issueBox
+      list[key].show = !list[key].show
     }
   },
   mounted () {

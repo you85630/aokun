@@ -7,15 +7,13 @@
         <div class="result-box">
           <div class="title">搜索结果:（<span>{{num}}</span>）</span></div>
           <div class="box">
-            <div class="page-box">
-              <div class="page">
-                <y-page :page="Page" @on-click="nowPage"></y-page>
-              </div>
+            <div class="page-box" v-if="status">
+              <y-page :page="Page" @on-click="nowPage"></y-page>
             </div>
             <div class="list-box">
               <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
             </div>
-            <div class="page-box">
+            <div class="page-box" v-if="status">
               <y-page :page="Page" @on-click="nowPage"></y-page>
             </div>
           </div>
@@ -35,6 +33,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      status: true,
       key: {
         page: 1,
         categry: -1,
@@ -101,6 +100,10 @@ export default {
     nowPage (key) {
       this.key.page = key
       this.Page.active = key
+      this.status = false
+      this.$nextTick(function () {
+        this.status = true
+      })
       this.searchData(this.key)
     }
   }
@@ -136,11 +139,5 @@ export default {
 }
 .page-box{
   font-size: 14px;
-  .page{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
 }
 </style>

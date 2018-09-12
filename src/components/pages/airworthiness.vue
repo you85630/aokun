@@ -14,7 +14,7 @@
           <td>{{tr.time}}</td>
         </tr>
       </table>
-      <div class="page">
+      <div class="page" v-if="status">
         <y-page :page="tablePage" @on-click="nowPage"></y-page>
       </div>
     </bg-color>
@@ -26,6 +26,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      status: true,
       headline: ['指令编号', '修正案号', '标题', '颁发单位', '参考文件', '生效日期']
     }
   },
@@ -51,6 +52,10 @@ export default {
     },
     nowPage (key) {
       this.tablePage.active = key
+      this.status = false
+      this.$nextTick(function () {
+        this.status = true
+      })
       this.getShzl(key)
     }
   },
