@@ -8,6 +8,7 @@ import search from './modules/search'
 import details from './modules/details'
 import learn from './modules/learn'
 import help from './modules/help'
+import airworthiness from './modules/airworthiness'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     search,
     details,
     learn,
-    help
+    help,
+    airworthiness
   },
   state: {
     navList: [

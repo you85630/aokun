@@ -3,11 +3,13 @@ import api from 'assets/js/api'
 export default {
   state: {
     searchSelect: [],
-    itemList: []
+    itemList: [],
+    num: 0
   },
   getters: {
     searchSelect: state => state.searchSelect,
-    itemList: state => state.itemList
+    itemList: state => state.itemList,
+    num: state => state.num
   },
   actions: {
     // 分类
@@ -76,7 +78,8 @@ export default {
     // 搜索
     searchData: (state, key) => {
       state.itemList = []
-      let list = key
+      let list = key.categorys
+      state.num = key.count
       for (const e in list) {
         if (list.hasOwnProperty(e)) {
           const element = list[e]

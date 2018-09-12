@@ -5,18 +5,18 @@
       <div class="result">
         <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
-          <div class="title">搜索结果（<span>{{resultList.num}}</span>）</span></div>
+          <div class="title">搜索结果:（<span>{{num}}</span>）</span></div>
           <div class="box">
             <div class="page-box">
               <div class="page">
-                <y-page :page="resultList.page" @on-click="nowPage"></y-page>
+                <y-page :page="Page" @on-click="nowPage"></y-page>
               </div>
             </div>
             <div class="list-box">
               <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
             </div>
             <div class="page-box">
-              <y-page :page="resultbtn" @on-click="nowPage"></y-page>
+              <y-page :page="Page" @on-click="nowPage"></y-page>
             </div>
           </div>
         </div>
@@ -35,13 +35,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      resultList: {
-        num: 1234,
-        page: {
-          all: 10,
-          active: 1
-        }
-      },
       key: {
         page: 1,
         categry: -1,
@@ -62,12 +55,13 @@ export default {
     ...mapGetters([
       'searchSelect',
       'linklist',
-      'itemList'
+      'itemList',
+      'num'
     ]),
-    resultbtn: function () {
+    Page: function () {
       let now = {
-        active: this.resultList.page.active,
-        all: this.resultList.page.all
+        all: Math.ceil(this.num / 10),
+        active: 1
       }
       return now
     }
@@ -83,17 +77,25 @@ export default {
       let router = this.$router.currentRoute.query.categry
       if (router) {
         key.categry = router
+        if (router === 1100004) {
+          this.$router.push('/search/airworthiness')
+        }
       }
       this.searchData(key)
     },
     // 过滤器
     filterBox (key) {
-      this.key.categry = key.id
+      if (key.id === 1100004) {
+        this.$router.push('/search/airworthiness')
+      } else {
+        this.key.categry = key.id
+      }
       this.searchData(this.key)
     },
     // 翻页
     nowPage (key) {
       this.key.page = key
+      this.Page.active = key
       this.searchData(this.key)
     }
   }

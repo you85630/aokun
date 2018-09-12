@@ -10,6 +10,7 @@ const learn = () => import('components/pages/learn')
 const help = () => import('components/pages/help')
 const register = () => import('components/pages/register')
 const details = () => import('components/pages/details')
+const airworthiness = () => import('components/pages/airworthiness')
 
 const router = new Router({
   routes: [
@@ -35,14 +36,6 @@ const router = new Router({
           meta: {
             requireAuth: true,
             title: '搜索'
-          }
-        }, {
-          path: '/search/details/:key',
-          name: 'details',
-          component: details,
-          meta: {
-            requireAuth: true,
-            title: '详情'
           }
         }, {
           path: '/data',
@@ -75,6 +68,22 @@ const router = new Router({
           meta: {
             requireAuth: true,
             title: '注册'
+          }
+        }, {
+          path: '/search/details/:key',
+          name: 'details',
+          component: details,
+          meta: {
+            requireAuth: true,
+            title: '详情'
+          }
+        }, {
+          path: '/search/airworthiness',
+          name: 'airworthiness',
+          component: airworthiness,
+          meta: {
+            requireAuth: true,
+            title: '适航指令'
           }
         }
       ]
