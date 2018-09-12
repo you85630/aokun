@@ -9,7 +9,7 @@
         <div class="left">
           <h2>HELP</h2>
           <ul>
-            <li v-for="(li,index) in left" :key="index"><router-link to="">{{li.name}}</router-link></li>
+            <li v-for="(li,index) in leftNav" :key="index"><router-link to="">{{li.name}}</router-link></li>
           </ul>
         </div>
         <div class="right">
@@ -25,11 +25,13 @@
           </ul>
           <div class="issue-box">
             <h2>经常问的问题：</h2>
-            <ul v-for="(li,index) in issueBox" :key="index">
-              <li class="title" @click="show(li)"><Icon :type="li.show?'ios-remove':'ios-add'" />{{li.title}}</li>
-              <li v-for="(i,val) in li.issue" :key="val" v-if="li.show">
-                <div class="title" @click="show(i)"><Icon :type="i.show?'ios-remove':'ios-add'" />{{i.title}}</div>
-                <p v-if="i.show">{{i.content}}</p>
+            <ul>
+              <li v-for="(li,val) in issue" :key="val">
+                <div class="title" @click="show(li)"><Icon :type="li.show?'ios-remove':'ios-add'" />{{li.title}}</div>
+                <div class="content" v-if="li.show">
+                  <p>{{li.desc}}</p>
+                  <div v-html="li.content"></div>
+                </div>
               </li>
             </ul>
           </div>
@@ -41,85 +43,43 @@
 
 <script>
 import searchBox from 'components/common/search'
+
+import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      key: {}
+    }
+  },
   components: {
     searchBox
   },
-  data () {
-    return {
-      left: [
-        {
-          link: '',
-          name: '视频教程'
-        }, {
-          link: '',
-          name: '用户指南'
-        }, {
-          link: '',
-          name: '视频教程'
-        }, {
-          link: '',
-          name: '用户指南'
-        }, {
-          link: '',
-          name: '用户指南'
-        }, {
-          link: '',
-          name: '视频教程'
-        }, {
-          link: '',
-          name: '用户指南'
-        }
-      ],
-      helpTips: [
-        {
-          name: '搜索',
-          img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
-        }, {
-          name: '视频教程',
-          img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
-        }, {
-          name: '用户指南',
-          img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
-        }
-      ],
-      issueBox: [
-        {
-          show: true,
-          title: '内容',
-          issue: [
-            {
-              show: false,
-              title: '翱坤平台上有哪些内容？',
-              content: '啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦'
-            }, {
-              show: false,
-              title: '翱坤平台上有哪些内容？',
-              content: '啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦'
-            }
-          ]
-        }, {
-          show: true,
-          title: '内容',
-          issue: [
-            {
-              show: false,
-              title: '翱坤平台上有哪些内容？',
-              content: '啦啦啦啦'
-            }, {
-              show: false,
-              title: '翱坤平台上有哪些内容？',
-              content: '啦啦啦啦'
-            }
-          ]
-        }
-      ]
+  computed: {
+    ...mapGetters([
+      'leftNav',
+      'helpTips',
+      'issueBox'
+    ]),
+    issue: function () {
+      let list = this.issueBox
+      let active = this.key
+      active.show = !active.show
+
+      return list
     }
   },
   methods: {
-    show (key) {
-      key.show = !key.show
+    ...mapActions([
+      'getHelp',
+      'getAsk'
+    ]),
+    show (item) {
+      this.key = item
     }
+  },
+  mounted () {
+    this.getHelp()
+    this.getAsk()
   }
 }
 </script>
@@ -138,6 +98,7 @@ export default {
     }
     li{
       margin-top: 4px;
+      margin-left: 10px;
       a{
         color: #316EC3;
         font-size: 14px;
@@ -185,8 +146,6 @@ export default {
         font-size: 14px;
       }
       ul{
-        margin-top: 10px;
-        border: 1px solid #eee;
         .title{
           padding: 4px 10px;
           background-color: #f5f5f5;
@@ -198,16 +157,14 @@ export default {
           }
         }
         li{
-          padding: 5px 10px;
+          padding-top: 10px;
           .title{
             border: 1px solid #eee;
-            border-bottom: none;
           }
-          p{
+          .content{
             padding: 4px;
             border: 1px solid #eee;
             border-top: none;
-            text-indent: 2em;
             font-size: 12px;
           }
         }
