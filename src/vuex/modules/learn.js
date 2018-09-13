@@ -4,7 +4,7 @@ export default {
   state: {
     videoBox: {
       play: false,
-      video: '',
+      video: 'https://v.qq.com/txp/iframe/player.html?vid=e07857p9nxw',
       cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-4.jpeg'
     },
     aboutBox: [

@@ -48,9 +48,23 @@ export default {
   methods: {
     ...mapActions([
       'getImg',
-      'getiImgList',
-      'searchHome'
-    ])
+      'getiImgList'
+    ]),
+    searchHome (now) {
+      let key = {
+        page: 1,
+        categry: -1,
+        key: now,
+        unit: -1,
+        number: -1,
+        selectid: -1,
+        stime: -1,
+        etime: -1
+      }
+
+      sessionStorage.setItem('key', key)
+      this.$router.push('/search')
+    }
   },
   created () {
     this.getImg()

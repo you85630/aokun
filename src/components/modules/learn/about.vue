@@ -3,10 +3,13 @@
     <h2>什么是翱坤数据库？</h2>
     <div class="box">
       <div class="left">
-        <video :src="video.video" v-if="video.play"></video>
+        <!-- <video :src="video.video" v-if="video.play"></video> -->
+        <div class="video" v-if="video.play">
+          <iframe frameborder="0" allowFullScreen="true" :src="video.video" ></iframe>
+        </div>
         <div class="play" v-else>
           <img :src="video.cover" alt="">
-          <Icon type="md-arrow-dropright-circle" @click="video.play=!video.play" />
+          <Icon type="md-arrow-dropright-circle" @click="Play" />
         </div>
       </div>
       <div class="right">
@@ -26,7 +29,12 @@
 
 <script>
 export default {
-  props: ['list', 'video']
+  props: ['list', 'video'],
+  methods: {
+    Play () {
+      this.video.play = !this.video.play
+    }
+  }
 }
 </script>
 
@@ -42,9 +50,13 @@ export default {
   flex-direction: row;
   margin-top: 10px;
   .left{
-    video{
+    .video{
       width: 640px;
       height: 373px;
+      iframe{
+        width: 100%;
+        height: 100%;
+      }
     }
     .play{
       position: relative;

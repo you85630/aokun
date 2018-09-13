@@ -1,11 +1,14 @@
 <template>
   <div class="search">
     <bg-color>
-      <search-box :selectBox="searchSelect" @on-search="searchData"></search-box>
+      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
       <div class="result">
         <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
-          <div class="title">搜索结果:（<span>{{num}}</span>）</span></div>
+          <div class="title">
+            <p>搜索关键字：{{searchList}}</p>
+            <p>搜索结果:（<span>{{num}}</span>）</span></p>
+          </div>
           <div class="box">
             <div class="page-box" v-if="status">
               <y-page :page="Page" @on-click="nowPage"></y-page>
@@ -38,11 +41,13 @@ export default {
         page: 1,
         categry: -1,
         key: -1,
+        unit: -1,
         number: -1,
         selectid: -1,
         stime: -1,
         etime: -1
-      }
+      },
+      searchList: ''
     }
   },
   components: {
@@ -73,16 +78,26 @@ export default {
       'searchData'
     ]),
     init (key) {
-      let router = this.$router.currentRoute.query.categry
-      if (router) {
-        key.categry = router
-        if (router === 1100004) {
-          this.$router.push('/search/airworthiness')
-        } else if (key.id === 5100002) {
-          this.$router.push('/search/relation')
-        }
+      let router = this.$router.currentRoute.query
+      if (router.categry === 1100004) {
+        this.$router.push('/search/airworthiness')
       }
+      if (router.categry === 5100002) {
+        this.$router.push('/search/relation')
+      }
+
+      if (sessionStorage.getItem('page')) {
+        key = JSON.parse(sessionStorage.getItem('key'))
+        this.searchList = key.key
+      }
+
       this.searchData(key)
+    },
+    // 搜索
+    search (key) {
+      this.searchList = key.key
+      this.searchData(key)
+      sessionStorage.removeItem('page')
     },
     // 过滤器
     filterBox (key) {

@@ -48,14 +48,14 @@ export default {
       }
     },
     getAsk: (state, key) => {
-      state.issueBox = key
-      for (const key in state.issueBox) {
-        if (state.issueBox.hasOwnProperty(key)) {
-          const e = state.issueBox[key]
+      for (const k in key) {
+        if (key.hasOwnProperty(k)) {
+          const e = key[k]
           e.title = e.class_name
           e.show = false
         }
       }
+      state.issueBox = key
     }
   }
 }

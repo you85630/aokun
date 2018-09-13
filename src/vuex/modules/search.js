@@ -21,23 +21,25 @@ export default {
     },
     // 搜索
     searchData: ({ commit }, key) => {
-      // page：第几页：没有的填0
+      // page：第几页：没有的填1
       // categry：分类id:没有的填-1
       // title:标题搜索：没有的填-1
       // content：内容搜索：没有填-1
       // wenhao：文号苏索：没有填-1
       // company：发文单位Id:没有-1
       // startTime/endTime：发文开始结束日期
-
       let data = {
         page: key.page,
         categry: key.categry,
-        title: key.key,
+        title: key.unit,
         content: key.key,
         wenhao: key.number,
         company: key.selectid,
         startTime: key.stime,
         endTime: key.etime
+      }
+      if (data.page === '') {
+        data.page = 1
       }
       if (data.categry === '') {
         data.categry = -1
@@ -60,6 +62,7 @@ export default {
       if (data.endTime === '') {
         data.endTime = -1
       }
+
       let URL = '/serach/' + data.page + '/' + data.categry + '/' + data.title + '/' + data.content + '/' + data.wenhao + '/' + data.company + '/' + data.startTime + '/' + data.endTime
       api.get(URL).then((res) => {
         commit('searchData', res.data)

@@ -1,7 +1,7 @@
 <template>
   <div class="data">
     <bg-color>
-      <search-box></search-box>
+      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
     </bg-color>
 
     <bg-color>
@@ -18,6 +18,7 @@ import searchBox from 'components/common/search'
 import introduce from 'components/modules/data/introduce'
 import itemBox from 'components/modules/data/item-box'
 
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     searchBox,
@@ -44,6 +45,21 @@ export default {
           cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg'
         }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'searchSelect'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'searchData'
+    ]),
+    search (key) {
+      sessionStorage.setItem('key', JSON.stringify(key))
+      sessionStorage.setItem('page', 'more')
+      this.$router.push('/search')
     }
   }
 }

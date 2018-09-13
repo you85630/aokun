@@ -30,16 +30,6 @@ export default {
       })
     },
 
-    searchHome: ({ commit }, key) => {
-      // let URL = ''
-      // let data = {
-
-      // }
-      // api.post(URL, data).then((res) => {
-      // })
-      commit('searchHome')
-    },
-
     getResource: ({ commit }, key) => {
       let URL = '/category'
       api.get(URL).then((res) => {
@@ -62,6 +52,7 @@ export default {
     },
 
     getiImgList: (state, key) => {
+      state.imgList = []
       for (const e in key) {
         if (key.hasOwnProperty(e)) {
           const element = key[e]
@@ -74,9 +65,6 @@ export default {
           })
         }
       }
-    },
-
-    searchHome: (state, key) => {
     },
 
     getResource: (state, key) => {
