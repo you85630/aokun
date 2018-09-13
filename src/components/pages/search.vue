@@ -5,10 +5,7 @@
       <div class="result">
         <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
-          <div class="title">
-            <p>搜索关键字：{{searchList}}</p>
-            <p>搜索结果:（<span>{{num}}</span>）</span></p>
-          </div>
+          <div class="title">搜索结果:{{searchList}}（<span>{{num}}</span>）</span></div>
           <div class="box">
             <div class="page-box" v-if="status">
               <y-page :page="Page" @on-click="nowPage"></y-page>
@@ -109,6 +106,7 @@ export default {
         this.key.categry = key.id
         this.$router.push({name: 'search', query: {categry: key.id}})
       }
+      key.page = 1
       this.searchData(this.key)
     },
     // 翻页
