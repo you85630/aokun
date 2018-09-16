@@ -5,7 +5,7 @@
       <div class="result">
         <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
-          <div class="title">搜索结果:{{searchList}}（<span>{{num}}</span>）</span></div>
+          <div class="title">搜索结果：<p>{{searchList}}</p>（<span>{{num}}</span>）</span></div>
           <div class="box">
             <div class="page-box" v-if="status">
               <y-page :page="Page" @on-click="nowPage"></y-page>
@@ -135,13 +135,7 @@ export default {
         this.status = true
       })
       this.key.page = key
-      if (sessionStorage.getItem('key')) {
-        this.key.key = sessionStorage.getItem('key')
-        this.searchList = this.key.key
-        this.categry = -1
-      } else {
-        this.key.categry = this.$router.currentRoute.query.categry
-      }
+
       this.searchData(this.key)
     }
   },
@@ -177,6 +171,12 @@ export default {
     background-color: #fff;
     color: #316EC3;
     font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p{
+      color: #f00;
+    }
     span{
       margin: 0 4px;
     }
