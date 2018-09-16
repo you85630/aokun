@@ -68,13 +68,13 @@ export default {
     }
   },
   mounted () {
-    this.init(this.key)
+    this.init()
   },
   methods: {
     ...mapActions([
       'searchData'
     ]),
-    init (key) {
+    init () {
       let router = this.$router.currentRoute.query
       if (router.categry === 1100004) {
         this.$router.push('/search/airworthiness')
@@ -83,22 +83,35 @@ export default {
         this.$router.push('/search/relation')
       }
 
-      if (sessionStorage.getItem('page')) {
-        key = JSON.parse(sessionStorage.getItem('key'))
-        this.searchList = key.key
+      if (sessionStorage.getItem('key')) {
+        this.key = JSON.parse(sessionStorage.getItem('key'))
+        this.searchList = this.key.key
+      } else {
+        this.key.categry = this.$router.currentRoute.query.categry
       }
-
-      this.searchData(key)
+      this.searchData(this.key)
     },
+
     // 搜索
     search (key) {
+      sessionStorage.removeItem('key')
       this.searchList = key.key
+      key.categry = this.$router.currentRoute.query.categry
       this.searchData(key)
-      sessionStorage.removeItem('page')
-      key = {}
     },
     // 过滤器
     filterBox (key) {
+      this.searchList = ''
+      this.key = {
+        page: 1,
+        categry: -1,
+        key: -1,
+        unit: -1,
+        number: -1,
+        selectid: -1,
+        stime: -1,
+        etime: -1
+      }
       if (key.id === 1100004) {
         this.$router.push('/search/airworthiness')
       } else if (key.id === 5100002) {
@@ -107,17 +120,23 @@ export default {
         this.key.categry = key.id
         this.$router.push({name: 'search', query: {categry: key.id}})
       }
-      key.page = 1
       this.searchData(this.key)
     },
     // 翻页
     nowPage (key) {
-      this.key.page = key
       this.Page.active = key
       this.status = false
       this.$nextTick(function () {
         this.status = true
       })
+      this.key.page = key
+      if (sessionStorage.getItem('key')) {
+        this.key.key = sessionStorage.getItem('key')
+        this.searchList = this.key.key
+        this.categry = -1
+      } else {
+        this.key.categry = this.$router.currentRoute.query.categry
+      }
       this.searchData(this.key)
     }
   }

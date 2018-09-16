@@ -61,8 +61,7 @@ export default {
         stime: -1,
         etime: -1
       }
-
-      sessionStorage.setItem('key', key)
+      sessionStorage.setItem('key', JSON.stringify(key))
       this.$router.push('/search')
     }
   },

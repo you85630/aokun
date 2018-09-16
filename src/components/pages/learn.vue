@@ -38,7 +38,6 @@ export default {
     ]),
     search (key) {
       sessionStorage.setItem('key', JSON.stringify(key))
-      sessionStorage.setItem('page', 'more')
       this.$router.push('/search')
     }
   },

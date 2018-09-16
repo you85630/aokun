@@ -34,7 +34,7 @@
       </li>
       <li>
         <p>发文日期：</p>
-        <div class="time">
+        <div class="time" v-if="status">
           <date-picker v-model="key.stime"></date-picker>
           <span>至</span>
           <date-picker v-model="key.etime"></date-picker>
@@ -64,6 +64,7 @@ export default {
     return {
       select: false,
       more: false,
+      status: true,
       key: {
         categry: '',
         page: 1,
@@ -85,15 +86,36 @@ export default {
     },
     simpleSearch (key) {
       this.$emit('on-search', key)
+      this.key = {
+        categry: '',
+        page: 1,
+        key: '',
+        select: '全部',
+        selectid: '',
+        unit: '',
+        number: '',
+        stime: '',
+        etime: ''
+      }
     },
     advancedSearch (key) {
       this.$emit('on-search', key)
-    }
-  },
-  created () {
-    let key = this.$router.currentRoute.query.categry
-    if (key) {
-      this.key.categry = this.$router.currentRoute.query.categry
+      this.more = true
+      this.key = {
+        categry: '',
+        page: 1,
+        key: '',
+        select: '全部',
+        selectid: '',
+        unit: '',
+        number: '',
+        stime: '',
+        etime: ''
+      }
+      this.status = false
+      this.$nextTick(function () {
+        this.status = true
+      })
     }
   }
 }
