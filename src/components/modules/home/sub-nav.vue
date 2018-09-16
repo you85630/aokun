@@ -38,7 +38,7 @@ export default {
     margin: 0 auto;
     width: 100px;
     height: 100px;
-    border: 2px solid #9B9B9B;
+    border: 2px solid #051520;
     border-radius: 100%;
     img{
       width: 80%;
@@ -47,7 +47,7 @@ export default {
   }
   .name{
     padding-top: 16px;
-    color: #9B9B9B;
+    color: #051520;
     font-size: 18px;
   }
 }

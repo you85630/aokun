@@ -42,8 +42,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.details{
+  background-color: #fff;
+}
 .intro{
   margin: -20px;
+  padding: 20px;
+  background-color: #051520;
+  color: #ccc;
   p{
     font-size: 16px;
     line-height: 2;
@@ -63,7 +69,8 @@ export default {
   }
 }
 .info{
-  margin-top: -10px;
+  padding: 20px 40px;
+  padding-top: 0;
   h2{
     margin-bottom: 10px;
     text-align: center;

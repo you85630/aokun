@@ -45,7 +45,6 @@ export default {
 <style lang="scss" scoped>
 .index{
   width: 100%;
-  height: 100%;
 }
 .container{
   margin: 0 auto;

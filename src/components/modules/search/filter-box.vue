@@ -4,7 +4,7 @@
       <dl v-for="(li,index) in showBoxNow" :key="index">
         <dt @click="li.type=!li.type">
           <p>{{li.name}}</p>
-          <Icon :type="li.type?'ios-add':'ios-remove'" />
+          <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
         </dt>
         <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
           <Icon :type="i.type?'md-radio-button-on':'md-radio-button-off'" />
@@ -67,16 +67,11 @@ export default {
   }
 }
 .show-box{
-  padding: 10px;
-  background-color: #fff;
   dl{
-    margin-bottom: 10px;
-    padding-left: 10px;
-
-    user-select: none;
-    &:last-child{
-      padding-bottom: 0;
-      margin-bottom: 0;
+    &:first-child{
+      dt{
+        margin: 0;
+      }
     }
     dt{
       display: flex;
@@ -84,6 +79,9 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       margin: 4px 0;
+      padding: 4px 10px;
+      background-color: #051520;
+      color: #fff;
       font-weight: bold;
       cursor: pointer;
       i{
@@ -100,6 +98,7 @@ export default {
       flex-direction: row;
       margin: 4px 0;
       padding-left: 10px;
+      color: #051520;
       cursor: pointer;
       i{
         font-size: 14px;

@@ -1,17 +1,24 @@
 <template>
-  <div class="header">
-    <div class="left">
-      <div class="logo">翱坤数据库</div>
-      <div class="nav">
-        <router-link v-for="(li,index) in nav" :key="index" :to="li.link"><p @click="linkTo">{{li.name}}</p></router-link>
+  <div class="header-box">
+    <div class="main">
+      <div class="left">
+        <div class="logo">
+          <router-link to="/home">
+            <img src="./../../assets/img/pic-01.jpeg" alt="">
+            <p>翱坤数据库</p>
+          </router-link>
+        </div>
+        <div class="nav">
+          <router-link v-for="(li,index) in nav" :key="index" :to="li.link"><p @click="linkTo">{{li.name}}</p></router-link>
+        </div>
       </div>
+      <div class="right" v-if="user.name">
+        <p>{{user.name}}</p>
+        <p class="gap">|</p>
+        <p @click="exit">退出</p>
+      </div>
+      <div class="right" v-else @click="login"><Icon type="ios-contact" />登录</div>
     </div>
-    <div class="right" v-if="user.name">
-      <p>{{user.name}}</p>
-      <p class="gap">|</p>
-      <p @click="exit">退出</p>
-    </div>
-    <div class="right" v-else @click="login"><Icon type="ios-contact" />登录</div>
   </div>
 </template>
 
@@ -52,24 +59,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 0 50px;
-  width: 1180px;
-  height: 70px;
+.header-box{
+  margin-bottom: 20px;
+  width: 100%;
   background-color:#051520;
+  box-shadow: 0 2px 5px #999;
+  .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 1180px;
+    height: 70px;
+    background-color:#051520;
+  }
 }
 .left{
   display: flex;
   align-items: center;
   .logo{
     margin-right: 48px;
-    color: #fff;
-    font-size: 24px;
+    a{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      user-select: none;
+      img{
+        margin-bottom: 6px;
+        width: 30px;
+        height: 30px;
+        border-radius: 2px;
+      }
+      p{
+        color: #fff;
+        font-size: 10px;
+        line-height: 1;
+      }
+    }
   }
   .nav{
     display: flex;

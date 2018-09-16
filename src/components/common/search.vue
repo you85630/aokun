@@ -123,7 +123,9 @@ export default {
 
 <style lang="scss" scoped>
 .search-box{
-  margin: -10px 0;
+  margin: -20px;
+  padding: 20px;
+  background-color: #051520;
   font-size: 14px;
 }
 .box{
@@ -144,10 +146,12 @@ export default {
   }
   .in{
     margin: 0 10px 0 20px;
+    color: #fff;
     font-size: 24px;
   }
   .close{
-    margin-left: 20px;
+    margin-left: 40px;
+    color: #fff;
     cursor: pointer;
   }
   .select{
@@ -169,9 +173,9 @@ export default {
       width: 100%;
       cursor: pointer;
       p{
+        overflow: hidden;
         margin-right: 10px;
         width: 90%;
-        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -190,10 +194,10 @@ export default {
       top:47px;
       left: 0;
       z-index: 2;
+      overflow-y: auto;
+      max-height: 200px;
       width: 100%;
       background-color: #fff;
-      max-height: 200px;
-      overflow-y: auto;
       cursor: pointer;
       li{
         padding: 4px 10px;
@@ -214,7 +218,7 @@ export default {
       border: none;
       border-radius: 2px;
       background: #316EC3;
-      color: #FFFFFF;
+      color: #fff;
       font-size: 18px;
     }
     .advanced{
@@ -235,7 +239,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  li{
+  li {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -244,6 +248,7 @@ export default {
     width: 50%;
     p{
       width: 90px;
+      color: #fff;
       text-align: right;
     }
     input{
@@ -257,17 +262,17 @@ export default {
       border: none;
       border-radius: 2px;
       background: #316EC3;
-      color: #FFFFFF;
+      color: #fff;
       font-size: 16px;
     }
   }
   .time{
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     span{
-      color:#fff;
       margin: 0 10px;
+      color:#fff;
     }
     .date-picker{
       background-color: #fff;

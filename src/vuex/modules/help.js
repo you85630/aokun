@@ -48,14 +48,32 @@ export default {
       }
     },
     getAsk: (state, key) => {
-      for (const k in key) {
-        if (key.hasOwnProperty(k)) {
-          const e = key[k]
-          e.title = e.class_name
-          e.show = false
+      var map = {}
+      var dest = []
+      for (var i = 0; i < key.length; i++) {
+        var e = key[i]
+        e.show = false
+        if (!map[e.class_id]) {
+          dest.push({
+            class_id: e.class_id,
+            title: e.class_name,
+            data: [e],
+            show: false
+          })
+          map[e.class_id] = e
+        } else {
+          for (var j = 0; j < dest.length; j++) {
+            var dj = dest[j]
+            if (dj.class_id === e.class_id) {
+              dj.data.push(e)
+              break
+            }
+          }
         }
       }
-      state.issueBox = key
+      dest[0].show = true
+      dest[0].data[0].show = true
+      state.issueBox = dest
     }
   }
 }

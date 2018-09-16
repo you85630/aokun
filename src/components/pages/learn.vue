@@ -8,7 +8,9 @@
       <login></login>
     </bg-color>
 
-    <about :video="videoBox" :list="aboutBox"></about>
+    <bg-color>
+      <about :video="videoBox" :list="aboutBox"></about>
+    </bg-color>
   </div>
 </template>
 
@@ -48,5 +50,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.learn{}
 </style>

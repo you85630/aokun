@@ -9,9 +9,7 @@
         </router-link>
       </div>
       <div class="btn-box">
-        <Icon class="icon" type="md-arrow-dropleft-circle" @click="prev" />
         <div class="btn"><p v-for="(li,index) in list.length" :key="index" :class="{active:index+1===num}" @click="now(li)"></p></div>
-        <Icon class="icon" type="md-arrow-dropright-circle" @click="next" />
       </div>
     </div>
   </div>
@@ -32,16 +30,6 @@ export default {
     }
   },
   methods: {
-    prev () {
-      let len = this.list.length
-      let Inx = this.num
-
-      if (Inx === 1) {
-        this.num = len
-      } else {
-        this.num--
-      }
-    },
     next () {
       let len = this.list.length
       let Inx = this.num
@@ -56,6 +44,7 @@ export default {
     },
     now (key) {
       this.num = key
+      clearTimeout()
     }
   },
   created () {
@@ -67,11 +56,6 @@ export default {
 <style lang="scss" scoped>
 .carousel{
   width: 100%;
-}
-.header{
-  padding: 20px 10px;
-  color: #ffffff;
-  font-size: 24px;
 }
 .slide-box{
   position: relative;
@@ -93,21 +77,14 @@ export default {
         padding: 20px;
         width: 510px;
         height: 309px;
-        background-color: #b0c1da;
-        color: #fff;
+        background-color: #f9f9f9;
+        color: #051520;
         font-size: 24px;
       }
     }
   }
   .btn-box{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .icon{
-      color: #fff;
-      font-size: 36px;
-      cursor: pointer;
-    }
+    text-align: center;
     .btn{
       display: flex;
       align-items: center;
@@ -116,13 +93,12 @@ export default {
       p{
         margin: 0 25px;
         width: 30px;
-        height: 30px;
-        border-radius: 100%;
-        background-color: #fff;
+        height: 5px;
+        background-color: #ccc;
         cursor: pointer;
       }
       .active{
-        opacity: .5;
+        background-color: #051520;
       }
     }
   }

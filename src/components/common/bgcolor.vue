@@ -12,9 +12,11 @@ export default {
 <style lang="scss" scoped>
 .bgcolor{
   box-sizing: border-box;
-  margin-bottom: 30px;
-  padding: 40px;
+  margin-bottom: 20px;
+  padding: 20px;
   width: 100%;
-  background-color: #b0c1da;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px #ccc;
 }
 </style>

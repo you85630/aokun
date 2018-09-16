@@ -7,8 +7,7 @@
 <style>
 #app {
   width: 100%;
-  height: 100%;
+  background-color: #f9f9f9;
   font-size: 0;
-  background-color: #fff;
 }
 </style>

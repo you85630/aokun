@@ -32,14 +32,15 @@ export default {
     height: 265px;
     background-color: #fff;
     p{
+      color: #051520;
       font-size: 14px;
     }
     a{
       padding: 10px 20px;
       border: none;
-      border: 1px solid #316EC3;
-      background-color: #fff;
-      color: #316EC3;
+      border-radius: 2px;
+      background-color: #316EC3;
+      color: #fff;
       font-size: 14px;
     }
   }

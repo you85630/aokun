@@ -10,8 +10,8 @@
         </div>
         <div class="btn" @click="search(key)">Search</div>
       </div>
+      <div class="inspect"><router-link to="/learn">检查我的访问</router-link></div>
     </div>
-    <div class="inspect"><router-link to="/learn">检查我的访问</router-link></div>
   </div>
 </template>
 
@@ -39,17 +39,18 @@ export default {
 
 <style lang="scss" scoped>
 .index-search{
+  position: relative;
+  box-sizing: border-box;
+  padding: 60px 40px;
+  width: 100%;
   .slogan{
-    box-sizing: border-box;
-    padding: 30px 40px;
     color: #fff;
     font-size: 48px;
   }
   .box{
     padding: 0 80px;
-    padding-top: 20px;
     .publish{
-      padding-bottom: 20px;
+      padding-top: 50px;
       color: #fff;
       font-size: 24px;
     }
@@ -58,6 +59,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       box-sizing: border-box;
+      padding: 20px 0;
       .search{
         position: relative;
         .icon{
@@ -85,7 +87,7 @@ export default {
         width: 150px;
         height: 51px;
         border-radius: 2px;
-        background-color:#F5F5F5;
+        background-color:#fff;
         color: #08151F;
         font-size: 20px;
         cursor: pointer;
@@ -93,8 +95,6 @@ export default {
     }
   }
   .inspect{
-    padding: 20px 40px;
-    padding-bottom: 40px;
     text-align: right;
     a{
       color: #fff;

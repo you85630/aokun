@@ -1,15 +1,12 @@
 <template>
   <div class="home">
-    <bg-color>
-      <bg-img :img="searchkey.bgimg">
-        <index-search :searchkey="searchkey" @on-search="searchHome"></index-search>
-      </bg-img>
-    </bg-color>
+    <div class="img-box">
+      <img :src="searchkey.bgimg" alt="">
+      <index-search :searchkey="searchkey" @on-search="searchHome"></index-search>
+    </div>
 
-    <bg-color>
-      <bg-img :img="searchkey.bgimg">
-        <y-carousel :list='imgList'></y-carousel>
-      </bg-img>
+    <bg-color :img="searchkey.bgimg">
+      <y-carousel :list='imgList'></y-carousel>
     </bg-color>
 
     <bg-color>
@@ -76,5 +73,18 @@ export default {
 .home{
   width: 100%;
   height: 100%;
+}
+.img-box{
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  width: 100%;
+  img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

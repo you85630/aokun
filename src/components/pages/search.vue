@@ -2,20 +2,21 @@
   <div class="search">
     <bg-color>
       <search-box :selectBox="searchSelect" @on-search="search"></search-box>
+    </bg-color>
+
+    <bg-color>
       <div class="result">
         <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
         <div class="result-box">
           <div class="title">搜索结果：<p>{{searchList}}</p>（<span>{{num}}</span>）</span></div>
-          <div class="box">
-            <div class="page-box" v-if="status">
-              <y-page :page="Page" @on-click="nowPage"></y-page>
-            </div>
-            <div class="list-box">
-              <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
-            </div>
-            <div class="page-box" v-if="status">
-              <y-page :page="Page" @on-click="nowPage"></y-page>
-            </div>
+          <div class="page-box" v-if="status">
+            <y-page :page="Page" @on-click="nowPage"></y-page>
+          </div>
+          <div class="list-box">
+            <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+          </div>
+          <div class="page-box" v-if="status">
+            <y-page :page="Page" @on-click="nowPage"></y-page>
           </div>
         </div>
       </div>
@@ -165,31 +166,26 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-bottom: -20px;
   }
 }
 .result-box{
   box-sizing: border-box;
-  width: 764px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  width: 840px;
   .title{
-    padding: 14px 20px;
-    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     color: #316EC3;
     font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     p{
       color: #f00;
     }
     span{
       margin: 0 4px;
     }
-  }
-  .box{
-    box-sizing: border-box;
-    padding: 14px 20px;
-    background-color: #fff;
   }
 }
 .page-box{

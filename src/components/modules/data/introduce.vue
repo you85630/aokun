@@ -1,7 +1,8 @@
 <template>
-  <div class="introduce">
-    <div class="left">
-      <h2>翱坤数据库知识中心</h2>
+  <div>
+    <div class="header">翱坤数据库知识中心</div>
+    <div class="introduce">
+      <div class="left">
       <p>欢迎来到翱坤数据库知识中心！</p>
       <p>欢迎来到由MOBILUS用户构思并构建的翱坤数据库知识中心。</p>
       <p>您告诉我们您需要一个全面，权威的信息和资源来源。</p>
@@ -17,6 +18,7 @@
     <div class="right">
       <router-link to="/help">了解关于翱坤数据库的更多信息</router-link>
     </div>
+    </div>
   </div>
 </template>
 
@@ -29,28 +31,22 @@ export default {
 <style lang="scss" scoped>
 .introduce{
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  margin: -20px;
   .left{
     width: 74%;
-    color:#fff;
+    color:#051520;
     font-size: 14px;
-    h2{
-      font-size: 24px;
-      font-weight: normal;
-      margin-bottom: 20px;
-    }
     p{
       margin-top: 10px;
     }
     ul{
-      padding-left: 30px;
       margin: 20px 0;
+      padding-left: 30px;
       li{
-        list-style: disc;
         margin-top: 10px;
+        list-style: disc;
       }
     }
     a{
@@ -59,11 +55,11 @@ export default {
   }
   .right{
     a{
-      font-size: 14px;
-      color: #316EC3;
-      background-color: #fff;
       padding: 10px 20px;
       border: none;
+      background-color: #fff;
+      color: #316EC3;
+      font-size: 14px;
     }
   }
 }

@@ -69,18 +69,19 @@ export default {
 .airworthiness{
   width: 100%;
   table{
-    background-color: #fff;
     width: 100%;
-    border: 1px solid #ccc;
+    background-color: #fff;
     th,
     td{
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 20px 10px;
+      border-bottom: 1px solid #ccc;
       font-size: 12px;
     }
     th{
-      font-weight: bold;
+      background-color: #051520;
+      color: #ccc;
       word-break: keep-all;
+      font-weight: bold;
       font-size: 14px;
     }
   }
@@ -88,8 +89,8 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    font-size: 12px;
     margin-top: 20px;
+    font-size: 12px;
   }
 }
 </style>

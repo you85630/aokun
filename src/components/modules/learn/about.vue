@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h2>什么是翱坤数据库？</h2>
+    <div class="header">什么是翱坤数据库？</div>
     <div class="box">
       <div class="left">
         <!-- <video :src="video.video" v-if="video.play"></video> -->
@@ -39,12 +39,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.about{
-  margin-bottom: 30px;
-  h2{
-    font-size: 18px;
-  }
-}
 .box{
   display: flex;
   flex-direction: row;
@@ -100,6 +94,7 @@ export default {
           margin-bottom: 0;
         }
         h2{
+          color: #051520;
           font-size: 18px;
         }
         .item{

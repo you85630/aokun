@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="msg">
-      <h2>翱坤数据库</h2>
+      <div class="header">翱坤数据库</div>
       <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
     </div>
     <div class="box">
@@ -50,14 +50,9 @@ export default {
 
 <style lang="scss" scoped>
 .login{
-  margin: -20px;
   .msg{
-    color:#fff;
-    h2{
-      font-size: 18px;
-    }
     p{
-      margin-top: 10px;
+      color: #051520;
       font-size: 14px;
     }
   }
@@ -75,7 +70,7 @@ export default {
 }
 .middle{
   margin: 0 10px;
-  color: #08151F;
+  color: #051520;
   font-size: 18px;
 }
 .left{
@@ -88,7 +83,7 @@ export default {
       margin-top: 20px;
       span{
         width: 100px;
-        color: #fff;
+        color: #051520;
         text-align: left;
         font-size: 14px;
       }
@@ -103,12 +98,13 @@ export default {
           width: 100%;
           height: 30px;
           border: none;
-          background-color: #fff;
+          border: 1px solid #051520;
           font-size: 14px;
         }
         button{
           padding: 2px 20px;
           border: none;
+          border-radius: 2px;
           background-color: #316EC3;
           color: #fff;
           font-size: 14px;
@@ -116,11 +112,14 @@ export default {
         span{
           display: flex;
           align-items: center;
+          flex-direction: row;
           cursor: pointer;
 
           user-select: none;
           i{
+            margin-top: -2px;
             margin-right: 4px;
+            color: #ccc;
             font-size: 18px;
           }
         }
@@ -131,6 +130,9 @@ export default {
       }
       .active{
         color: #316EC3;
+        i{
+          color: #316EC3;
+        }
       }
     }
   }
@@ -145,6 +147,7 @@ export default {
   a{
     margin-top: 30px;
     padding: 4px 30px;
+    border-radius: 2px;
     background-color: #316EC3;
     color: #fff;
     font-size: 14px;

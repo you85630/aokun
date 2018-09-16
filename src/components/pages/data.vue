@@ -6,9 +6,10 @@
 
     <bg-color>
       <introduce></introduce>
-      <div class="item-box">
+    </bg-color>
+
+    <bg-color>
         <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
-      </div>
     </bg-color>
   </div>
 </template>
@@ -65,10 +66,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.data{
-  .item-box{
-    margin: -20px;
-    margin-top: 50px;
-  }
-}
+
 </style>

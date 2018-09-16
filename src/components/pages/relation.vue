@@ -72,29 +72,36 @@ export default {
   width: 100%;
   ul{
     width: 100%;
-    border: 1px solid #dddee1;
     border-top:none;
     li{
       width: 100%;
       .name{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
         box-sizing: border-box;
+        margin-bottom: 10px;
         padding: 10px;
-        border-top: 1px solid #dddee1;
-        background-color: #f9f9f9;
-        font-size: 14px;
-        cursor: pointer;
+        background-color: #051520;
+        color: #ccc;
         font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
         i{
           margin-right: 4px;
+          font-weight: bold;
+          font-size: 18px;
         }
       }
       .text{
-        box-sizing: border-box;
-        background-color: #fff;
         display: flex;
+        align-items: center;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: center;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        background-color: #fff;
+        color: #051520;
         p {
           padding: 10px;
           font-size: 14px;
@@ -108,23 +115,24 @@ export default {
   }
 }
 .contory{
-  padding-bottom: 40px;
   margin-top: -10px;
+  padding: 40px 0;
+  color: #051520;
   .name{
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     p{
-      font-size: 16px;
       margin-right: 40px;
+      font-size: 16px;
       span{
         font-weight: bold;
       }
     }
   }
   .info{
-    font-size: 14px;
     margin-top: 10px;
+    font-size: 14px;
   }
 }
 </style>
