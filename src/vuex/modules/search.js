@@ -86,7 +86,11 @@ export default {
       for (const e in list) {
         if (list.hasOwnProperty(e)) {
           const element = list[e]
-          let time = this.a.mutations.timestampToTime(element.post_time)
+          let date = new Date(element.post_time * 1000)
+          let Y = date.getFullYear() + '-'
+          let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+          let D = date.getDate() + ' '
+          let time = Y + M + D
           state.itemList.push({
             name: element.title,
             number: element.wenhao,
@@ -95,13 +99,6 @@ export default {
           })
         }
       }
-    },
-    timestampToTime (timestamp) {
-      let date = new Date(timestamp * 1000)
-      let Y = date.getFullYear() + '-'
-      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      return Y + M + D
     }
   }
 }

@@ -18,7 +18,11 @@ export default {
   mutations: {
     getDetails: (state, key) => {
       state.details = key[0]
-      state.details.post_time = this.a.mutations.timestampToTime(key[0].post_time)
+      let date = new Date(key[0].post_time * 1000)
+      let Y = date.getFullYear() + '-'
+      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+      let D = date.getDate() + ' '
+      state.details.post_time = Y + M + D
       state.details.status = key[0].status === 1 ? '有效期' : '无效期'
     },
     timestampToTime (timestamp) {
