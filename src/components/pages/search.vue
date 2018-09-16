@@ -95,6 +95,7 @@ export default {
       this.searchList = key.key
       this.searchData(key)
       sessionStorage.removeItem('page')
+      key = {}
     },
     // 过滤器
     filterBox (key) {

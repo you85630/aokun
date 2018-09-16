@@ -1,30 +1,16 @@
 <template>
   <div class="filter-box">
-    <div class="small" @click="hideBox=!hideBox">
-      <span>
-        <Icon  :type="hideBox?'ios-remove':'ios-add'" />
-        <em v-if="hideBox">收起过滤器</em>
-        <em v-else>展开过滤器</em>
-      </span>
-    </div>
-    <div class="filter" v-if="hideBox">
-      <div class="show">
-        <div class="show-box">
-          <dl v-for="(li,index) in showBoxNow" :key="index">
-            <dt @click="li.type=!li.type">
-              <p>{{li.name}}</p>
-              <Icon :type="li.type?'ios-add':'ios-remove'" />
-            </dt>
-            <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
-              <Icon :type="i.type?'md-radio-button-on':'md-radio-button-off'" />
-              <p>{{i.name}}</p>
-            </dd>
-          </dl>
-        </div>
-      </div>
-      <div class="btn">
-        <button @click="filter">应用</button>
-      </div>
+    <div class="show-box">
+      <dl v-for="(li,index) in showBoxNow" :key="index">
+        <dt @click="li.type=!li.type">
+          <p>{{li.name}}</p>
+          <Icon :type="li.type?'ios-add':'ios-remove'" />
+        </dt>
+        <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
+          <Icon :type="i.type?'md-radio-button-on':'md-radio-button-off'" />
+          <p>{{i.name}}</p>
+        </dd>
+      </dl>
     </div>
   </div>
 </template>
@@ -32,13 +18,6 @@
 <script>
 export default {
   props: ['showBox'],
-  data () {
-    return {
-      status: true,
-      hideBox: true,
-      select: ''
-    }
-  },
   computed: {
     showBoxNow: function (param) {
       let list = this.showBox
@@ -73,13 +52,7 @@ export default {
         }
       }
       key.type = !key.type
-      this.select = key
-    },
-    // 应用
-    filter () {
-      if (this.select !== '') {
-        this.$emit('on-click', this.select)
-      }
+      this.$emit('on-click', key)
     }
   }
 }
@@ -92,54 +65,19 @@ export default {
   .active{
     color:#316EC3;
   }
-  .small{
-    padding: 10px 20px;
-    background-color: #f5f5f5;
-    text-align: right;
-    font-size: 14px;
-
-    user-select: none;
-    span{
-      cursor: pointer;
-      i{
-        font-size: 20px;
-      }
-    }
-  }
-  .filter{
-    padding: 0 20px;
-    padding-bottom: 20px;
-    background-color: #f5f5f5;
-    .show{
-      overflow-y: auto;
-      max-height: 500px;
-    }
-  }
-  .btn{
-    button{
-      margin-right: 6px;
-      padding: 4px 10px;
-      border: 1px solid #316EC3;
-      border-radius: 2px;
-      background-color: #316EC3;
-      color: #fff;
-      font-size: 14px;
-    }
-    .save{
-      margin-right: 0;
-      border-color: #316EC3;
-      background-color: #f5f5f5;
-      color: #316EC3;
-    }
-  }
 }
 .show-box{
-  padding: 10px 0;
+  padding: 10px;
+  background-color: #fff;
   dl{
     margin-bottom: 10px;
     padding-left: 10px;
 
     user-select: none;
+    &:last-child{
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
     dt{
       display: flex;
       align-items: center;
@@ -164,7 +102,7 @@ export default {
       padding-left: 10px;
       cursor: pointer;
       i{
-        font-size: 16px;
+        font-size: 14px;
       }
       p{
         margin-left: 4px;

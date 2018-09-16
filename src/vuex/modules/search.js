@@ -31,8 +31,8 @@ export default {
       let data = {
         page: key.page,
         categry: key.categry,
-        title: key.unit,
-        content: key.key,
+        title: key.key,
+        content: key.unit,
         wenhao: key.number,
         company: key.selectid,
         startTime: key.stime,
