@@ -87,8 +87,13 @@ export default {
         this.key = JSON.parse(sessionStorage.getItem('key'))
         this.searchList = this.key.key
       } else {
-        this.key.categry = -1
+        if (router.categry) {
+          this.key.categry = router.categry
+        } else {
+          this.key.categry = -1
+        }
       }
+
       this.searchData(this.key)
     },
 
