@@ -87,7 +87,7 @@ export default {
         this.key = JSON.parse(sessionStorage.getItem('key'))
         this.searchList = this.key.key
       } else {
-        this.key.categry = this.$router.currentRoute.query.categry
+        this.key.categry = -1
       }
       this.searchData(this.key)
     },
@@ -96,7 +96,12 @@ export default {
     search (key) {
       sessionStorage.removeItem('key')
       this.searchList = key.key
-      key.categry = this.$router.currentRoute.query.categry
+      let router = this.$router.currentRoute.query.categry
+      if (router) {
+        key.categry = router
+      } else {
+        key.categry = -1
+      }
       this.searchData(key)
     },
     // 过滤器
@@ -138,6 +143,18 @@ export default {
         this.key.categry = this.$router.currentRoute.query.categry
       }
       this.searchData(this.key)
+    }
+  },
+  watch: {
+    '$route': {
+      handler: function (val) {
+        let key = val.query.categry
+        if (!key) {
+          this.key.categry = -1
+          this.searchData(this.key)
+        }
+      },
+      deep: true
     }
   }
 }
