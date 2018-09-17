@@ -108,6 +108,7 @@ export default {
       } else {
         key.categry = -1
       }
+      sessionStorage.setItem('key', JSON.stringify(key))
       this.searchData(key)
     },
     // 过滤器
@@ -135,14 +136,18 @@ export default {
     },
     // 翻页
     nowPage (key) {
+      let now = JSON.parse(sessionStorage.getItem('key'))
+      if (!now) {
+        now = this.key
+      }
+      now.page = key
+      this.searchData(now)
+
       this.Page.active = key
       this.status = false
       this.$nextTick(function () {
         this.status = true
       })
-      this.key.page = key
-
-      this.searchData(this.key)
     }
   },
   watch: {
@@ -150,6 +155,8 @@ export default {
       handler: function (val) {
         let key = val.query.categry
         if (!key) {
+          sessionStorage.removeItem('key')
+          this.searchList = ''
           this.key.categry = -1
           this.searchData(this.key)
         }
