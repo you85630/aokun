@@ -28,10 +28,10 @@ export default {
   methods: {
     nowPage (key) {
       let len = this.page.all
-      if (key === 0) {
+      if (key <= 0) {
         key = 1
       }
-      if (key === len) {
+      if (key >= len) {
         key = len
       }
       this.$emit('on-click', key)
