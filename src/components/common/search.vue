@@ -16,7 +16,7 @@
         </ul>
       </div>
       <div class="more" v-if="!more">
-        <button @click="simpleSearch(key)">搜索</button>
+        <button class="btn-bg" @click="simpleSearch(key)">搜索</button>
         <Icon class="help" type="ios-help-circle" />
         <p class="advanced" @click="more=true">高级搜索</p>
       </div>
@@ -42,7 +42,7 @@
       </li>
       <li>
         <p></p>
-        <button @click="advancedSearch(key)">搜索</button>
+        <button class="btn-bg" @click="advancedSearch(key)">搜索</button>
       </li>
     </ul>
   </div>
@@ -217,8 +217,6 @@ export default {
       height: 45px;
       border: none;
       border-radius: 2px;
-      background: #316EC3;
-      color: #fff;
       font-size: 18px;
     }
     .advanced{
@@ -261,8 +259,6 @@ export default {
       height: 30px;
       border: none;
       border-radius: 2px;
-      background: #316EC3;
-      color: #fff;
       font-size: 16px;
     }
   }

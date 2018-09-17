@@ -18,11 +18,10 @@ h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
 del,ins,u,s,a,a:hover{text-decoration:none;}
 body,textarea,input,button,select,keygen,legend{outline:0;font:12px/1.2 'Microsoft YaHei UI', 'Microsoft YaHei', Roboto, Helvetica, Arial, Verdana, sans-serif;}
 *{-webkit-tap-highlight-color:transparent;}
-a{color:#000;}
 input,select{outline:none;-webkit-appearance:none;}
 html,body{width:100%;height: 100%;}
 
-.infobox p{font-size: 16px; line-height: 2}
+a{color:#316EC3;}
 .header{
   margin-right: -20px;
   margin-bottom: 20px;
@@ -31,4 +30,12 @@ html,body{width:100%;height: 100%;}
   background-color: #051520;
   color: #fff;
   font-size: 24px;
+}
+.btn-bg{
+  background-color: #316EC3;
+  color: #fff;
+}
+.infobox p{
+  font-size: 16px;
+  line-height: 2
 }

@@ -94,7 +94,6 @@ export default {
           margin-bottom: 0;
         }
         h2{
-          color: #051520;
           font-size: 18px;
         }
         .item{

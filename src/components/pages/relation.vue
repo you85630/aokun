@@ -3,8 +3,8 @@
     <bg-color>
       <ul>
         <li v-for="(li,index) in contoryList" :key="index">
-          <div class="name" @click="openText(index)"><Icon :type="li.open?'ios-remove':'ios-add'" />{{li.areaName}}</div>
-          <div class="text" v-if="li.open">
+          <div class="name btn-bg" @click="openText(index)"><Icon :type="li.open?'ios-remove':'ios-add'" />{{li.areaName}}</div>
+          <div class="text btn-bg" v-if="li.open">
             <p @click="cdetail(i.id)" v-for="(i,val) in li.data" :key="val" :class="{active:i.id===now}">{{i.name}}</p>
           </div>
         </li>
@@ -82,8 +82,6 @@ export default {
         box-sizing: border-box;
         margin-bottom: 10px;
         padding: 10px;
-        background-color: #051520;
-        color: #ccc;
         font-weight: bold;
         font-size: 16px;
         cursor: pointer;
@@ -100,8 +98,6 @@ export default {
         flex-wrap: wrap;
         box-sizing: border-box;
         margin-bottom: 10px;
-        background-color: #fff;
-        color: #051520;
         p {
           padding: 10px;
           font-size: 14px;
@@ -117,7 +113,6 @@ export default {
 .contory{
   margin-top: -10px;
   padding: 40px 0;
-  color: #051520;
   .name{
     display: flex;
     align-items: center;

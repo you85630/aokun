@@ -178,7 +178,6 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: row;
-    color: #316EC3;
     font-size: 14px;
     p{
       color: #f00;

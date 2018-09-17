@@ -3,7 +3,7 @@
     <bg-color>
       <table class="table">
         <tr>
-          <th v-for="(li,index) in headline" :key="index">{{li}}</th>
+          <th class="btn-bg" v-for="(li,index) in headline" :key="index">{{li}}</th>
         </tr>
         <tr v-for="(tr,index) in shzlList" :key="index">
           <td>{{tr.no}}</td>
@@ -78,8 +78,6 @@ export default {
       font-size: 12px;
     }
     th{
-      background-color: #051520;
-      color: #ccc;
       word-break: keep-all;
       font-weight: bold;
       font-size: 14px;

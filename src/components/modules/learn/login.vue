@@ -20,7 +20,7 @@
             <span></span>
             <p>
               <span @click="select=!select" :class="{active:select}"><Icon :type="select?'ios-checkbox':'ios-square'" />记住我</span>
-              <button>登陆</button>
+              <button class="btn-bg">登陆</button>
             </p>
           </li>
           <li>
@@ -32,7 +32,7 @@
       <div class="middle">- OR -</div>
       <div class="right">
         <h2>免费注册翱坤数据库账户</h2>
-        <router-link to="/register">注册</router-link>
+        <router-link to="/register" class="btn-bg">注册</router-link>
       </div>
     </div>
   </div>
@@ -52,7 +52,6 @@ export default {
 .login{
   .msg{
     p{
-      color: #051520;
       font-size: 14px;
     }
   }
@@ -63,14 +62,12 @@ export default {
     justify-content: space-between;
     margin-top: 30px;
     h2{
-      color: #08151F;
       font-size: 14px;
     }
   }
 }
 .middle{
   margin: 0 10px;
-  color: #051520;
   font-size: 18px;
 }
 .left{
@@ -83,7 +80,6 @@ export default {
       margin-top: 20px;
       span{
         width: 100px;
-        color: #051520;
         text-align: left;
         font-size: 14px;
       }
@@ -105,8 +101,6 @@ export default {
           padding: 2px 20px;
           border: none;
           border-radius: 2px;
-          background-color: #316EC3;
-          color: #fff;
           font-size: 14px;
         }
         span{
@@ -124,7 +118,6 @@ export default {
           }
         }
         a{
-          color: #316EC3;
           font-size: 14px;
         }
       }
@@ -148,8 +141,6 @@ export default {
     margin-top: 30px;
     padding: 4px 30px;
     border-radius: 2px;
-    background-color: #316EC3;
-    color: #fff;
     font-size: 14px;
   }
 }

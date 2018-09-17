@@ -36,7 +36,6 @@ export default {
   justify-content: space-between;
   .left{
     width: 74%;
-    color:#051520;
     font-size: 14px;
     p{
       margin-top: 10px;
@@ -49,16 +48,12 @@ export default {
         list-style: disc;
       }
     }
-    a{
-      color: #316EC3;
-    }
   }
   .right{
     a{
       padding: 10px 20px;
       border: none;
       background-color: #fff;
-      color: #316EC3;
       font-size: 14px;
     }
   }

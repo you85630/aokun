@@ -2,7 +2,7 @@
   <div class="filter-box">
     <div class="show-box">
       <dl v-for="(li,index) in showBoxNow" :key="index">
-        <dt @click="li.type=!li.type">
+        <dt class="btn-bg" @click="li.type=!li.type">
           <p>{{li.name}}</p>
           <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
         </dt>
@@ -80,8 +80,6 @@ export default {
       justify-content: space-between;
       margin: 4px 0;
       padding: 4px 10px;
-      background-color: #051520;
-      color: #fff;
       font-weight: bold;
       cursor: pointer;
       i{
@@ -98,7 +96,6 @@ export default {
       flex-direction: row;
       margin: 4px 0;
       padding-left: 10px;
-      color: #051520;
       cursor: pointer;
       i{
         font-size: 14px;

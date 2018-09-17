@@ -47,7 +47,6 @@ export default {
   }
   .name{
     padding-top: 16px;
-    color: #051520;
     font-size: 18px;
   }
 }

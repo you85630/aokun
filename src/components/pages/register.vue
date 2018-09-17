@@ -18,14 +18,14 @@
                 <p><input type="text" placeholder="不少于6位的密码"></p>
               </li>
               <li>
-                <p><button>注册</button></p>
+                <p><button class="btn-bg">注册</button></p>
               </li>
             </ul>
           </div>
         </bg-color>
-        <div class="or">OR</div>
+        <div class="or">- OR -</div>
         <div class="login">
-          <router-link to="/learn">已有账号登陆</router-link>
+          <router-link to="/learn" class="btn-bg">已有账号登陆</router-link>
           <p>注册即表示你同意网站的《<router-link to="">服务条款</router-link>》</p>
         </div>
       </div>
@@ -50,8 +50,6 @@ export default {
     padding: 10px 40px;
     border: none;
     border-radius: 2px;
-    background-color:#316EC3;
-    color:#fff;
     font-size: 14px;
   }
   h2{

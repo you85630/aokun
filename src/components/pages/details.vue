@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <bg-color>
-      <div class="intro">
+      <div class="intro btn-bg">
         <p><span>主题分类：</span>{{details.category_name}}</p>
         <div class="line">
           <p><span>办文单位：</span>{{details.company_name}}</p>
@@ -48,8 +48,6 @@ export default {
 .intro{
   margin: -20px;
   padding: 20px;
-  background-color: #051520;
-  color: #ccc;
   p{
     font-size: 16px;
     line-height: 2;

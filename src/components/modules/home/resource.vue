@@ -44,13 +44,11 @@ export default {
       margin-bottom: 8px;
       padding: 6px 0;
       border-bottom: 1px solid #ccc;
-      color: #051520;
       font-weight: bold;
       font-size: 18px;
     }
     .item{
       padding-bottom: 8px;
-      color: #051520;
       font-size: 16px;
       cursor: pointer;
     }
