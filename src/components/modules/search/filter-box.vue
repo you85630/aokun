@@ -63,7 +63,7 @@ export default {
   box-sizing: border-box;
   width: 300px;
   .active{
-    color:#316EC3;
+    color:#2d8cf0;
   }
 }
 .show-box{

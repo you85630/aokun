@@ -305,6 +305,7 @@ export default {
   input {
     width: 96%;
     border: none;
+    background: #f5f5f5;
     font-size: 12px;
   }
   i {
@@ -320,9 +321,9 @@ export default {
   padding: 20px 20px 10px;
   width: 340px;
   border: 1px solid #eee;
+  border: 1px solid #eee;
   border-radius: 2px;
   background-color: #fff;
-  border: 1px solid #eee;
   &:before,
   &:after {
     position: absolute;
@@ -379,11 +380,11 @@ export default {
     }
   }
   dl {
-    font-size: 0;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 0;
     dt,
     dd {
       padding: 10px 0;
@@ -422,12 +423,12 @@ export default {
 }
 .month-show {
   .month-title {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     button {
       padding: 0 5px;
       border: none;
@@ -468,12 +469,12 @@ export default {
 }
 .year-show {
   .year-title {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
     button {
       padding: 0 5px;
       border: none;

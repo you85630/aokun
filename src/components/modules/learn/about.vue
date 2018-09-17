@@ -102,7 +102,7 @@ export default {
             display: flex;
             align-items: center;
             flex-direction: row;
-            color: #316EC3;
+            color: #2d8cf0;
             font-size: 14px;
             i{
               margin-right: 4px;

@@ -125,7 +125,6 @@ export default {
 .search-box{
   margin: -20px;
   padding: 20px;
-  background-color: #051520;
   font-size: 14px;
 }
 .box{
@@ -138,7 +137,7 @@ export default {
     width: 580px;
     height: 45px;
     border: none;
-    background-color: #fff;
+    background-color: #eee;
     font-size: 18px;
   }
   .all{
@@ -146,12 +145,10 @@ export default {
   }
   .in{
     margin: 0 10px 0 20px;
-    color: #fff;
     font-size: 24px;
   }
   .close{
     margin-left: 40px;
-    color: #fff;
     cursor: pointer;
   }
   .select{
@@ -164,7 +161,7 @@ export default {
     width: 160px;
     height: 45px;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #eee;
     .iconbox{
       display: flex;
       align-items: center;
@@ -221,13 +218,12 @@ export default {
     }
     .advanced{
       margin-left: 20px;
-      color: #316EC3;
+      color: #2d8cf0;
       font-size: 18px;
       cursor: pointer;
     }
     .help{
       margin-left: 36px;
-      color:#fff;
       font-size: 20px;
       cursor: pointer;
     }
@@ -246,7 +242,6 @@ export default {
     width: 50%;
     p{
       width: 90px;
-      color: #fff;
       text-align: right;
     }
     input{
@@ -268,10 +263,9 @@ export default {
     flex-direction: row;
     span{
       margin: 0 10px;
-      color:#fff;
     }
     .date-picker{
-      background-color: #fff;
+      background-color: #f5f5f5;
     }
   }
 }

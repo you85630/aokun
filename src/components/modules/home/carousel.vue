@@ -78,7 +78,7 @@ export default {
         width: 510px;
         height: 309px;
         background-color: #f9f9f9;
-        font-size: 24px;
+        font-size: 18px;
       }
     }
   }

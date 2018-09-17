@@ -62,14 +62,14 @@ export default {
         }
         button{
           padding: 2px 8px;
-          border: 1px solid #eee;
+          border: none;
           border-radius: 2px;
+          background-color: #eee;
         }
       }
       .active{
         button{
-          border-color: #316EC3;
-          background-color: #316EC3;
+          background-color: #2d8cf0;
           color: #fff;
         }
       }

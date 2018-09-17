@@ -94,7 +94,7 @@ export default {
           width: 100%;
           height: 30px;
           border: none;
-          border: 1px solid #051520;
+          background-color: #eee;
           font-size: 14px;
         }
         button{
@@ -113,7 +113,7 @@ export default {
           i{
             margin-top: -2px;
             margin-right: 4px;
-            color: #ccc;
+            color: #eee;
             font-size: 18px;
           }
         }
@@ -122,9 +122,9 @@ export default {
         }
       }
       .active{
-        color: #316EC3;
+        color: #2d8cf0;
         i{
-          color: #316EC3;
+          color: #2d8cf0;
         }
       }
     }

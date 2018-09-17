@@ -94,6 +94,7 @@ export default {
     font-size: 24px;
   }
   .login{
+    padding-bottom: 40px;
     p{
       margin-top: 20px;
       font-size: 14px;

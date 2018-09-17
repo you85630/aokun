@@ -4,7 +4,7 @@
       <ul>
         <li v-for="(li,index) in contoryList" :key="index">
           <div class="name btn-bg" @click="openText(index)"><Icon :type="li.open?'ios-remove':'ios-add'" />{{li.areaName}}</div>
-          <div class="text btn-bg" v-if="li.open">
+          <div class="text" v-if="li.open">
             <p @click="cdetail(i.id)" v-for="(i,val) in li.data" :key="val" :class="{active:i.id===now}">{{i.name}}</p>
           </div>
         </li>
