@@ -102,7 +102,7 @@ export default {
         margin:0 4px;
         padding: 0;
         background: none;
-        color:#316EC3;
+        color:#2d8cf0;
       }
     }
   }

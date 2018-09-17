@@ -2,7 +2,7 @@
   <div class="search-box">
     <div class="box">
       <input :class="{all:more}" type="text" placeholder="输入关键字" v-model="key.key">
-      <p class="in">in:</p>
+      <p class="in">in</p>
       <div class="select">
         <div class="iconbox" @click="select=true">
           <p>{{key.select}}</p>
@@ -144,7 +144,7 @@ export default {
     width: 700px;
   }
   .in{
-    margin: 0 10px 0 20px;
+    margin: 0 20px;
     font-size: 24px;
   }
   .close{
