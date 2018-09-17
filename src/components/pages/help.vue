@@ -5,7 +5,7 @@
     </bg-color>
 
     <bg-color>
-      <div class="header">HELP</div>
+      <div class="header">翱坤帮助资源</div>
       <div class="box">
         <div class="left">
           <ul>
@@ -13,9 +13,6 @@
           </ul>
         </div>
         <div class="right">
-          <div class="tips">
-            <h2>翱坤帮助资源</h2>
-          </div>
           <ul class="help-tips">
             <li v-for="(li,index) in helpTips" :key="index">
               <img :src="li.img" alt="">
@@ -91,7 +88,6 @@ export default {
       margin-top: 4px;
       margin-left: 10px;
       a{
-        color: #316EC3;
         font-size: 14px;
       }
     }
@@ -102,16 +98,6 @@ export default {
     padding: 20px 10px;
     width: 780px;
     background-color: #fff;
-    .tips{
-      color: #051520;
-      h2{
-        font-size: 18px;
-      }
-      p{
-        margin-top: 10px;
-        font-size: 14px;
-      }
-    }
     .help-tips{
       display: flex;
       align-items: center;
