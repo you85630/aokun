@@ -6,13 +6,13 @@ const index = () => import('views/index')
 const home = () => import('components/pages/home')
 const search = () => import('components/pages/search')
 const data = () => import('components/pages/data')
-const learn = () => import('components/pages/learn')
+const login = () => import('components/pages/login')
 const help = () => import('components/pages/help')
 const register = () => import('components/pages/register')
 const details = () => import('components/pages/details')
 const airworthiness = () => import('components/pages/airworthiness')
 const relation = () => import('components/pages/relation')
-const learnmore = () => import('components/pages/learn-more')
+const learn = () => import('components/pages/learn-more')
 
 const router = new Router({
   routes: [
@@ -48,17 +48,17 @@ const router = new Router({
             title: '数据'
           }
         }, {
+          path: '/login',
+          name: 'login',
+          component: login,
+          meta: {
+            requireAuth: true,
+            title: '登陆'
+          }
+        }, {
           path: '/learn',
           name: 'learn',
           component: learn,
-          meta: {
-            requireAuth: true,
-            title: '学习'
-          }
-        }, {
-          path: '/learn/learnmore',
-          name: 'learnmore',
-          component: learnmore,
           meta: {
             requireAuth: true,
             title: '学习'

@@ -25,7 +25,7 @@
         </bg-color>
         <div class="or">- OR -</div>
         <div class="login">
-          <router-link to="/learn" class="btn-bg">已有账号登陆</router-link>
+          <router-link to="/login" class="btn-bg">已有账号登陆</router-link>
           <p>注册即表示你同意网站的《<router-link to="">服务条款</router-link>》</p>
         </div>
       </div>

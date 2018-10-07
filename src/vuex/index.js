@@ -108,7 +108,7 @@ export default new Vuex.Store({
       this.user = {}
     },
     login (state) {
-      router.push('/learn')
+      router.push('/login')
     },
     timestampToTime (timestamp) {
       let date = new Date(timestamp * 1000)
