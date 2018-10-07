@@ -15,7 +15,7 @@ const relation = () => import('components/pages/relation')
 const learn = () => import('components/pages/learn-more')
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
