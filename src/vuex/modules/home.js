@@ -3,9 +3,9 @@ import api from 'assets/js/api'
 export default {
   state: {
     searchkey: {
-      slogan: '移动工程资源的目的地',
-      num: 207000,
-      bgimg: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg'
+      slogan: '',
+      num: 0,
+      bgimg: ''
     },
     imgList: [],
     linklist: []

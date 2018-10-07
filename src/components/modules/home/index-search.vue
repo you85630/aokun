@@ -10,7 +10,7 @@
         </div>
         <div class="btn" @click="search(key)">Search</div>
       </div>
-      <div class="inspect"><router-link to="/learn">检查我的访问</router-link></div>
+      <div class="inspect"><router-link to="/learn">检查我的权限</router-link></div>
     </div>
   </div>
 </template>

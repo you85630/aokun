@@ -30,17 +30,17 @@ export default {
     return {
       itemList: [
         {
-          name: '去拯救网络安全知识中心',
+          name: 'CAAC知识中心',
           link: '',
           info: '及时获取与端到端车辆和产品设计的网络物理安全性，风险缓解，劳动力开发资源，培训，标准等相关的权威信息。',
           cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg'
         }, {
-          name: '去拯救网络安全知识中心',
+          name: 'FAA知识中心',
           link: '',
           info: '及时获取与端到端车辆和产品设计的网络物理安全性，风险缓解，劳动力开发资源，培训，标准等相关的权威信息。',
           cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg'
         }, {
-          name: '去拯救网络安全知识中心',
+          name: 'EASA知识中心',
           link: '',
           info: '及时获取与端到端车辆和产品设计的网络物理安全性，风险缓解，劳动力开发资源，培训，标准等相关的权威信息。',
           cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-6.jpeg'

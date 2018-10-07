@@ -12,6 +12,7 @@ const register = () => import('components/pages/register')
 const details = () => import('components/pages/details')
 const airworthiness = () => import('components/pages/airworthiness')
 const relation = () => import('components/pages/relation')
+const learnmore = () => import('components/pages/learn-more')
 
 const router = new Router({
   routes: [
@@ -50,6 +51,14 @@ const router = new Router({
           path: '/learn',
           name: 'learn',
           component: learn,
+          meta: {
+            requireAuth: true,
+            title: '学习'
+          }
+        }, {
+          path: '/learn/learnmore',
+          name: 'learnmore',
+          component: learnmore,
           meta: {
             requireAuth: true,
             title: '学习'

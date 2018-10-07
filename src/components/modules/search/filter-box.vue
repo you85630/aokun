@@ -7,7 +7,7 @@
           <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
         </dt>
         <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
-          <Icon :type="i.type?'md-radio-button-on':'md-radio-button-off'" />
+          <Icon :type="i.type?'md-square':'md-square-outline'" />
           <p>{{i.name}}</p>
         </dd>
       </dl>

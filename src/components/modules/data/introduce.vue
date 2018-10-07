@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">翱坤数据库知识中心</div>
+    <div class="header">翱坤数据库中心</div>
     <div class="introduce">
       <div class="left">
       <p>欢迎来到翱坤数据库知识中心！</p>
@@ -16,7 +16,7 @@
       <p>现在就开始。浏览质量，免费内容或通过SAE MOBILUS订阅扩展您的访问权限。 <router-link to="">单击此处</router-link>以建议未来的知识中心</p>
     </div>
     <div class="right">
-      <router-link to="/help">了解关于翱坤数据库的更多信息</router-link>
+      <router-link to="/learn/learnmore">了解关于翱坤数据库的更多信息</router-link>
     </div>
     </div>
   </div>

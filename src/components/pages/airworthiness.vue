@@ -78,6 +78,7 @@ export default {
       font-size: 12px;
     }
     th{
+      padding: 10px;
       word-break: keep-all;
       font-weight: bold;
       font-size: 14px;

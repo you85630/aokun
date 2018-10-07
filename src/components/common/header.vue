@@ -4,8 +4,7 @@
       <div class="left">
         <div class="logo">
           <router-link to="/home">
-            <img src="./../../assets/img/pic-01.jpeg" alt="">
-            <p>翱坤数据库</p>
+            <img src="./../../assets/img/pic-03.png" alt="">
           </router-link>
         </div>
         <div class="nav">
@@ -70,7 +69,6 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     margin: 0 auto;
-    padding: 0 20px;
     width: 1180px;
     height: 70px;
     background-color:#051520;
@@ -89,15 +87,8 @@ export default {
 
       user-select: none;
       img{
-        margin-bottom: 6px;
-        width: 30px;
-        height: 30px;
-        border-radius: 2px;
-      }
-      p{
-        color: #fff;
-        font-size: 10px;
-        line-height: 1;
+        width: auto;
+        height: 70px;
       }
     }
   }

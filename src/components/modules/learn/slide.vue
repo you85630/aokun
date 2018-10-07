@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <div class="header">翱坤数据库</div>
+    <div class="header">翱坤知识库</div>
     <div class="slide-box">
       <div class="img-box">
         <router-link v-for="(li,index) in list" :key="index" :to="li.link" v-if="index+1===num">
