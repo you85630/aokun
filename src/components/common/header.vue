@@ -4,7 +4,7 @@
       <div class="left">
         <div class="logo">
           <router-link to="/home">
-            <img src="./../../assets/img/pic-03.png" alt="">
+            <img src="./../../assets/img/pic-01.png" alt="">
           </router-link>
         </div>
         <div class="nav">
@@ -88,7 +88,7 @@ export default {
       user-select: none;
       img{
         width: auto;
-        height: 70px;
+        height: 30px;
       }
     }
   }
