@@ -12,7 +12,7 @@ const register = () => import('components/pages/register')
 const details = () => import('components/pages/details')
 const airworthiness = () => import('components/pages/airworthiness')
 const relation = () => import('components/pages/relation')
-const learn = () => import('components/pages/learn-more')
+const learn = () => import('components/pages/learn')
 
 const router = new Router({
   // mode: 'history',

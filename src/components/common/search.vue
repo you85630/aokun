@@ -141,7 +141,7 @@ export default {
     }
     ul{
       position: absolute;
-      top:47px;
+      top:45px;
       left: 0;
       z-index: 2;
       overflow-y: auto;
@@ -149,8 +149,9 @@ export default {
       width: 100%;
       background-color: #fff;
       cursor: pointer;
+      border: 1px solid #eee;
       li{
-        padding: 4px 10px;
+        padding: 10px;
         font-size: 14px;
         &:hover{
           background-color: #f5f5f5;
