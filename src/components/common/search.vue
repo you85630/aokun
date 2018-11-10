@@ -17,7 +17,7 @@
       </div>
       <div class="more">
         <button class="btn-bg" @click="simpleSearch(key)">搜索</button>
-        <p class="advanced" @click="more=true">高级搜索</p>
+        <p class="advanced" @click="senior">高级搜索</p>
       </div>
     </div>
   </div>
@@ -77,6 +77,9 @@ export default {
         stime: '',
         etime: ''
       }
+    },
+    senior () {
+      this.$router.push('/search')
     }
   }
 }
