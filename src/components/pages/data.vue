@@ -9,20 +9,20 @@
     </bg-color>
 
     <bg-color>
-        <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+        <data-item v-for="(li,index) in itemList" :key="index" :item="li"></data-item>
     </bg-color>
   </div>
 </template>
 
 <script>
 import introduce from 'components/modules/introduce'
-import itemBox from 'components/modules/item-box'
+import dataItem from 'components/modules/data-item'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     introduce,
-    itemBox
+    dataItem
   },
   data () {
     return {

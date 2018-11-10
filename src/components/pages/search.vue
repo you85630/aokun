@@ -26,7 +26,7 @@
 
 <script>
 import filterBox from 'components/modules/filter-box'
-import itemBox from 'components/modules/items-box'
+import itemBox from 'components/modules/item-box'
 
 import { mapGetters, mapActions } from 'vuex'
 

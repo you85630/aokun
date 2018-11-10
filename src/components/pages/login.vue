@@ -16,7 +16,7 @@
 
 <script>
 import login from 'components/modules/login'
-import about from 'components/modules/about'
+import about from 'components/modules/about-me'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {

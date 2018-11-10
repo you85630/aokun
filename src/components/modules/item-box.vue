@@ -1,12 +1,19 @@
 <template>
-  <div class="item">
-    <div class="left">
-      <p>{{item.info}}</p>
-      <p><router-link class="btn-bg" :to="item.link">{{item.name}}</router-link></p>
-    </div>
-    <div class="right">
-      <img :src="item.cover" alt="">
-    </div>
+  <div class="item-box">
+    <ul>
+      <li>
+        <span>名称：</span>
+        <p><router-link :to="'/search/details/'+item.key">{{item.name}}</router-link></p>
+      </li>
+      <li>
+        <span>文号：</span>
+        <p>{{item.number}}</p>
+      </li>
+      <li>
+        <span>发文时间：</span>
+        <p>{{item.time}}</p>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -17,36 +24,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin-top: 20px;
-  .left{
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    box-sizing: border-box;
-    padding: 60px 20px;
-    width: 460px;
-    height: 265px;
-    background-color: #fff;
-    p{
-      font-size: 14px;
-    }
-    a{
-      padding: 10px 20px;
-      border: none;
-      border-radius: 2px;
-      font-size: 14px;
-    }
-  }
-  .right{
-    width: 680px;
-    height: 265px;
-    img{
-      width: 100%;
-      height: 100%;
+.item-box{
+  box-sizing: border-box;
+  padding: 10px 0;
+  width: 100%;
+  border-top: 1px solid #eee;
+  ul{
+    li{
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      box-sizing: border-box;
+      margin-bottom: 6px;
+      span{
+        text-align: right;
+        white-space: nowrap;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      p{
+        font-size: 14px;
+      }
     }
   }
 }
