@@ -1,7 +1,7 @@
 <template>
   <div class="help">
     <bg-color>
-      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
+      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
@@ -35,13 +35,9 @@
 </template>
 
 <script>
-import searchBox from 'components/common/search'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: {
-    searchBox
-  },
   computed: {
     ...mapGetters([
       'searchSelect',
@@ -68,7 +64,7 @@ export default {
       this.$router.push('/search')
     }
   },
-  mounted () {
+  created () {
     this.getHelp()
     this.getAsk()
   }

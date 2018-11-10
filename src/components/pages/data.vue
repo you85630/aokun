@@ -1,7 +1,7 @@
 <template>
   <div class="data">
     <bg-color>
-      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
+      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
@@ -15,14 +15,12 @@
 </template>
 
 <script>
-import searchBox from 'components/common/search'
-import introduce from 'components/modules/data/introduce'
-import itemBox from 'components/modules/data/item-box'
+import introduce from 'components/modules/introduce'
+import itemBox from 'components/modules/item-box'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
-    searchBox,
     introduce,
     itemBox
   },

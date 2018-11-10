@@ -59,7 +59,7 @@ export default {
       this.getShzl(key)
     }
   },
-  mounted () {
+  created () {
     this.init()
   }
 }

@@ -29,7 +29,7 @@ export default {
       'details'
     ])
   },
-  mounted () {
+  created () {
     let id = this.$router.currentRoute.params.key
     this.getDetails(id)
   },

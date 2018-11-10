@@ -61,7 +61,7 @@ export default {
       this.getCdetail(key)
     }
   },
-  mounted () {
+  created () {
     this.init()
   }
 }

@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import slide from 'components/modules/learn/slide'
-import bookList from 'components/modules/learn/book-list'
+import slide from 'components/modules/slide'
+import bookList from 'components/modules/book-list'
 
 export default {
   components: {

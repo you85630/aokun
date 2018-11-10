@@ -24,12 +24,7 @@
 </template>
 
 <script>
-import datePicker from 'components/common/datepicker'
 export default {
-  // props: ['selectBox'],
-  components: {
-    datePicker
-  },
   computed: {
     rangeList: function () {
       return this.selectBox

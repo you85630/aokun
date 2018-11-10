@@ -29,7 +29,7 @@ export default {
           let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
           let D = date.getDate() + ' '
           e.time = Y + M + D
-          let list = JSON.parse(e.ck_titile)
+          let list = e.ck_titile
           for (const i in list) {
             if (list.hasOwnProperty(i)) {
               const n = list[i]

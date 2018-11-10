@@ -1,7 +1,7 @@
 <template>
   <div class="learn">
     <bg-color>
-      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
+      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
@@ -15,14 +15,12 @@
 </template>
 
 <script>
-import searchBox from 'components/common/search'
-import login from 'components/modules/learn/login'
-import about from 'components/modules/learn/about'
+import login from 'components/modules/login'
+import about from 'components/modules/about'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
-    searchBox,
     login,
     about
   },
@@ -43,7 +41,7 @@ export default {
       this.$router.push('/search')
     }
   },
-  mounted () {
+  created () {
     this.getStudy()
   }
 }

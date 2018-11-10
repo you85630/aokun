@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import indexSearch from 'components/modules/home/index-search'
-import yCarousel from 'components/modules/home/carousel'
-import yResource from 'components/modules/home/resource'
-import subNav from 'components/modules/home/sub-nav'
+import indexSearch from 'components/modules/index-search'
+import yCarousel from 'components/modules/carousel'
+import yResource from 'components/modules/resource'
+import subNav from 'components/modules/sub-nav'
 
 import { mapGetters, mapActions } from 'vuex'
 

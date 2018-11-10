@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <bg-color>
-      <search-box :selectBox="searchSelect" @on-search="search"></search-box>
+      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
@@ -25,9 +25,8 @@
 </template>
 
 <script>
-import searchBox from 'components/common/search'
-import filterBox from 'components/modules/search/filter-box'
-import itemBox from 'components/modules/search/item-box'
+import filterBox from 'components/modules/filter-box'
+import itemBox from 'components/modules/items-box'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -49,7 +48,6 @@ export default {
     }
   },
   components: {
-    searchBox,
     filterBox,
     itemBox
   },
@@ -68,7 +66,7 @@ export default {
       return now
     }
   },
-  mounted () {
+  created () {
     this.init()
   },
   methods: {
