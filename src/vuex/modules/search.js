@@ -1,12 +1,33 @@
 import api from 'assets/js/api'
+
 export default {
   state: {
     num: 0,
-    itemList: []
+    itemList: [],
+    moreLeftNavBox: [{
+      title: '明航组织',
+      type: false,
+      label: [
+        {
+          id: 'caac',
+          name: 'CAAC',
+          type: false
+        }, {
+          id: 'faa',
+          name: 'FAA',
+          type: false
+        }, {
+          id: 'easa',
+          name: 'EASA',
+          type: false
+        }
+      ]
+    }]
   },
   getters: {
     num: state => state.num,
-    itemList: state => state.itemList
+    itemList: state => state.itemList,
+    moreLeftNavBox: state => state.moreLeftNavBox
   },
   actions: {
     // 搜索
@@ -31,8 +52,8 @@ export default {
         title: key.selectid === 2 ? key.text : -1,
         content: key.selectid === 3 ? key.text : -1,
         company: key.company ? key.company : -1,
-        startTime: key.style === 1 ? key.startTime : -1,
-        endTime: key.style === 1 ? key.endTime : -1,
+        startTime: key.startTime === 1 ? key.startTime : -1,
+        endTime: key.endTime === 1 ? key.endTime : -1,
         style: key.style ? key.style : -1
       }
 
@@ -43,12 +64,11 @@ export default {
         '/' + data.subCids +
         '/' + data.title +
         '/' + data.content +
-        '/' + data.all +
+        // '/' + data.all +
         '/' + data.company +
         '/' + data.startTime +
         '/' + data.endTime +
         '/' + data.style
-
       api.get(URL).then((res) => {
         commit('searchData', res.data)
       })
@@ -58,6 +78,27 @@ export default {
   mutations: {
     // 搜索
     searchData: (state, key) => {
+      state.moreLeftNavBox = [
+        {
+          title: '明航组织',
+          type: false,
+          label: [
+            {
+              id: 'caac',
+              name: 'CAAC',
+              type: false
+            }, {
+              id: 'faa',
+              name: 'FAA',
+              type: false
+            }, {
+              id: 'easa',
+              name: 'EASA',
+              type: false
+            }
+          ]
+        }
+      ]
       state.itemList = []
       if (key) {
         state.num = key.count
@@ -77,6 +118,59 @@ export default {
               key: element.id
             })
           }
+        }
+
+        // 高级搜索
+        if (key.cids) {
+          let cidsList = {
+            type: false,
+            title: '主体分类',
+            label: []
+          }
+          let statusList = {
+            type: false,
+            title: '文档有效性',
+            label: []
+          }
+          let yearsList = {
+            type: false,
+            title: '文档年份',
+            label: []
+          }
+
+          for (const a in key.cids) {
+            if (key.cids.hasOwnProperty(a)) {
+              const element = key.cids[a]
+              cidsList.label.push({
+                id: element.bigCatagoryId,
+                // name: element.name,
+                number: element.c
+              })
+            }
+          }
+
+          for (const b in key.status) {
+            if (key.status.hasOwnProperty(b)) {
+              const element = key.status[b]
+              statusList.label.push({
+                id: element.status,
+                // name: element.name,
+                number: element.c
+              })
+            }
+          }
+
+          for (const c in key.years) {
+            if (key.years.hasOwnProperty(c)) {
+              const element = key.years[c]
+              yearsList.label.push({
+                id: element.year,
+                name: element.year,
+                number: element.c
+              })
+            }
+          }
+          state.moreLeftNavBox = [...state.moreLeftNavBox, cidsList, statusList, yearsList]
         }
       }
     }

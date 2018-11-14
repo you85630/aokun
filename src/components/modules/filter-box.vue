@@ -8,7 +8,7 @@
         </dt>
         <dd v-for="(i,val) in li.label" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
           <Icon :type="i.type?'md-square':'md-square-outline'" />
-          <p>{{i.name}}</p>
+          <p>{{i.name}}<span v-if="i.number">（{{i.number}}）</span></p>
         </dd>
       </dl>
     </div>
@@ -39,6 +39,7 @@ export default {
 <style lang="scss" scoped>
 .filter-box{
   box-sizing: border-box;
+  margin-right: 30px;
   width: 300px;
   .active{
     color:#2d8cf0;
@@ -80,8 +81,15 @@ export default {
         font-size: 14px;
       }
       p{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
         margin-left: 4px;
         font-size: 14px;
+        span{
+          color: #2d8cf0;
+          font-size: 12px;
+        }
       }
     }
   }

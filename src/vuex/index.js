@@ -14,6 +14,7 @@ import relation from './modules/relation'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  namespaced: true,
   modules: {
     login,
     home,

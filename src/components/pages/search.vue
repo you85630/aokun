@@ -1,12 +1,12 @@
 <template>
   <div class="search">
     <bg-color>
-      <y-search @on-search="search"></y-search>
+      <y-search :list="filterList" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
       <div class="result">
-        <filter-box :showBox="leftNavBox" @on-click="filterBox"></filter-box>
+        <filter-box v-if="searchType===-1" :showBox="filterList" @on-click="filterBox"></filter-box>
 
         <div class="result-box" v-if="num">
           <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
@@ -34,6 +34,11 @@ import itemBox from 'components/modules/item-box'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      searchType: -1
+    }
+  },
   components: {
     filterBox,
     itemBox
@@ -42,7 +47,8 @@ export default {
     ...mapGetters([
       'leftNavBox',
       'itemList',
-      'num'
+      'num',
+      'moreLeftNavBox'
     ]),
     pages: function () {
       let page = {
@@ -50,6 +56,15 @@ export default {
         all: Math.ceil(this.num / 10)
       }
       return page
+    },
+    filterList: function () {
+      let now = []
+      if (this.searchType === 1) {
+        now = this.moreLeftNavBox
+      } else {
+        now = this.leftNavBox
+      }
+      return now
     }
   },
   methods: {
@@ -66,10 +81,10 @@ export default {
       }
       // 默认搜索一次
       let searchKey = {
-        page: 1,
         selectid: 1,
         style: -1,
-        text: ''
+        text: '',
+        page: 1
       }
       this.search(searchKey)
     },
@@ -80,12 +95,8 @@ export default {
     },
     // 搜索
     search (key) {
-      if (key.style !== 1) {
-        // 普通搜索
-        this.searchData(key)
-      } else {
-        // 高级搜索
-      }
+      this.searchData(key)
+      this.searchType = key.style
     },
     // 翻页
     nowPage (key) {
@@ -110,8 +121,7 @@ export default {
 .result-box{
   box-sizing: border-box;
   padding-bottom: 20px;
-  padding-left: 30px;
-  width: 840px;
+  width: 100%;
   .title{
     display: flex;
     align-items: center;
