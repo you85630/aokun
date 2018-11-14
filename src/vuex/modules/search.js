@@ -1,92 +1,66 @@
 import api from 'assets/js/api'
-
 export default {
   state: {
-    searchSelect: [],
-    itemList: [],
-    num: 0
+    num: 0,
+    itemList: []
   },
   getters: {
-    searchSelect: state => state.searchSelect,
-    itemList: state => state.itemList,
-    num: state => state.num
+    num: state => state.num,
+    itemList: state => state.itemList
   },
   actions: {
-    // 分类
-    getCompany: ({ commit }, key) => {
-      let URL = '/company'
-      api.get(URL).then((res) => {
-        commit('getCompany', res.data)
-      })
-    },
     // 搜索
     searchData: ({ commit }, key) => {
-      // page：第几页：没有的填1
-      // categry：分类id:没有的填-1
+      // /fsearch/{page}/{oragons}/{bigCids}/{subCids}/{title}/{content}/{company}/{startTime}/{endTime}/{style}
+      // page：第几页：没有的填0
+      // oragons：组织caac，faa，easa没有的填-1，多个用,分开
+      // bigCids：大分类id:没有的填-1，多个用,分开
+      // subCids：小分类id:没有的填-1，多个用,分开
       // title:标题搜索：没有的填-1
       // content：内容搜索：没有填-1
-      // wenhao：文号苏索：没有填-1
       // company：发文单位Id:没有-1
       // startTime/endTime：发文开始结束日期
+      // style：普通还是高级：高级1，普通填-1
       let data = {
-        page: key.page,
-        categry: key.categry,
-        title: key.key,
-        content: key.unit,
-        wenhao: key.number,
-        company: key.selectid,
-        startTime: key.stime,
-        endTime: key.etime
+        page: key.page ? key.page : 1,
+        oragons: key.oragons ? key.oragons : -1,
+        bigCids: key.bigCids ? key.bigCids : -1,
+        subCids: key.subCids ? key.subCids : -1,
+        title: key.selectid === 2 ? key.selectid : -1,
+        content: key.selectid === 3 ? key.selectid : -1,
+        company: key.company ? key.company : -1,
+        startTime: key.style === 1 ? key.startTime : '-1',
+        endTime: key.style === 1 ? key.endTime : '-1',
+        style: key.style ? key.style : -1
       }
-      if (data.page === '') {
-        data.page = 1
-      }
-      if (data.categry === '') {
-        data.categry = -1
-      }
-      if (data.title === '') {
-        data.title = -1
-      }
-      if (data.content === '') {
-        data.content = -1
-      }
-      if (data.wenhao === '') {
-        data.wenhao = -1
-      }
-      if (data.company === '') {
-        data.company = -1
-      }
-      if (data.startTime === '') {
-        data.startTime = -1
-      }
-      if (data.endTime === '') {
-        data.endTime = -1
-      }
+      let URL = '/fsearch' +
+        '/' + data.page +
+        '/' + data.oragons +
+        '/' + data.bigCids +
+        '/' + data.subCids +
+        '/' + data.title +
+        '/' + data.content +
+        '/' + data.company +
+        '/' + data.startTime +
+        '/' + data.endTime +
+        '/' + data.style
 
-      let URL = '/serach/' + data.page + '/' + data.categry + '/' + data.title + '/' + data.content + '/' + data.wenhao + '/' + data.company + '/' + data.startTime + '/' + data.endTime
       api.get(URL).then((res) => {
         commit('searchData', res.data)
       })
     }
   },
+
   mutations: {
-    getCompany: (state, key) => {
-      for (const e in key) {
-        if (key.hasOwnProperty(e)) {
-          const element = key[e]
-          state.searchSelect.push(element)
-        }
-      }
-    },
     // 搜索
     searchData: (state, key) => {
       state.itemList = []
-      let list = key.categorys
       state.num = key.count
+      let list = key.categorys
       for (const e in list) {
         if (list.hasOwnProperty(e)) {
           const element = list[e]
-          let date = new Date(element.post_time * 1000)
+          let date = new Date(element.postTime * 1000)
           let Y = date.getFullYear() + '-'
           let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
           let D = date.getDate() + ' '

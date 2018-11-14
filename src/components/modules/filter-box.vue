@@ -1,12 +1,12 @@
 <template>
   <div class="filter-box">
     <div class="show-box">
-      <dl v-for="(li,index) in showBoxNow" :key="index">
+      <dl v-for="(li,index) in showBox" :key="index">
         <dt class="btn-bg" @click="li.type=!li.type">
-          <p>{{li.name}}</p>
+          <p>{{li.title}}</p>
           <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
         </dt>
-        <dd v-for="(i,val) in li.item" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
+        <dd v-for="(i,val) in li.label" :key="val" :class="{active:i.type}" v-if="!li.type" @click="selectBox(i)">
           <Icon :type="i.type?'md-square':'md-square-outline'" />
           <p>{{i.name}}</p>
         </dd>
@@ -18,33 +18,11 @@
 <script>
 export default {
   props: ['showBox'],
-  computed: {
-    showBoxNow: function (param) {
-      let list = this.showBox
-      let router = parseInt(this.$router.currentRoute.query.categry)
-      for (const key in list) {
-        if (list.hasOwnProperty(key)) {
-          const element = list[key].item
-          for (let i = 0; i < element.length; i++) {
-            const e = element[i]
-            if (router) {
-              e.type = false
-              if (e.id === router) {
-                e.type = true
-              }
-            }
-          }
-        }
-      }
-
-      return list
-    }
-  },
   methods: {
     selectBox (key) {
-      let list = this.showBoxNow
+      let list = this.showBox
       for (let i = 0; i < list.length; i++) {
-        const element = list[i].item
+        const element = list[i].label
         for (const e in element) {
           if (element.hasOwnProperty(e)) {
             element[e].type = false

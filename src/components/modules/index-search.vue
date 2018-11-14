@@ -84,11 +84,12 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-left: 20px;
         width: 150px;
         height: 51px;
         border-radius: 2px;
-        background-color:#fff;
-        color: #08151F;
+        background-color:#2d8cf0;
+        color: #fff;
         font-size: 20px;
         cursor: pointer;
       }

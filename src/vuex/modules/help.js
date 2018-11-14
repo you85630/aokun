@@ -7,13 +7,13 @@ export default {
     helpTips: [
       {
         name: '搜索',
-        img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
+        img: 'http://p7qasncyc.bkt.clouddn.com/icon-1.png'
       }, {
         name: '视频教程',
-        img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
+        img: 'http://p7qasncyc.bkt.clouddn.com/icon-1.png'
       }, {
         name: '用户指南',
-        img: 'http://osc94pt0z.bkt.clouddn.com/icon-1.png'
+        img: 'http://p7qasncyc.bkt.clouddn.com/icon-1.png'
       }
     ]
   },
@@ -38,14 +38,30 @@ export default {
   },
   mutations: {
     getHelp: (state, key) => {
-      state.leftNav = key
-      for (const key in state.leftNav) {
-        if (state.leftNav.hasOwnProperty(key)) {
-          const e = state.leftNav[key]
-          e.link = ''
-          e.name = e.class_name
+      // state.leftNav = key
+      var map = {}
+      var dest = []
+      for (var i = 0; i < key.length; i++) {
+        var e = key[i]
+        e.show = false
+        if (!map[e.class_id]) {
+          dest.push({
+            class_id: e.class_id,
+            title: e.class_name,
+            data: [e]
+          })
+          map[e.class_id] = e
+        } else {
+          for (var j = 0; j < dest.length; j++) {
+            var dj = dest[j]
+            if (dj.class_id === e.class_id) {
+              dj.data.push(e)
+              break
+            }
+          }
         }
       }
+      state.leftNav = dest
     },
     getAsk: (state, key) => {
       var map = {}

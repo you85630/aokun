@@ -1,11 +1,11 @@
 <template>
   <div class="search-box">
     <div class="box">
-      <input type="text" placeholder="输入关键字" v-model="key.key">
+      <input type="text" placeholder="输入关键字" v-model="key.text">
       <p class="in">in</p>
       <div class="select">
         <div class="iconbox" @click="select=true">
-          <p>{{key.select}}</p>
+          <p v-for="(li,index) in rangeList" :key="index" v-if="key.selectid===li.id">{{li.name}}</p>
           <div class="icon">
             <Icon type="md-arrow-dropup" />
             <Icon type="md-arrow-dropdown" />
@@ -16,8 +16,8 @@
         </ul>
       </div>
       <div class="more">
-        <button class="btn-bg" @click="simpleSearch(key)">搜索</button>
-        <p class="advanced" @click="senior">高级搜索</p>
+        <button class="btn-bg" @click="simpleSearch">搜索</button>
+        <p class="advanced" @click="seniorSearch">高级搜索</p>
       </div>
     </div>
   </div>
@@ -34,15 +34,10 @@ export default {
     return {
       select: false,
       key: {
-        categry: '',
         page: 1,
-        key: '',
-        select: '全部',
-        selectid: '',
-        unit: '',
-        number: '',
-        stime: '',
-        etime: ''
+        text: '',
+        selectid: 1,
+        style: -1
       },
       selectBox: [
         {
@@ -61,25 +56,18 @@ export default {
   methods: {
     showSelect (key) {
       this.select = false
-      this.key.select = key.name
       this.key.selectid = key.id
     },
-    simpleSearch (key) {
-      this.$emit('on-search', key)
-      this.key = {
-        categry: '',
-        page: 1,
-        key: '',
-        select: '全部',
-        selectid: '',
-        unit: '',
-        number: '',
-        stime: '',
-        etime: ''
-      }
-    },
-    senior () {
+    simpleSearch () {
+      this.$emit('on-search', this.key)
       this.$router.push('/search')
+    },
+    seniorSearch () {
+      this.key.style = 1
+      this.$emit('on-search', this.key)
+      this.$router.push('/search')
+      // 还原
+      this.key.style = -1
     }
   }
 }
@@ -150,9 +138,9 @@ export default {
       overflow-y: auto;
       max-height: 200px;
       width: 100%;
+      border: 1px solid #eee;
       background-color: #fff;
       cursor: pointer;
-      border: 1px solid #eee;
       li{
         padding: 10px;
         font-size: 14px;

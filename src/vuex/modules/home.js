@@ -8,12 +8,38 @@ export default {
       bgimg: ''
     },
     imgList: [],
-    linklist: []
+    linklist: [],
+    leftNavBox: [
+      {
+        title: '明航组织',
+        type: false,
+        label: [
+          {
+            id: 'caac',
+            name: 'CAAC',
+            type: false
+          }, {
+            id: 'faa',
+            name: 'FAA',
+            type: false
+          }, {
+            id: 'easa',
+            name: 'EASA',
+            type: false
+          }
+        ]
+      }, {
+        title: '主体分类',
+        type: false,
+        label: this.linklist
+      }
+    ]
   },
   getters: {
     searchkey: state => state.searchkey,
     imgList: state => state.imgList,
-    linklist: state => state.linklist
+    linklist: state => state.linklist,
+    leftNavBox: state => state.leftNavBox
   },
   actions: {
     getImg: ({ commit }) => {
@@ -76,10 +102,10 @@ export default {
             for (let i = 0; i < element.length; i++) {
               const e = element[i]
               list.push({
-                type: false,
                 name: e.name,
                 id: e.id,
-                item: []
+                item: [],
+                type: false
               })
             }
           } else {
@@ -90,8 +116,7 @@ export default {
                 if (e.parent_id === s.id) {
                   s.item.push({
                     name: e.name,
-                    id: e.id,
-                    type: false
+                    id: e.id
                   })
                 }
               }
@@ -99,8 +124,8 @@ export default {
           }
         }
       }
-
       state.linklist = list
+      state.leftNavBox[1].label = list
     }
   }
 }

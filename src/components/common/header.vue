@@ -69,6 +69,7 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     margin: 0 auto;
+    padding: 0 20px;
     width: 1180px;
     height: 70px;
     background-color:#051520;

@@ -1,7 +1,7 @@
 <template>
   <div class="help">
     <bg-color>
-      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
+      <y-search></y-search>
     </bg-color>
 
     <bg-color>
@@ -9,7 +9,10 @@
       <div class="box">
         <div class="left">
           <ul>
-            <li v-for="(li,index) in leftNav" :key="index"><router-link to="">{{li.name}}</router-link></li>
+            <li v-for="(li,index) in leftNav" :key="index">
+              <h2>{{li.title}}</h2>
+              <p v-for="(i,val) in li.data" :key="val">{{i.title}}</p>
+            </li>
           </ul>
         </div>
         <div class="right">
@@ -40,7 +43,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'searchSelect',
       'leftNav',
       'helpTips',
       'issueBox'
@@ -58,10 +60,6 @@ export default {
     openVal (i, k) {
       let list = this.issueBox
       list[i].data[k].show = !list[i].data[k].show
-    },
-    search (key) {
-      sessionStorage.setItem('key', JSON.stringify(key))
-      this.$router.push('/search')
     }
   },
   created () {
@@ -82,9 +80,15 @@ export default {
     background-color: #f5f5f5;
     li{
       margin-top: 4px;
+      margin-bottom: 10px;
       margin-left: 10px;
-      a{
-        font-size: 14px;
+      font-size: 14px;
+      h2{
+        margin-bottom: 5px;
+      }
+      p{
+        margin-left: 20px;
+        cursor: pointer;
       }
     }
   }

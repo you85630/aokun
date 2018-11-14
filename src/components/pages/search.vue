@@ -1,23 +1,26 @@
 <template>
   <div class="search">
     <bg-color>
-      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
+      <y-search @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
       <div class="result">
-        <filter-box :showBox="linklist" @on-click="filterBox"></filter-box>
-        <div class="result-box">
-          <div class="title">搜索结果：<p>{{searchList}}</p>（<span>{{num}}</span>）</span></div>
-          <div class="page-box" v-if="status">
-            <y-page :page="Page" @on-click="nowPage"></y-page>
+        <filter-box :showBox="leftNavBox" @on-click="filterBox"></filter-box>
+
+        <div class="result-box" v-if="num">
+          <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
+
+          <div class="page-box">
+            <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
-          <div class="list-box">
-            <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+          <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+          <div class="page-box">
+            <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
-          <div class="page-box" v-if="status">
-            <y-page :page="Page" @on-click="nowPage"></y-page>
-          </div>
+        </div>
+        <div v-else class="data-none">
+          <p>暂无数据</p>
         </div>
       </div>
     </bg-color>
@@ -31,43 +34,23 @@ import itemBox from 'components/modules/item-box'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      status: true,
-      key: {
-        page: 1,
-        categry: -1,
-        key: -1,
-        unit: -1,
-        number: -1,
-        selectid: -1,
-        stime: -1,
-        etime: -1
-      },
-      searchList: ''
-    }
-  },
   components: {
     filterBox,
     itemBox
   },
   computed: {
     ...mapGetters([
-      'searchSelect',
-      'linklist',
+      'leftNavBox',
       'itemList',
       'num'
     ]),
-    Page: function () {
-      let now = {
-        all: Math.ceil(this.num / 10),
-        active: 1
+    pages: function () {
+      let page = {
+        active: 1,
+        all: Math.ceil(this.num / 10)
       }
-      return now
+      return page
     }
-  },
-  created () {
-    this.init()
   },
   methods: {
     ...mapActions([
@@ -81,86 +64,38 @@ export default {
       if (router.categry === 5100002) {
         this.$router.push('/search/relation')
       }
-
-      if (sessionStorage.getItem('key')) {
-        this.key = JSON.parse(sessionStorage.getItem('key'))
-        this.searchList = this.key.key
-      } else {
-        if (router.categry) {
-          this.key.categry = router.categry
-        } else {
-          this.key.categry = -1
-        }
+      // 默认搜索一次
+      let searchKey = {
+        page: 1,
+        selectid: 1,
+        style: -1,
+        text: ''
       }
-
-      this.searchData(this.key)
-    },
-
-    // 搜索
-    search (key) {
-      sessionStorage.removeItem('key')
-      this.searchList = key.key
-      let router = this.$router.currentRoute.query.categry
-      if (router) {
-        key.categry = router
-      } else {
-        key.categry = -1
-      }
-      sessionStorage.setItem('key', JSON.stringify(key))
-      this.searchData(key)
+      this.search(searchKey)
     },
     // 过滤器
     filterBox (key) {
-      this.searchList = ''
-      this.key = {
-        page: 1,
-        categry: -1,
-        key: -1,
-        unit: -1,
-        number: -1,
-        selectid: -1,
-        stime: -1,
-        etime: -1
-      }
-      if (key.id === 1100004) {
-        this.$router.push('/search/airworthiness')
-      } else if (key.id === 5100002) {
-        this.$router.push('/search/relation')
+      sessionStorage.removeItem('key')
+      this.search({company: key.id})
+    },
+    // 搜索
+    search (key) {
+      if (key.style !== 1) {
+        // 普通搜索
+        console.log(key)
+
+        this.searchData(key)
       } else {
-        this.key.categry = key.id
-        this.$router.push({name: 'search', query: {categry: key.id}})
+        // 高级搜索
       }
-      this.searchData(this.key)
     },
     // 翻页
     nowPage (key) {
-      let now = JSON.parse(sessionStorage.getItem('key'))
-      if (!now) {
-        now = this.key
-      }
-      now.page = key
-      this.searchData(now)
-
-      this.Page.active = key
-      this.status = false
-      this.$nextTick(function () {
-        this.status = true
-      })
+      this.searchData({page: key})
     }
   },
-  watch: {
-    '$route': {
-      handler: function (val) {
-        let key = val.query.categry
-        if (!key) {
-          sessionStorage.removeItem('key')
-          this.searchList = ''
-          this.key.categry = -1
-          this.searchData(this.key)
-        }
-      },
-      deep: true
-    }
+  created () {
+    this.init()
   }
 }
 </script>
@@ -184,15 +119,22 @@ export default {
     align-items: center;
     flex-direction: row;
     font-size: 14px;
-    p{
-      color: #f00;
-    }
     span{
       margin: 0 4px;
     }
   }
 }
 .page-box{
-  font-size: 14px;
+  text-align: center;
+  margin: 12px 0;
+}
+.data-none{
+  font-size: 16px;
+  color: #ccc;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 </style>

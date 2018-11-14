@@ -47,17 +47,7 @@ export default {
       'getImg',
       'getiImgList'
     ]),
-    searchHome (now) {
-      let key = {
-        page: 1,
-        categry: -1,
-        key: now,
-        unit: -1,
-        number: -1,
-        selectid: -1,
-        stime: -1,
-        etime: -1
-      }
+    searchHome (key) {
       sessionStorage.setItem('key', JSON.stringify(key))
       this.$router.push('/search')
     }

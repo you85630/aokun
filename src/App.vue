@@ -5,9 +5,8 @@
 </template>
 
 <style>
-#app {
-  width: 100%;
+#app{
+  min-width: 1180px;
   background-color: #f9f9f9;
-  font-size: 0;
 }
 </style>

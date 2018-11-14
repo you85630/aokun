@@ -1,7 +1,7 @@
 <template>
   <div class="data">
     <bg-color>
-      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
+      <y-search></y-search>
     </bg-color>
 
     <bg-color>
@@ -18,7 +18,7 @@
 import introduce from 'components/modules/introduce'
 import dataItem from 'components/modules/data-item'
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   components: {
     introduce,
@@ -46,19 +46,10 @@ export default {
       ]
     }
   },
-  computed: {
-    ...mapGetters([
-      'searchSelect'
-    ])
-  },
   methods: {
     ...mapActions([
       'searchData'
-    ]),
-    search (key) {
-      sessionStorage.setItem('key', JSON.stringify(key))
-      this.$router.push('/search')
-    }
+    ])
   }
 }
 </script>

@@ -12,7 +12,7 @@ import 'assets/css/reset.css'
 
 // 引入iview
 import 'iview/dist/styles/iview.css'
-import { Icon } from 'iview'
+import { Icon, Page } from 'iview'
 
 // 全局引用自定义模板
 import moduleBox from 'components/common/modulebox'
@@ -20,6 +20,7 @@ import moduleBox from 'components/common/modulebox'
 // 全局事件
 import utils from './assets/js/utils.js'
 Vue.component('Icon', Icon)
+Vue.component('Page', Page)
 Vue.prototype.utils = utils
 
 Vue.use(moduleBox)

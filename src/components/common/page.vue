@@ -1,23 +1,23 @@
 <template>
   <div class="page-list">
     <ul>
-      <li @click="nowPage(1)" :class="{none:page.active==1,active:page.active!==1}"><button>首页</button></li>
-      <li @click="nowPage(page.active-1)" :class="{none:page.active==1,active:page.active!==1}"><button>上一页</button></li>
+      <li @click="nowPage(1)" :class="{none:pageMas.active==1,active:pageMas.active!==1}"><button>首页</button></li>
+      <li @click="nowPage(pageMas.active-1)" :class="{none:pageMas.active==1,active:pageMas.active!==1}"><button>上一页</button></li>
 
-      <li v-if="page.active>3">…</li>
+      <li v-if="pageMas.active>3">…</li>
 
-      <li @click="nowPage(page.active-2)" v-if="page.active-2>0"><button>{{page.active-2}}</button></li>
-      <li @click="nowPage(page.active-1)" v-if="page.active-1>0"><button>{{page.active-1}}</button></li>
+      <li @click="nowPage(pageMas.active-2)" v-if="pageMas.active-2>0"><button>{{pageMas.active-2}}</button></li>
+      <li @click="nowPage(pageMas.active-1)" v-if="pageMas.active-1>0"><button>{{pageMas.active-1}}</button></li>
 
-      <li class="active"><button>{{page.active}}</button></li>
+      <li class="active"><button>{{pageMas.active}}</button></li>
 
-      <li @click="nowPage(page.active+1)" v-if="page.active+1<page.all+1"><button>{{page.active+1}}</button></li>
-      <li @click="nowPage(page.active+2)" v-if="page.active+2<page.all+1"><button>{{page.active+2}}</button></li>
+      <li @click="nowPage(pageMas.active+1)" v-if="pageMas.active+1<page.all+1"><button>{{pageMas.active+1}}</button></li>
+      <li @click="nowPage(pageMas.active+2)" v-if="pageMas.active+2<page.all+1"><button>{{pageMas.active+2}}</button></li>
 
       <li v-if="page.all>5">…</li>
 
-      <li @click="nowPage(page.active+1)" :class="{none:page.active==page.all,active:page.active!==page.all}"><button>下一页</button></li>
-      <li @click="nowPage(page.all)" :class="{none:page.active==page.all,active:page.active!==page.all}"><button>末页</button></li>
+      <li @click="nowPage(pageMas.active+1)" :class="{none:pageMas.active==page.all,active:pageMas.active!==page.all}"><button>下一页</button></li>
+      <li @click="nowPage(page.all)" :class="{none:pageMas.active==page.all,active:pageMas.active!==page.all}"><button>末页</button></li>
     </ul>
   </div>
 </template>
@@ -25,19 +25,23 @@
 <script>
 export default {
   props: ['page'],
+  computed: {
+    pageMas: function () {
+      return this.page
+    }
+  },
   methods: {
     nowPage (key) {
-      let len = this.page.all
+      let len = this.pageMas.all
       if (key <= 0) {
         key = 1
       }
       if (key >= len) {
         key = len
       }
+      this.pageMas.active = key
       this.$emit('on-click', key)
     }
-  },
-  mounted () {
   }
 }
 </script>

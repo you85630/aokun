@@ -1,7 +1,7 @@
 <template>
   <div class="learn">
     <bg-color>
-      <y-search :selectBox="searchSelect" @on-search="search"></y-search>
+      <y-search></y-search>
     </bg-color>
 
     <bg-color>
@@ -26,7 +26,6 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'searchSelect',
       'videoBox',
       'aboutBox'
     ])
@@ -35,11 +34,7 @@ export default {
     ...mapActions([
       'getStudy',
       'searchData'
-    ]),
-    search (key) {
-      sessionStorage.setItem('key', JSON.stringify(key))
-      this.$router.push('/search')
-    }
+    ])
   },
   created () {
     this.getStudy()

@@ -19,7 +19,6 @@ export default {
     yFooter
   },
   mounted () {
-    this.getCompany()
     this.getResource()
   },
   computed: {
@@ -35,7 +34,6 @@ export default {
     ...mapActions([
       'exit',
       'login',
-      'getCompany',
       'getResource'
     ])
   }
@@ -44,11 +42,16 @@ export default {
 
 <style lang="scss" scoped>
 .index{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
 .container{
+  box-sizing: border-box;
   margin: 0 auto;
+  padding: 0 20px;
   min-height: 77vh;
-  width: 1180px;
+  max-width: 1180px;
 }
 </style>
