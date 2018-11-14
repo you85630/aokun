@@ -3,6 +3,7 @@
     <y-header :nav="navList" :user="user" @go="login" @out="exit"></y-header>
     <div class="container">
       <router-view/>
+      <BackTop :bottom="170"></BackTop>
     </div>
     <y-footer :title="title" :footer="footerList" :icon="iconList"></y-footer>
   </div>
@@ -51,6 +52,7 @@ export default {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 20px;
+  min-width: 1180px;
   min-height: 77vh;
   max-width: 1180px;
 }

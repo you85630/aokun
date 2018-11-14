@@ -1,7 +1,7 @@
 <template>
   <div class="index-search">
     <div class="slogan">{{searchkey.slogan}}</div>
-    <div class="box">
+    <div class="search-box">
       <div class="publish">超过{{searchkey.num}}的出版物</div>
       <div class="search-box">
         <div class="search">
@@ -47,7 +47,7 @@ export default {
     color: #fff;
     font-size: 48px;
   }
-  .box{
+  .search-box{
     padding: 0 80px;
     .publish{
       padding-top: 50px;

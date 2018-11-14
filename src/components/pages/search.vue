@@ -82,8 +82,6 @@ export default {
     search (key) {
       if (key.style !== 1) {
         // 普通搜索
-        console.log(key)
-
         this.searchData(key)
       } else {
         // 高级搜索
@@ -125,16 +123,16 @@ export default {
   }
 }
 .page-box{
-  text-align: center;
   margin: 12px 0;
+  text-align: center;
 }
 .data-none{
-  font-size: 16px;
-  color: #ccc;
-  width: 100%;
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  color: #ccc;
+  font-size: 16px;
 }
 </style>

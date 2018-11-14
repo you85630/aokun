@@ -58,6 +58,7 @@ export default {
       justify-content: space-between;
       margin: 4px 0;
       padding: 4px 10px;
+      border-radius: 2px;
       font-weight: bold;
       cursor: pointer;
       i{
