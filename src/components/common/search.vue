@@ -16,8 +16,8 @@
             <Row type="flex" align="middle">
                 <Col span="5">{{Filterlist[0].title}}：</Col>
                 <Col span="19">
-                  <Select v-model="key.oragons" clearable>
-                    <Option v-for="(i,val) in Filterlist[0].label" :value="val" :key="i.name">{{ i.name }}</Option>
+                  <Select v-model="key.oragons" clearable >
+                    <Option v-for="i in Filterlist[0].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
                   </Select>
                 </Col>
             </Row>
@@ -37,8 +37,8 @@
             <Row type="flex" align="middle">
                 <Col span="5">发文单位：</Col>
                 <Col span="19">
-                  <Select v-model="key.company" clearable>
-                    <Option v-for="(i,val) in Filterlist[0].label" :value="val" :key="i.name">{{ i.name }}</Option>
+                  <Select v-model="key.company" clearable >
+                    <Option v-for="i in companyList" :value="i.id" :key="i.name">{{ i.name }}</Option>
                   </Select>
                 </Col>
             </Row>
@@ -86,14 +86,12 @@ export default {
         selectid: 1,
         style: -1,
         page: 1
-      }
+      },
+      Filterlist: []
     }
   },
   props: ['list'],
   computed: {
-    Filterlist: function () {
-      return this.list
-    },
     rangeList: function () {
       return this.selectBox
     },
@@ -121,6 +119,9 @@ export default {
         }
       }
       return now
+    },
+    companyList: function () {
+      return this.$store.state.home.companyList
     }
   },
   methods: {
@@ -133,25 +134,55 @@ export default {
         }
       }
     },
+    // 简单搜索
     simpleSearch () {
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
+      // 数据还原
+      this.key = {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        selectid: 1,
+        style: -1,
+        page: 1
+      }
     },
+    // 打开高级搜索
     seniorSearch () {
       this.key.style = 1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
+      this.Filterlist = this.list
     },
+    // 高级搜索
     advancedSearch (e) {
       this.key.text = e
       this.key.style = 1
       this.$emit('on-search', this.key)
+      // 数据还原
+      this.key = {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        selectid: 1,
+        style: -1,
+        page: 1
+      }
     },
+    // 获取时间
     changeTimes (key) {
       this.key.startTime = key[0]
       this.key.endTime = key[1]
     },
+    // 获取类别
     changeClassify (key) {
       if (key.length === 1) {
         this.key.bigCids = key[0]

@@ -3,11 +3,23 @@
     <ul>
       <li>
         <span>名称：</span>
-        <p><router-link :to="'/search/details/'+item.key">{{item.name}}</router-link></p>
+        <p><router-link :to="'/search/details/'+item.key">{{item.title}}</router-link></p>
+      </li>
+      <li>
+        <span>主题：</span>
+        <p>{{item.subject}}</p>
       </li>
       <li>
         <span>文号：</span>
-        <p>{{item.number}}</p>
+        <p>{{item.wenhao}}</p>
+      </li>
+      <li>
+        <span>组织：</span>
+        <p>{{item.organ}}</p>
+      </li>
+      <li>
+        <span>类别：</span>
+        <p>{{item.bigCatagoryName}}/{{item.subCatagoryName}}</p>
       </li>
       <li>
         <span>发文时间：</span>

@@ -4,25 +4,7 @@ export default {
   state: {
     num: 0,
     itemList: [],
-    moreLeftNavBox: [{
-      title: '明航组织',
-      type: false,
-      label: [
-        {
-          id: 'caac',
-          name: 'CAAC',
-          type: false
-        }, {
-          id: 'faa',
-          name: 'FAA',
-          type: false
-        }, {
-          id: 'easa',
-          name: 'EASA',
-          type: false
-        }
-      ]
-    }]
+    moreLeftNavBox: []
   },
   getters: {
     num: state => state.num,
@@ -48,9 +30,9 @@ export default {
         oragons: key.oragons ? key.oragons : -1,
         bigCids: key.bigCids ? key.bigCids : -1,
         subCids: key.subCids ? key.subCids : -1,
-        all: key.selectid === 1 ? key.text : -1,
-        title: key.selectid === 2 ? key.text : -1,
-        content: key.selectid === 3 ? key.text : -1,
+        all: key.selectid === 1 ? key.text ? key.text : -1 : -1,
+        title: key.selectid === 2 ? key.text ? key.text : -1 : -1,
+        content: key.selectid === 3 ? key.text ? key.text : -1 : -1,
         company: key.company ? key.company : -1,
         startTime: key.startTime === 1 ? key.startTime : -1,
         endTime: key.endTime === 1 ? key.endTime : -1,
@@ -64,7 +46,7 @@ export default {
         '/' + data.subCids +
         '/' + data.title +
         '/' + data.content +
-        // '/' + data.all +
+        '/' + data.all +
         '/' + data.company +
         '/' + data.startTime +
         '/' + data.endTime +
@@ -78,50 +60,34 @@ export default {
   mutations: {
     // 搜索
     searchData: (state, key) => {
-      state.moreLeftNavBox = [
-        {
-          title: '明航组织',
-          type: false,
-          label: [
-            {
-              id: 'caac',
-              name: 'CAAC',
-              type: false
-            }, {
-              id: 'faa',
-              name: 'FAA',
-              type: false
-            }, {
-              id: 'easa',
-              name: 'EASA',
-              type: false
-            }
-          ]
-        }
-      ]
+      state.moreLeftNavBox = []
       state.itemList = []
       if (key) {
         state.num = key.count
-        let list = key.categorys
-        for (const e in list) {
-          if (list.hasOwnProperty(e)) {
-            const element = list[e]
+        state.itemList = key.categorys
+        for (const e in state.itemList) {
+          if (state.itemList.hasOwnProperty(e)) {
+            const element = state.itemList[e]
             let date = new Date(element.postTime * 1000)
             let Y = date.getFullYear() + '-'
             let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
             let D = date.getDate() + ' '
             let time = Y + M + D
-            state.itemList.push({
-              name: element.title,
-              number: element.wenhao,
-              time: time,
-              key: element.id
-            })
+            element.time = time
+            element.organ = element.organ.toUpperCase()
+            if (!element.wenhao) {
+              element.wenhao = '暂无'
+            }
           }
         }
 
         // 高级搜索
         if (key.cids) {
+          let orangsList = {
+            title: '明航组织',
+            type: false,
+            label: []
+          }
           let cidsList = {
             type: false,
             title: '主体分类',
@@ -138,12 +104,22 @@ export default {
             label: []
           }
 
+          for (const a in key.orangs) {
+            if (key.orangs.hasOwnProperty(a)) {
+              const element = key.orangs[a]
+              orangsList.label.push({
+                id: element.bigCatagoryId,
+                name: element.name,
+                number: element.c
+              })
+            }
+          }
           for (const a in key.cids) {
             if (key.cids.hasOwnProperty(a)) {
               const element = key.cids[a]
               cidsList.label.push({
                 id: element.bigCatagoryId,
-                // name: element.name,
+                name: element.name,
                 number: element.c
               })
             }
@@ -154,7 +130,7 @@ export default {
               const element = key.status[b]
               statusList.label.push({
                 id: element.status,
-                // name: element.name,
+                name: element.name,
                 number: element.c
               })
             }
@@ -170,7 +146,7 @@ export default {
               })
             }
           }
-          state.moreLeftNavBox = [...state.moreLeftNavBox, cidsList, statusList, yearsList]
+          state.moreLeftNavBox = [orangsList, cidsList, statusList, yearsList]
         }
       }
     }

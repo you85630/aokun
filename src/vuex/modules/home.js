@@ -9,31 +9,8 @@ export default {
     },
     imgList: [],
     linklist: [],
-    leftNavBox: [
-      {
-        title: '明航组织',
-        type: false,
-        label: [
-          {
-            id: 'caac',
-            name: 'CAAC',
-            type: false
-          }, {
-            id: 'faa',
-            name: 'FAA',
-            type: false
-          }, {
-            id: 'easa',
-            name: 'EASA',
-            type: false
-          }
-        ]
-      }, {
-        title: '主体分类',
-        type: false,
-        label: this.linklist
-      }
-    ]
+    companyList: [],
+    leftNavBox: []
   },
   getters: {
     searchkey: state => state.searchkey,
@@ -61,7 +38,14 @@ export default {
       api.get(URL).then((res) => {
         commit('getResource', res.data)
       })
+    },
+    getCompany: ({ commit }, key) => {
+      let URL = '/company'
+      api.get(URL).then((res) => {
+        commit('getCompany', res.data)
+      })
     }
+
   },
   mutations: {
     getImg: (state, key) => {
@@ -125,7 +109,38 @@ export default {
         }
       }
       state.linklist = list
-      state.leftNavBox[1].label = list
+      state.leftNavBox = [{
+        title: '明航组织',
+        type: false,
+        label: [
+          {
+            id: 'caac',
+            name: 'CAAC',
+            type: false
+          }, {
+            id: 'faa',
+            name: 'FAA',
+            type: false
+          }, {
+            id: 'easa',
+            name: 'EASA',
+            type: false
+          }
+        ]
+      }, {
+        title: '主体分类',
+        type: false,
+        label: list
+      }]
+    },
+    // 发文单位
+    getCompany: (state, key) => {
+      for (const e in key) {
+        if (key.hasOwnProperty(e)) {
+          const element = key[e]
+          state.companyList.push(element)
+        }
+      }
     }
   }
 }
