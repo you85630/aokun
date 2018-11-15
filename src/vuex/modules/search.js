@@ -14,7 +14,7 @@ export default {
   actions: {
     // 搜索
     searchData: ({ commit }, key) => {
-      // /fsearch/{page}/{oragons}/{bigCids}/{subCids}/{title}/{content}/{all}/{company}/{startTime}/{endTime}/{style}
+      // /fsearch/{page}/{oragons}/{bigCids}/{subCids}/{title}/{content}/{all}/{year}/{status}/{company}/{startTime}/{endTime}/{style}
       // page：第几页：没有的填0
       // oragons：组织caac，faa，easa没有的填-1，多个用,分开
       // bigCids：大分类id:没有的填-1，多个用,分开
@@ -34,6 +34,8 @@ export default {
         title: key.selectid === 2 ? key.text ? key.text : -1 : -1,
         content: key.selectid === 3 ? key.text ? key.text : -1 : -1,
         company: key.company ? key.company : -1,
+        year: key.year ? key.year : -1,
+        status: key.status ? key.status : -1,
         startTime: key.startTime === 1 ? key.startTime : -1,
         endTime: key.endTime === 1 ? key.endTime : -1,
         style: key.style ? key.style : -1
@@ -47,6 +49,8 @@ export default {
         '/' + data.title +
         '/' + data.content +
         '/' + data.all +
+        '/' + data.year +
+        '/' + data.status +
         '/' + data.company +
         '/' + data.startTime +
         '/' + data.endTime +

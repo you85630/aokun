@@ -35,6 +35,29 @@
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
+                <Col span="5">{{Filterlist[2].title}}：</Col>
+                <Col span="19">
+                  <Select v-model="key.status" clearable >
+                    <Option v-for="i in Filterlist[2].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
+                  </Select>
+                </Col>
+            </Row>
+         </Col>
+         <Col span="10" offset="2">
+            <Row type="flex" justify="center" align="middle">
+              <Col span="4">{{Filterlist[3].title}}：</Col>
+              <Col span="20">
+                <Select v-model="key.year" clearable >
+                  <Option v-for="i in Filterlist[3].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
+                </Select>
+              </Col>
+            </Row>
+         </Col>
+      </Row>
+
+      <Row type="flex" justify="space-between" align="middle">
+         <Col span="10">
+            <Row type="flex" align="middle">
                 <Col span="5">发文单位：</Col>
                 <Col span="19">
                   <Select v-model="key.company" clearable >
@@ -83,6 +106,8 @@ export default {
         subCids: '',
         startTime: '',
         endTime: '',
+        year: '',
+        status: '',
         selectid: 1,
         style: -1,
         page: 1

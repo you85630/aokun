@@ -6,7 +6,7 @@
 
     <bg-color>
       <div class="result">
-        <filter-box :showBox="filterList" @on-click="filterBox"></filter-box>
+        <filter-box v-if="searchType===-1" :showBox="filterList" @on-click="filterBox"></filter-box>
 
         <div class="result-box" v-if="num">
           <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
