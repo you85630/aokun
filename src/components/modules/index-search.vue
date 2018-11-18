@@ -26,6 +26,7 @@ export default {
   },
   data () {
     return {
+      start: false,
       key: ''
     }
   },
@@ -43,6 +44,8 @@ export default {
   box-sizing: border-box;
   padding: 60px 40px;
   width: 100%;
+  height: 405px;
+  box-sizing: border-box;
   .slogan{
     color: #fff;
     font-size: 48px;

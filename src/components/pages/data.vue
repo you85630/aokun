@@ -1,7 +1,7 @@
 <template>
   <div class="data">
     <bg-color>
-      <y-search :list="moreLeftNavBox"></y-search>
+      <y-search></y-search>
     </bg-color>
 
     <bg-color>
@@ -18,7 +18,7 @@
 import introduce from 'components/modules/introduce'
 import dataItem from 'components/modules/data-item'
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   components: {
     introduce,
@@ -45,11 +45,6 @@ export default {
         }
       ]
     }
-  },
-  computed: {
-    ...mapGetters([
-      'moreLeftNavBox'
-    ])
   },
   methods: {
     ...mapActions([

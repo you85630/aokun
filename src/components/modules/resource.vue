@@ -4,7 +4,7 @@
     <div class="box">
       <div class="list" v-for="(li,index) in list" :key="index">
         <div class="name">{{li.name}}</div>
-        <div class="item" v-for="(i,val) in li.item" :key="val" @click="linkTo(i)">{{i.name}}</div>
+        <div class="item" v-for="(i,val) in li.item" :key="val" @click="linkTo(li,i)">{{i.name}}</div>
       </div>
     </div>
   </div>
@@ -20,9 +20,9 @@ export default {
     }
   },
   methods: {
-    linkTo (key) {
+    linkTo (item, key) {
       let router = this.$router
-      router.push({name: 'search', query: {categry: key.id}})
+      router.push({name: 'search', query: {categry: key.id, classify: item.id}})
     }
   }
 }

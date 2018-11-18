@@ -62,7 +62,6 @@ export default {
   mutations: {
     // 搜索
     searchData: (state, key) => {
-      state.moreLeftNavBox = []
       state.itemList = []
       if (key) {
         state.num = key.count

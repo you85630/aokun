@@ -11,7 +11,12 @@ export default {
     linklist: [],
     companyList: [],
     leftNavBox: [],
-    moreLeftNavBox: []
+    moreLeftNavBox: {
+      orangsList: {},
+      cidsList: {},
+      statusList: {},
+      yearsList: {}
+    }
   },
   getters: {
     searchkey: state => state.searchkey,
@@ -181,33 +186,22 @@ export default {
     },
     // 高级搜索
     getMoreLeftNavBox: (state, key) => {
+      state.moreLeftNavBox = {
+        orangsList: {},
+        cidsList: {},
+        statusList: {},
+        yearsList: {}
+      }
+      let orangsList = []
+      let cidsList = []
+      let statusList = []
+      let yearsList = []
       if (key) {
-        let orangsList = {
-          title: '明航组织',
-          type: false,
-          label: []
-        }
-        let cidsList = {
-          type: false,
-          title: '主体分类',
-          label: []
-        }
-        let statusList = {
-          type: false,
-          title: '文档有效性',
-          label: []
-        }
-        let yearsList = {
-          type: false,
-          title: '文档年份',
-          label: []
-        }
-
         for (const a in key.orangs) {
           if (key.orangs.hasOwnProperty(a)) {
             const element = key.orangs[a]
-            orangsList.label.push({
-              id: element.bigCatagoryId,
+            orangsList.push({
+              id: element.organ,
               name: element.name,
               number: element.c
             })
@@ -216,7 +210,7 @@ export default {
         for (const a in key.cids) {
           if (key.cids.hasOwnProperty(a)) {
             const element = key.cids[a]
-            cidsList.label.push({
+            cidsList.push({
               id: element.bigCatagoryId,
               name: element.name,
               number: element.c
@@ -227,7 +221,7 @@ export default {
         for (const b in key.status) {
           if (key.status.hasOwnProperty(b)) {
             const element = key.status[b]
-            statusList.label.push({
+            statusList.push({
               id: element.status,
               name: element.name,
               number: element.c
@@ -238,14 +232,19 @@ export default {
         for (const c in key.years) {
           if (key.years.hasOwnProperty(c)) {
             const element = key.years[c]
-            yearsList.label.push({
+            yearsList.push({
               id: element.year,
               name: element.year,
               number: element.c
             })
           }
         }
-        state.moreLeftNavBox = [orangsList, cidsList, statusList, yearsList]
+        state.moreLeftNavBox = {
+          orangsList,
+          cidsList,
+          statusList,
+          yearsList
+        }
       }
     }
   }

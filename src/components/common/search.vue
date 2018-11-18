@@ -1,6 +1,6 @@
 <template>
   <div class="search-box">
-    <div class="search-simple" v-if="more">
+    <div class="search-simple" v-if="key.style===-1">
       <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 92%;">
           <Select v-model="select" slot="prepend" style="width: 80px">
               <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
@@ -10,21 +10,21 @@
       <p class="advanced" @click="seniorSearch">高级搜索</p>
     </div>
 
-    <div class="advanced-search" v-if="!more">
+    <div class="advanced-search" v-if="key.style===1">
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
-                <Col span="5">{{Filterlist[0].title}}：</Col>
+                <Col span="5">明航组织：</Col>
                 <Col span="19">
-                  <Select v-model="key.oragons" clearable >
-                    <Option v-for="i in Filterlist[0].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
+                  <Select v-model="key.oragons" clearable>
+                    <Option v-for="i in Filterlist.orangsList" :value="i.id" :key="i.name">{{ i.name }}</Option>
                   </Select>
                 </Col>
             </Row>
          </Col>
          <Col span="10" offset="2">
             <Row type="flex" justify="center" align="middle">
-              <Col span="4">{{Filterlist[1].title}}：</Col>
+              <Col span="4">主体分类：</Col>
               <Col span="20">
                 <Cascader :data="classify" change-on-select @on-change="changeClassify"></Cascader>
               </Col>
@@ -35,20 +35,20 @@
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
-                <Col span="5">{{Filterlist[2].title}}：</Col>
+                <Col span="5">文档有效性：</Col>
                 <Col span="19">
-                  <Select v-model="key.status" clearable >
-                    <Option v-for="i in Filterlist[2].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
+                  <Select v-model="key.status" clearable>
+                    <Option v-for="i in Filterlist.statusList" :value="i.id" :key="i.name">{{ i.name }}</Option>
                   </Select>
                 </Col>
             </Row>
          </Col>
          <Col span="10" offset="2">
             <Row type="flex" justify="center" align="middle">
-              <Col span="4">{{Filterlist[3].title}}：</Col>
+              <Col span="4">文档年份：</Col>
               <Col span="20">
-                <Select v-model="key.year" clearable >
-                  <Option v-for="i in Filterlist[3].label" :value="i.id" :key="i.name">{{ i.name }}</Option>
+                <Select v-model="key.year" clearable>
+                  <Option v-for="i in Filterlist.yearsList" :value="i.id" :key="i.name">{{ i.name }}</Option>
                 </Select>
               </Col>
             </Row>
@@ -84,10 +84,8 @@
 
 <script>
 export default {
-  props: ['list'],
   data () {
     return {
-      more: true,
       select: '全部',
       selectBox: [
         {
@@ -113,13 +111,16 @@ export default {
         selectid: 1,
         style: -1,
         page: 1
-      },
-      Filterlist: this.list
+      }
     }
   },
-  created () {
-  },
   computed: {
+    Filterlist: function () {
+      return this.$store.state.home.moreLeftNavBox
+    },
+    companyList: function () {
+      return this.$store.state.home.companyList
+    },
     rangeList: function () {
       return this.selectBox
     },
@@ -147,9 +148,6 @@ export default {
         }
       }
       return now
-    },
-    companyList: function () {
-      return this.$store.state.home.companyList
     }
   },
   methods: {
@@ -164,7 +162,6 @@ export default {
     },
     // 简单搜索
     simpleSearch () {
-      this.more = true
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
@@ -180,13 +177,14 @@ export default {
         style: -1,
         page: 1
       }
+      sessionStorage.removeItem('style')
     },
     // 打开高级搜索
     seniorSearch () {
       this.key.style = 1
-      this.more = false
       this.$emit('on-search', this.key)
       this.$router.push('/search')
+      sessionStorage.setItem('style', JSON.stringify(this.key.style))
     },
     // 高级搜索
     advancedSearch (e) {
@@ -202,7 +200,7 @@ export default {
         startTime: '',
         endTime: '',
         selectid: 1,
-        style: -1,
+        style: 1,
         page: 1
       }
     },
@@ -219,6 +217,12 @@ export default {
         this.key.bigCids = key[0]
         this.key.subCids = key[1]
       }
+    }
+  },
+  created () {
+    let style = JSON.parse(sessionStorage.getItem('style'))
+    if (style === 1) {
+      this.key.style = style
     }
   },
   watch: {

@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <bg-color>
-      <y-search :list="moreLeftNavBox" @on-search="search"></y-search>
+      <y-search @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
@@ -9,7 +9,7 @@
         <filter-box v-if="more" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box">
-          <div class="title">搜索结果：<em>{{nameBox}}</em>（<span>{{num}}</span>）</span></div>
+          <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
           <div class="page-box" v-if="num">
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
@@ -38,8 +38,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      more: true,
-      nameBox: ''
+      more: true
     }
   },
   components: {
@@ -50,8 +49,7 @@ export default {
     ...mapGetters([
       'leftNavBox',
       'itemList',
-      'num',
-      'moreLeftNavBox'
+      'num'
     ]),
     pages: function () {
       let page = {
@@ -66,27 +64,41 @@ export default {
       'searchData'
     ]),
     init () {
-      let router = this.$router.currentRoute.query
-      if (router.categry === 1100004) {
-        this.$router.push('/search/airworthiness')
-      }
-      if (router.categry === 5100002) {
-        this.$router.push('/search/relation')
-      }
       // 默认搜索一次
       let searchKey = {
         selectid: 1,
         style: -1,
         text: '',
-        page: 1
+        page: 1,
+        subCids: -1,
+        bigCids: -1
       }
       let text = JSON.parse(sessionStorage.getItem('key'))
       if (text) {
         searchKey.text = text
-        this.nameBox = text
       }
 
+      let router = this.$router.currentRoute.query
+      if (router.categry) {
+        if (router.categry === 1100004) {
+          this.$router.push('/search/airworthiness')
+        }
+        if (router.categry === 5100002) {
+          this.$router.push('/search/relation')
+        }
+        searchKey.subCids = router.categry
+        searchKey.bigCids = router.classify
+        let list = this.leftNavBox[1].label
+        for (let i = 0; i < list.length; i++) {
+          const element = list[i]
+          element.type = false
+          if (element.id === router.classify) {
+            element.type = true
+          }
+        }
+      }
       this.search(searchKey)
+      this.$router.push('/search')
     },
     // 过滤器
     filterSearch (key) {
@@ -136,9 +148,6 @@ export default {
     align-items: center;
     flex-direction: row;
     font-size: 14px;
-    em{
-      color: #f00;
-    }
     span{
       margin: 0 4px;
     }
