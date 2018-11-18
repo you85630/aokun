@@ -107,7 +107,11 @@ export default {
     },
     // 过滤器
     filterSearch (key) {
-      this.search({company: key.id, style: -1})
+      if (typeof key.id === 'number') {
+        this.search({bigCids: key.id, style: -1})
+      } else {
+        this.search({oragons: key.id, style: -1})
+      }
     },
     // 搜索
     search (key) {
