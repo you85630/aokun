@@ -6,25 +6,24 @@
 
     <bg-color>
       <div class="result">
-        <filter-box :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
+        <filter-box v-if="more" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
 
-        <div class="result-box" v-if="num">
-          <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
-
-          <div class="page-box">
+        <div class="result-box">
+          <div class="title">搜索结果：<em>{{nameBox}}</em>（<span>{{num}}</span>）</span></div>
+          <div class="page-box" v-if="num">
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
           <div class="item-box">
-            <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
-            <Spin fix v-if="showbox"></Spin>
+            <item-box v-for="(li,index) in itemList" :key="index" :item="li" v-if="num"></item-box>
+            <div v-if="!num" class="data-none">
+              <p>暂无数据</p>
+            </div>
           </div>
-          <div class="page-box">
+          <div class="page-box" v-if="num">
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
         </div>
-        <div v-else class="data-none">
-          <p>暂无数据</p>
-        </div>
+
       </div>
     </bg-color>
   </div>
@@ -39,7 +38,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      showbox: false
+      more: true,
+      nameBox: ''
     }
   },
   components: {
@@ -83,19 +83,24 @@ export default {
       let text = JSON.parse(sessionStorage.getItem('key'))
       if (text) {
         searchKey.text = text
+        this.nameBox = text
       }
       this.search(searchKey)
     },
     // 过滤器
     filterSearch (key) {
-      this.search({company: key.id})
+      this.search({company: key.id, style: -1})
     },
     // 搜索
     search (key) {
-      this.showbox = false
-      setTimeout(() => {
-        this.showbox = false
-      }, 500)
+      this.nameBox = ''
+      if (key.style === -1) {
+        this.more = true
+      } else {
+        this.more = false
+      }
+      this.nameBox = key.text
+
       this.searchData(key)
       sessionStorage.setItem('search', JSON.stringify(key))
       sessionStorage.removeItem('key')
@@ -119,18 +124,19 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: -20px;
   }
 }
 .result-box{
   box-sizing: border-box;
-  padding-bottom: 20px;
   width: 100%;
   .title{
     display: flex;
     align-items: center;
     flex-direction: row;
     font-size: 14px;
+    em{
+      color: #f00;
+    }
     span{
       margin: 0 4px;
     }
@@ -149,8 +155,8 @@ export default {
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  height: 240px;
   color: #ccc;
   font-size: 16px;
-  padding-bottom: 20px;
 }
 </style>

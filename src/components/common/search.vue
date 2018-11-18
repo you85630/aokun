@@ -117,6 +117,9 @@ export default {
       Filterlist: [...this.list]
     }
   },
+  created () {
+    console.log(this.key)
+  },
   computed: {
     rangeList: function () {
       return this.selectBox
