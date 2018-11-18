@@ -1,6 +1,6 @@
 <template>
   <div class="search-box">
-    <div class="search-simple" v-if="key.style===-1">
+    <div class="search-simple" v-if="more">
       <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 92%;">
           <Select v-model="select" slot="prepend" style="width: 80px">
               <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
@@ -10,7 +10,7 @@
       <p class="advanced" @click="seniorSearch">高级搜索</p>
     </div>
 
-    <div class="advanced-search" v-if="key.style===1">
+    <div class="advanced-search" v-if="!more">
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
@@ -78,7 +78,6 @@
         <Col span="21"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col>
         <Col span="2" offset="1"><p class="cursor" @click="simpleSearch">关闭高级搜索</p></Col>
       </Row>
-
     </div>
   </div>
 </template>
@@ -88,6 +87,7 @@ export default {
   props: ['list'],
   data () {
     return {
+      more: true,
       select: '全部',
       selectBox: [
         {
@@ -114,8 +114,10 @@ export default {
         style: -1,
         page: 1
       },
-      Filterlist: [...this.list]
+      Filterlist: this.list
     }
+  },
+  created () {
   },
   computed: {
     rangeList: function () {
@@ -162,6 +164,7 @@ export default {
     },
     // 简单搜索
     simpleSearch () {
+      this.more = true
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
@@ -181,9 +184,9 @@ export default {
     // 打开高级搜索
     seniorSearch () {
       this.key.style = 1
+      this.more = false
       this.$emit('on-search', this.key)
       this.$router.push('/search')
-      this.Filterlist = this.list
     },
     // 高级搜索
     advancedSearch (e) {

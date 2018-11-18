@@ -85,6 +85,7 @@ export default {
         searchKey.text = text
         this.nameBox = text
       }
+
       this.search(searchKey)
     },
     // 过滤器
@@ -102,6 +103,7 @@ export default {
       this.nameBox = key.text
 
       this.searchData(key)
+
       sessionStorage.setItem('search', JSON.stringify(key))
       sessionStorage.removeItem('key')
     },
