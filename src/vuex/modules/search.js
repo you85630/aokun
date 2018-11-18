@@ -55,7 +55,7 @@ export default {
         '/' + data.endTime +
         '/' + data.style
       api.get(URL).then((res) => {
-        commit('searchData', res.data)
+        // commit('searchData', res.data)
       })
     }
   },

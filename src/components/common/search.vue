@@ -75,7 +75,15 @@
       </Row>
 
       <Row type="flex" justify="center" align="middle">
-        <Col span="21"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col>
+        <!-- <Col span="21"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col> -->
+        <Col span="21">
+          <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
+              <Select v-model="select" slot="prepend" style="width: 80px">
+                  <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
+              </Select>
+              <Button slot="append" style="width: 80px; color:#fff;" @click="advancedSearch">搜索</Button>
+          </Input>
+        </Col>
         <Col span="2" offset="1"><p class="cursor" @click="simpleSearch">关闭高级搜索</p></Col>
       </Row>
     </div>
@@ -116,7 +124,7 @@ export default {
   },
   computed: {
     Filterlist: function () {
-      return this.$store.state.home.moreLeftNavBox
+      return this.$store.state.home.moreSearch
     },
     companyList: function () {
       return this.$store.state.home.companyList
@@ -175,10 +183,8 @@ export default {
       sessionStorage.setItem('style', JSON.stringify(this.key.style))
     },
     // 高级搜索
-    advancedSearch (e) {
+    advancedSearch () {
       this.key.style = 1
-      this.key.text = e
-
       this.$emit('on-search', this.key)
     },
     // 获取时间
@@ -218,6 +224,10 @@ export default {
   margin: -20px;
   padding: 20px;
   font-size: 14px;
+    .ivu-input-group-append{
+      border: 1px solid #2d8cf0;
+      background-color: #2d8cf0;
+    }
 }
 .search-simple{
   display: flex;
@@ -228,10 +238,6 @@ export default {
     color: #2d8cf0;
     font-size: 14px;
     cursor: pointer;
-  }
-  .ivu-input-group-append{
-    border: 1px solid #2d8cf0;
-    background-color: #2d8cf0;
   }
 }
 .advanced-search{

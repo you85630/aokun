@@ -11,7 +11,8 @@ export default {
     linklist: [],
     companyList: [],
     leftNavBox: [],
-    moreLeftNavBox: {
+    moreLeftNavBox: [],
+    moreSearch: {
       orangsList: {},
       cidsList: {},
       statusList: {},
@@ -23,7 +24,8 @@ export default {
     imgList: state => state.imgList,
     linklist: state => state.linklist,
     leftNavBox: state => state.leftNavBox,
-    moreLeftNavBox: state => state.moreLeftNavBox
+    moreLeftNavBox: state => state.moreLeftNavBox,
+    moreSearch: state => state.moreSearch
   },
   actions: {
     getImg: ({ commit }) => {
@@ -52,7 +54,7 @@ export default {
         commit('getCompany', res.data)
       })
     },
-    getMoreLeftNavBox: ({ commit }) => {
+    getMoreSearch: ({ commit }) => {
       let data = {
         page: 1,
         oragons: -1,
@@ -84,7 +86,7 @@ export default {
         '/' + data.endTime +
         '/' + data.style
       api.get(URL).then((res) => {
-        commit('getMoreLeftNavBox', res.data)
+        commit('getMoreSearch', res.data)
       })
     }
 
@@ -185,8 +187,8 @@ export default {
       }
     },
     // 高级搜索
-    getMoreLeftNavBox: (state, key) => {
-      state.moreLeftNavBox = {
+    getMoreSearch: (state, key) => {
+      state.moreSearch = {
         orangsList: {},
         cidsList: {},
         statusList: {},
@@ -239,12 +241,31 @@ export default {
             })
           }
         }
-        state.moreLeftNavBox = {
+        state.moreSearch = {
           orangsList,
           cidsList,
           statusList,
           yearsList
         }
+        state.moreLeftNavBox = [
+          {
+            title: '明航组织',
+            type: false,
+            label: orangsList
+          }, {
+            title: '主体分类',
+            type: false,
+            label: cidsList
+          }, {
+            title: '文档有效期',
+            type: false,
+            label: statusList
+          }, {
+            title: '文档年份',
+            type: false,
+            label: yearsList
+          }
+        ]
       }
     }
   }

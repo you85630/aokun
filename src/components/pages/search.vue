@@ -7,6 +7,7 @@
     <bg-color>
       <div class="result">
         <filter-box v-if="more" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
+        <filter-box v-else :showBox="moreLeftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box">
           <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
@@ -48,6 +49,7 @@ export default {
   computed: {
     ...mapGetters([
       'leftNavBox',
+      'moreLeftNavBox',
       'itemList',
       'num'
     ]),
@@ -78,7 +80,9 @@ export default {
       if (text) {
         searchKey.text = text
       }
-      if (style === 1) {
+      if (style === -1) {
+        this.more = true
+      } else {
         this.more = false
       }
 
@@ -115,16 +119,13 @@ export default {
     },
     // 搜索
     search (key) {
-      this.nameBox = ''
       if (key.style === -1) {
         this.more = true
       } else {
         this.more = false
       }
-      this.nameBox = key.text
 
       this.searchData(key)
-
       sessionStorage.setItem('search', JSON.stringify(key))
     },
     // 翻页

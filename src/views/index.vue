@@ -22,7 +22,7 @@ export default {
   mounted () {
     this.getResource()
     this.getCompany()
-    this.getMoreLeftNavBox()
+    this.getMoreSearch()
   },
   computed: {
     ...mapGetters([
@@ -39,7 +39,7 @@ export default {
       'login',
       'getResource',
       'getCompany',
-      'getMoreLeftNavBox'
+      'getMoreSearch'
     ])
   }
 }
