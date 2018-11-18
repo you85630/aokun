@@ -6,7 +6,8 @@ export default {
     start: true
   },
   getters: {
-    details: state => state.details
+    details: state => state.details,
+    start: state => state.start
   },
   actions: {
     getDetails: ({ commit }, key) => {
