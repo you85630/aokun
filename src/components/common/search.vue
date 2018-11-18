@@ -165,18 +165,6 @@ export default {
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
-      // 数据还原
-      this.key = {
-        text: '',
-        oragons: '',
-        bigCids: '',
-        subCids: '',
-        startTime: '',
-        endTime: '',
-        selectid: 1,
-        style: -1,
-        page: 1
-      }
       sessionStorage.removeItem('style')
     },
     // 打开高级搜索
@@ -191,18 +179,6 @@ export default {
       this.key.style = 1
       this.key.text = e
       this.$emit('on-search', this.key)
-      // 数据还原
-      this.key = {
-        text: '',
-        oragons: '',
-        bigCids: '',
-        subCids: '',
-        startTime: '',
-        endTime: '',
-        selectid: 1,
-        style: 1,
-        page: 1
-      }
     },
     // 获取时间
     changeTimes (key) {
@@ -221,9 +197,14 @@ export default {
   },
   created () {
     let style = JSON.parse(sessionStorage.getItem('style'))
+    let text = JSON.parse(sessionStorage.getItem('key'))
     if (style === 1) {
       this.key.style = style
     }
+    if (text) {
+      this.key.text = text
+    }
+    console.log(this.key.text)
   },
   watch: {
     'select': 'selectId'

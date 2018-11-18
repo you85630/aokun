@@ -7,9 +7,11 @@
             <img src="./../../assets/img/pic-01.png" alt="">
           </router-link>
         </div>
-        <div class="nav">
-          <router-link v-for="(li,index) in nav" :key="index" :to="li.link"><p @click="linkTo">{{li.name}}</p></router-link>
-        </div>
+        <ul class="nav">
+          <li v-for="li in nav" :key="li.link">
+            <router-link :to="li.link"><p @click="linkTo(li.link)">{{li.name}}</p></router-link>
+          </li>
+        </ul>
       </div>
       <div class="right" v-if="user.name">
         <p>{{user.name}}</p>
@@ -40,7 +42,7 @@ export default {
     login () {
       this.$emit('go')
     },
-    linkTo () {
+    linkTo (key) {
       sessionStorage.removeItem('key')
       let list = this.$store.state.home.linklist
       for (let i = 0; i < list.length; i++) {

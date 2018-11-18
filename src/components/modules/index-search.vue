@@ -1,7 +1,7 @@
 <template>
   <div class="index-search">
     <div class="slogan">{{searchkey.slogan}}</div>
-    <div class="search-box">
+    <div class="search-now">
       <div class="publish">超过{{searchkey.num}}的出版物</div>
       <div class="search-box">
         <div class="search">
@@ -44,25 +44,24 @@ export default {
   box-sizing: border-box;
   padding: 60px 40px;
   width: 100%;
-  height: 405px;
+  min-height: 405px;
   box-sizing: border-box;
   .slogan{
     color: #fff;
     font-size: 48px;
+    margin-bottom: 50px;
   }
-  .search-box{
+  .search-now{
     padding: 0 80px;
     .publish{
-      padding-top: 50px;
       color: #fff;
       font-size: 24px;
+      margin-bottom: 20px;
     }
     .search-box{
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-sizing: border-box;
-      padding: 20px 0;
       .search{
         position: relative;
         .icon{
@@ -99,7 +98,9 @@ export default {
     }
   }
   .inspect{
+    width: 100%;
     text-align: right;
+    margin-top: 20px;
     a{
       color: #fff;
       font-size: 24px;

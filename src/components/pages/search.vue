@@ -117,7 +117,6 @@ export default {
       this.searchData(key)
 
       sessionStorage.setItem('search', JSON.stringify(key))
-      sessionStorage.removeItem('key')
     },
     // 翻页
     nowPage (key) {
