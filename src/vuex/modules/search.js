@@ -3,11 +3,13 @@ import api from 'assets/js/api'
 export default {
   state: {
     num: 0,
-    itemList: []
+    itemList: [],
+    moreLeftNavBox: []
   },
   getters: {
     num: state => state.num,
-    itemList: state => state.itemList
+    itemList: state => state.itemList,
+    moreLeftNavBox: state => state.moreLeftNavBox
   },
   actions: {
     // 搜索
@@ -55,7 +57,7 @@ export default {
         '/' + data.endTime +
         '/' + data.style
       api.get(URL).then((res) => {
-        // commit('searchData', res.data)
+        commit('searchData', res.data)
       })
     }
   },
@@ -78,6 +80,84 @@ export default {
             element.time = time
             element.organ = element.organ.toUpperCase()
           }
+        }
+
+        let orangsList = []
+        let cidsList = []
+        let statusList = []
+        let yearsList = []
+        if (key) {
+          for (const a in key.orangs) {
+            if (key.orangs.hasOwnProperty(a)) {
+              const element = key.orangs[a]
+              orangsList.push({
+                id: element.organ,
+                name: element.name,
+                number: element.c,
+                sort: 'oragons'
+              })
+            }
+          }
+          for (const a in key.cids) {
+            if (key.cids.hasOwnProperty(a)) {
+              const element = key.cids[a]
+              cidsList.push({
+                id: element.bigCatagoryId,
+                name: element.name,
+                number: element.c,
+                sort: 'cids'
+              })
+            }
+          }
+
+          for (const b in key.status) {
+            if (key.status.hasOwnProperty(b)) {
+              const element = key.status[b]
+              statusList.push({
+                id: element.status,
+                name: element.name,
+                number: element.c,
+                sort: 'status'
+              })
+            }
+          }
+
+          for (const c in key.years) {
+            if (key.years.hasOwnProperty(c)) {
+              const element = key.years[c]
+              yearsList.push({
+                id: element.year,
+                name: element.year,
+                number: element.c,
+                sort: 'years'
+              })
+            }
+          }
+          state.moreSearch = {
+            orangsList,
+            cidsList,
+            statusList,
+            yearsList
+          }
+          state.moreLeftNavBox = [
+            {
+              title: '明航组织',
+              type: false,
+              label: orangsList
+            }, {
+              title: '主体分类',
+              type: false,
+              label: cidsList
+            }, {
+              title: '文档有效期',
+              type: false,
+              label: statusList
+            }, {
+              title: '文档年份',
+              type: false,
+              label: yearsList
+            }
+          ]
         }
       }
     }

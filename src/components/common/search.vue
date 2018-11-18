@@ -75,7 +75,6 @@
       </Row>
 
       <Row type="flex" justify="center" align="middle">
-        <!-- <Col span="21"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col> -->
         <Col span="21">
           <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
               <Select v-model="select" slot="prepend" style="width: 80px">
@@ -173,7 +172,7 @@ export default {
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
-      sessionStorage.removeItem('style')
+      sessionStorage.setItem('style', JSON.stringify(this.key.style))
     },
     // 打开高级搜索
     seniorSearch () {
@@ -181,6 +180,14 @@ export default {
       this.$emit('on-search', this.key)
       this.$router.push('/search')
       sessionStorage.setItem('style', JSON.stringify(this.key.style))
+
+      let list = this.$store.state.home.leftNavBox[1].label
+      for (const c in list) {
+        if (list.hasOwnProperty(c)) {
+          const element = list[c]
+          element.type = false
+        }
+      }
     },
     // 高级搜索
     advancedSearch () {

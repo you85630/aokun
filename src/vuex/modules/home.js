@@ -11,7 +11,6 @@ export default {
     linklist: [],
     companyList: [],
     leftNavBox: [],
-    moreLeftNavBox: [],
     moreSearch: {
       orangsList: {},
       cidsList: {},
@@ -24,7 +23,6 @@ export default {
     imgList: state => state.imgList,
     linklist: state => state.linklist,
     leftNavBox: state => state.leftNavBox,
-    moreLeftNavBox: state => state.moreLeftNavBox,
     moreSearch: state => state.moreSearch
   },
   actions: {
@@ -133,7 +131,8 @@ export default {
                 name: e.name,
                 id: e.id,
                 item: [],
-                type: false
+                type: false,
+                sort: 'cids'
               })
             }
           } else {
@@ -160,15 +159,18 @@ export default {
           {
             id: 'caac',
             name: 'CAAC',
-            type: false
+            type: false,
+            sort: 'oragons'
           }, {
             id: 'faa',
             name: 'FAA',
-            type: false
+            type: false,
+            sort: 'oragons'
           }, {
             id: 'easa',
             name: 'EASA',
-            type: false
+            type: false,
+            sort: 'oragons'
           }
         ]
       }, {
@@ -205,7 +207,8 @@ export default {
             orangsList.push({
               id: element.organ,
               name: element.name,
-              number: element.c
+              number: element.c,
+              sort: 'orangs'
             })
           }
         }
@@ -215,7 +218,8 @@ export default {
             cidsList.push({
               id: element.bigCatagoryId,
               name: element.name,
-              number: element.c
+              number: element.c,
+              sort: 'cids'
             })
           }
         }
@@ -226,7 +230,8 @@ export default {
             statusList.push({
               id: element.status,
               name: element.name,
-              number: element.c
+              number: element.c,
+              sort: 'status'
             })
           }
         }
@@ -237,7 +242,8 @@ export default {
             yearsList.push({
               id: element.year,
               name: element.year,
-              number: element.c
+              number: element.c,
+              sort: 'years'
             })
           }
         }

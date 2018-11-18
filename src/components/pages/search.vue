@@ -39,7 +39,20 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      more: true
+      more: true,
+      searchKey: {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        year: '',
+        status: '',
+        selectid: 1,
+        style: -1,
+        page: 1
+      }
     }
   },
   components: {
@@ -67,18 +80,10 @@ export default {
     ]),
     init () {
       // 默认搜索一次
-      let searchKey = {
-        selectid: 1,
-        style: -1,
-        text: '',
-        page: 1,
-        subCids: -1,
-        bigCids: -1
-      }
       let text = JSON.parse(sessionStorage.getItem('key'))
       let style = JSON.parse(sessionStorage.getItem('style'))
       if (text) {
-        searchKey.text = text
+        this.searchKey.text = text
       }
       if (style === -1) {
         this.more = true
@@ -94,8 +99,8 @@ export default {
         if (router.categry === 5100002) {
           this.$router.push('/search/relation')
         }
-        searchKey.subCids = router.categry
-        searchKey.bigCids = router.classify
+        this.searchKey.subCids = router.categry
+        this.searchKey.bigCids = router.classify
         let list = this.leftNavBox[1].label
         for (let i = 0; i < list.length; i++) {
           const element = list[i]
@@ -105,28 +110,73 @@ export default {
           }
         }
       }
-
-      this.search(searchKey)
+      this.search(this.searchKey)
       this.$router.push('/search')
     },
     // 过滤器
     filterSearch (key) {
-      if (typeof key.id === 'number') {
-        this.search({bigCids: key.id, style: -1})
+      let style = JSON.parse(sessionStorage.getItem('style'))
+      if (style) {
+        if (style === 1) {
+          if (key.sort === 'oragons') {
+            this.searchKey.oragons = key.id
+            this.searchKey.style = 1
+            this.search(this.searchKey)
+          }
+          if (key.sort === 'cids') {
+            this.searchKey.bigCids = key.id
+            this.searchKey.style = 1
+            this.search(this.searchKey)
+          }
+          if (key.sort === 'status') {
+            this.searchKey.status = key.id
+            this.searchKey.style = 1
+            this.search(this.searchKey)
+          }
+          if (key.sort === 'years') {
+            this.searchKey.year = key.id
+            this.searchKey.style = 1
+            this.search(this.searchKey)
+          }
+        } else {
+          if (key.sort === 'cids') {
+            this.search({bigCids: key.id, style: -1})
+          }
+          if (key.sort === 'oragons') {
+            this.search({oragons: key.id, style: -1})
+          }
+        }
       } else {
-        this.search({oragons: key.id, style: -1})
+        if (key.sort === 'cids') {
+          this.search({bigCids: key.id, style: -1})
+        }
+        if (key.sort === 'oragons') {
+          this.search({oragons: key.id, style: -1})
+        }
       }
     },
     // 搜索
     search (key) {
       if (key.style === -1) {
         this.more = true
+        this.searchKey = {
+          text: '',
+          oragons: '',
+          bigCids: '',
+          subCids: '',
+          startTime: '',
+          endTime: '',
+          year: '',
+          status: '',
+          selectid: 1,
+          style: -1,
+          page: 1
+        }
       } else {
         this.more = false
       }
 
       this.searchData(key)
-      sessionStorage.setItem('search', JSON.stringify(key))
     },
     // 翻页
     nowPage (key) {
