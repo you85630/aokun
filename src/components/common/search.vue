@@ -83,7 +83,7 @@
               <Button slot="append" style="width: 80px; color:#fff;" @click="advancedSearch">搜索</Button>
           </Input>
         </Col>
-        <Col span="2" offset="1"><p class="cursor" @click="simpleSearch">关闭高级搜索</p></Col>
+        <Col span="2" offset="1"><p class="cursor" @click="closeSimpleSearch">关闭高级搜索</p></Col>
       </Row>
     </div>
   </div>
@@ -172,6 +172,24 @@ export default {
       this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
+      sessionStorage.setItem('style', JSON.stringify(this.key.style))
+    },
+    // 关闭高级搜索
+    closeSimpleSearch () {
+      this.key = {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        year: '',
+        status: '',
+        selectid: 1,
+        style: -1,
+        page: 1
+      }
+      this.$emit('on-search', this.key)
       sessionStorage.setItem('style', JSON.stringify(this.key.style))
     },
     // 打开高级搜索
