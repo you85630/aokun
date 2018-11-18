@@ -44,15 +44,11 @@ export default {
     },
     linkTo (key) {
       sessionStorage.removeItem('key')
+      sessionStorage.removeItem('style')
       let list = this.$store.state.home.linklist
       for (let i = 0; i < list.length; i++) {
-        const element = list[i].item
-        for (const key in element) {
-          if (element.hasOwnProperty(key)) {
-            const e = element[key]
-            e.type = false
-          }
-        }
+        const element = list[i]
+        element.type = false
       }
     }
   }

@@ -74,8 +74,12 @@ export default {
         bigCids: -1
       }
       let text = JSON.parse(sessionStorage.getItem('key'))
+      let style = JSON.parse(sessionStorage.getItem('style'))
       if (text) {
         searchKey.text = text
+      }
+      if (style === 1) {
+        this.more = false
       }
 
       let router = this.$router.currentRoute.query
@@ -97,6 +101,7 @@ export default {
           }
         }
       }
+
       this.search(searchKey)
       this.$router.push('/search')
     },

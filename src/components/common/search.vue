@@ -201,10 +201,10 @@ export default {
     if (style === 1) {
       this.key.style = style
     }
+
     if (text) {
       this.key.text = text
     }
-    console.log(this.key.text)
   },
   watch: {
     'select': 'selectId'
