@@ -23,6 +23,7 @@ export default {
       // company：发文单位Id:没有-1
       // startTime/endTime：发文开始结束日期
       // style：普通还是高级：高级1，普通填-1
+
       let data = {
         page: key.page ? key.page : 1,
         oragons: key.oragons ? key.oragons : -1,
@@ -34,8 +35,8 @@ export default {
         company: key.company ? key.company : -1,
         year: key.year ? key.year : -1,
         status: key.status ? key.status : -1,
-        startTime: key.startTime === 1 ? key.startTime : -1,
-        endTime: key.endTime === 1 ? key.endTime : -1,
+        startTime: key.startTime ? Math.round(new Date(key.startTime) / 1000) : -1,
+        endTime: key.endTime ? Math.round(new Date(key.endTime) / 1000) : -1,
         style: key.style ? key.style : -1
       }
 

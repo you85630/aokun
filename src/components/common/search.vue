@@ -178,6 +178,7 @@ export default {
     advancedSearch (e) {
       this.key.style = 1
       this.key.text = e
+
       this.$emit('on-search', this.key)
     },
     // 获取时间
