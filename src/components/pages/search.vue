@@ -1,12 +1,12 @@
 <template>
   <div class="search">
     <bg-color>
-      <y-search :list="filterList" @on-search="search"></y-search>
+      <y-search :list="moreLeftNavBox" @on-search="search"></y-search>
     </bg-color>
 
     <bg-color>
       <div class="result">
-        <filter-box v-if="searchType===-1" :showBox="filterList" @on-click="filterBox"></filter-box>
+        <filter-box :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box" v-if="num">
           <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
@@ -14,7 +14,10 @@
           <div class="page-box">
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
-          <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+          <div class="item-box">
+            <item-box v-for="(li,index) in itemList" :key="index" :item="li"></item-box>
+            <Spin fix v-if="showbox"></Spin>
+          </div>
           <div class="page-box">
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
@@ -36,7 +39,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      searchType: -1
+      showbox: false
     }
   },
   components: {
@@ -56,15 +59,6 @@ export default {
         all: Math.ceil(this.num / 10)
       }
       return page
-    },
-    filterList: function () {
-      let now = []
-      if (this.searchType === 1) {
-        now = this.moreLeftNavBox
-      } else {
-        now = this.leftNavBox
-      }
-      return now
     }
   },
   methods: {
@@ -86,21 +80,31 @@ export default {
         text: '',
         page: 1
       }
+      let text = JSON.parse(sessionStorage.getItem('key'))
+      if (text) {
+        searchKey.text = text
+      }
       this.search(searchKey)
     },
     // 过滤器
-    filterBox (key) {
-      sessionStorage.removeItem('key')
+    filterSearch (key) {
       this.search({company: key.id})
     },
     // 搜索
     search (key) {
+      this.showbox = false
+      setTimeout(() => {
+        this.showbox = false
+      }, 500)
       this.searchData(key)
-      this.searchType = key.style
+      sessionStorage.setItem('search', JSON.stringify(key))
+      sessionStorage.removeItem('key')
     },
     // 翻页
     nowPage (key) {
-      this.searchData({page: key})
+      let search = JSON.parse(sessionStorage.getItem('search'))
+      search.page = key
+      this.searchData(search)
     }
   },
   created () {
@@ -136,6 +140,9 @@ export default {
   margin: 12px 0;
   text-align: center;
 }
+.item-box{
+  position: relative;
+}
 .data-none{
   display: flex;
   align-items: center;
@@ -144,7 +151,6 @@ export default {
   width: 100%;
   color: #ccc;
   font-size: 16px;
-  height: 100px;
   padding-bottom: 20px;
 }
 </style>

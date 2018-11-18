@@ -1,5 +1,5 @@
 <template>
-  <div class="item-box">
+  <div class="item">
     <ul>
       <li>
         <span>名称：</span>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item-box{
+.item{
   box-sizing: border-box;
   padding: 10px 0;
   width: 100%;

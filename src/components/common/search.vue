@@ -10,7 +10,7 @@
       <p class="advanced" @click="seniorSearch">高级搜索</p>
     </div>
 
-    <div class="advanced-search" v-else>
+    <div class="advanced-search" v-if="key.style===1">
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
@@ -75,7 +75,8 @@
       </Row>
 
       <Row type="flex" justify="center" align="middle">
-        <Col span="24"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col>
+        <Col span="21"><Input size="large" search enter-button="搜索" @on-search="advancedSearch" placeholder="Enter something..." /></Col>
+        <Col span="2" offset="1"><p class="cursor" @click="simpleSearch">关闭高级搜索</p></Col>
       </Row>
 
     </div>
@@ -84,6 +85,7 @@
 
 <script>
 export default {
+  props: ['list'],
   data () {
     return {
       select: '全部',
@@ -112,10 +114,9 @@ export default {
         style: -1,
         page: 1
       },
-      Filterlist: []
+      Filterlist: [...this.list]
     }
   },
-  props: ['list'],
   computed: {
     rangeList: function () {
       return this.selectBox
@@ -186,8 +187,8 @@ export default {
     },
     // 高级搜索
     advancedSearch (e) {
-      this.key.text = e
       this.key.style = 1
+      this.key.text = e
       this.$emit('on-search', this.key)
       // 数据还原
       this.key = {
@@ -251,5 +252,8 @@ export default {
       margin-top: 0;
     }
   }
+}
+.cursor{
+  cursor: pointer;
 }
 </style>

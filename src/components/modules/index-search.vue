@@ -8,7 +8,7 @@
           <Icon class="icon" type="ios-search" />
           <input type="text" v-model="key" placeholder="输入关键字，作者，产品代码…">
         </div>
-        <div class="btn" @click="search(key)">Search</div>
+        <div class="btn" @click="search(key)">搜索</div>
       </div>
       <div class="inspect"><router-link to="/login">检查我的权限</router-link></div>
     </div>
