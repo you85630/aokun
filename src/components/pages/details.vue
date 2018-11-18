@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <bg-color>
+    <bg-color v-if="start">
       <div class="intro btn-bg">
         <p><span>主题分类：</span>{{details.category_name}}</p>
         <div class="line">
@@ -14,9 +14,13 @@
         <p><span>名称：</span>{{details.title}}</p>
       </div>
     </bg-color>
-    <div class="info">
+    <div class="info" v-if="start">
       <h2>{{details.title}}</h2>
       <div class="infobox" v-html="details.contents"></div>
+    </div>
+
+    <div class="data-none" v-else>
+      <p>暂无数据</p>
     </div>
   </div>
 </template>
@@ -26,7 +30,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'details'
+      'details',
+      'start'
     ])
   },
   created () {
@@ -74,5 +79,15 @@ export default {
     text-align: center;
     font-size: 20px;
   }
+}
+.data-none{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 240px;
+  color: #ccc;
+  font-size: 16px;
 }
 </style>

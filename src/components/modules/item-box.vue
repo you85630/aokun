@@ -3,7 +3,7 @@
     <ul>
       <li>
         <span>名称：</span>
-        <p><router-link :to="'/search/details/'+item.key">{{item.title}}</router-link></p>
+        <p><router-link :to="'/search/details/'+item.id">{{item.title}}</router-link></p>
       </li>
       <!-- <li>
         <span>主题：</span>
