@@ -77,9 +77,6 @@ export default {
             let time = Y + M + D
             element.time = time
             element.organ = element.organ.toUpperCase()
-            if (!element.wenhao) {
-              element.wenhao = '暂无'
-            }
           }
         }
       }

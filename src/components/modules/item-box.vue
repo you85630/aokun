@@ -3,24 +3,12 @@
     <ul>
       <li>
         <span>名称：</span>
-        <p><router-link :to="'/search/details/'+item.id">{{item.title}}</router-link></p>
+        <p class="title" @click="linkTo(item)">{{item.title}}</p>
       </li>
-      <!-- <li>
-        <span>主题：</span>
-        <p>{{item.subject}}</p>
-      </li> -->
       <li>
         <span>文号：</span>
-        <p>{{item.wenhao}}</p>
+        <p>{{item.wenhao?item.wenhao:'暂无'}}</p>
       </li>
-      <!-- <li>
-        <span>组织：</span>
-        <p>{{item.organ}}</p>
-      </li>
-      <li>
-        <span>类别：</span>
-        <p>{{item.bigCatagoryName}}/{{item.subCatagoryName}}</p>
-      </li> -->
       <li>
         <span>发文时间：</span>
         <p>{{item.time}}</p>
@@ -31,7 +19,15 @@
 
 <script>
 export default {
-  props: ['item']
+  props: ['item'],
+  methods: {
+    linkTo (item) {
+      sessionStorage.removeItem(item)
+      let router = this.$router
+      router.push('/search/details')
+      sessionStorage.setItem('item', JSON.stringify(item))
+    }
+  }
 }
 </script>
 
@@ -56,6 +52,10 @@ export default {
       }
       p{
         font-size: 14px;
+      }
+      .title{
+        cursor: pointer;
+        color: #2d8cf0;
       }
     }
   }

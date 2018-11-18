@@ -81,7 +81,7 @@ const router = new Router({
             title: '注册'
           }
         }, {
-          path: '/search/details/:key',
+          path: '/search/details',
           name: 'details',
           component: details,
           meta: {
