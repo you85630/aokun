@@ -1,7 +1,7 @@
 <template>
   <div class="help">
     <bg-color>
-      <y-search></y-search>
+      <y-search :list="moreLeftNavBox"></y-search>
     </bg-color>
 
     <bg-color>
@@ -45,7 +45,8 @@ export default {
     ...mapGetters([
       'leftNav',
       'helpTips',
-      'issueBox'
+      'issueBox',
+      'moreLeftNavBox'
     ])
   },
   methods: {

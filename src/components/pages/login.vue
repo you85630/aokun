@@ -1,7 +1,7 @@
 <template>
   <div class="learn">
     <bg-color>
-      <y-search></y-search>
+      <y-search :list="moreLeftNavBox"></y-search>
     </bg-color>
 
     <bg-color>
@@ -27,7 +27,8 @@ export default {
   computed: {
     ...mapGetters([
       'videoBox',
-      'aboutBox'
+      'aboutBox',
+      'moreLeftNavBox'
     ])
   },
   methods: {
