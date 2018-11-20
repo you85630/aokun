@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import 'babel-polyfill'
 import Vuex from 'vuex'
 import router from 'router'
 
@@ -66,7 +67,7 @@ export default new Vuex.Store({
       {
         name: '首页',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-2.png',
-        link: ''
+        link: 'http://www.aerotech.site/plus/list.php?tid=1'
       }, {
         name: '关于我们',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-1.png',
@@ -74,15 +75,15 @@ export default new Vuex.Store({
       }, {
         name: '新闻动态',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-3.png',
-        link: ''
+        link: 'http://www.aerotech.site/plus/list.php?tid=5'
       }, {
         name: '产品服务',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-4.png',
-        link: ''
+        link: 'http://www.aerotech.site/plus/list.php?tid=2'
       }, {
         name: '联系我们',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-8.png',
-        link: ''
+        link: 'http://www.aerotech.site/plus/list.php?tid=6'
       }
     ]
   },

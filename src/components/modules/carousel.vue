@@ -1,17 +1,14 @@
 <template>
   <div class="carousel">
     <div class="header">翱坤数据库</div>
-    <div class="slide-box">
-      <div class="img-box">
-        <router-link v-for="(li,index) in list" :key="index" :to="li.link" v-if="index+1===num">
+    <Carousel loop autoplay v-model="num" dots="outside" arrow="hover" trigger="click">
+      <CarouselItem v-for="(li,index) in list" :key="index">
+        <div class="img-box">
           <img :src="li.img" alt="">
           <div class="info">{{li.info}}</div>
-        </router-link>
-      </div>
-      <div class="btn-box">
-        <div class="btn"><p v-for="(li,index) in list.length" :key="index" :class="{active:index+1===num}" @click="now(li)"></p></div>
-      </div>
-    </div>
+        </div>
+      </CarouselItem>
+    </Carousel>
   </div>
 </template>
 
@@ -28,27 +25,6 @@ export default {
     return {
       num: 0
     }
-  },
-  methods: {
-    next () {
-      let len = this.list.length
-      let Inx = this.num
-      if (Inx === len) {
-        this.num = 1
-      } else {
-        this.num++
-      }
-      setTimeout(() => {
-        this.next()
-      }, 5000)
-    },
-    now (key) {
-      this.num = key
-      clearTimeout()
-    }
-  },
-  created () {
-    this.next()
   }
 }
 </script>
@@ -56,49 +32,25 @@ export default {
 <style lang="scss" scoped>
 .carousel{
   width: 100%;
-}
-.slide-box{
-  position: relative;
-  padding: 0 10px;
   .img-box{
-    a{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      img{
-        width: 550px;
-        height: 309px;
-      }
-      .info{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        padding: 20px;
-        width: 510px;
-        height: 309px;
-        background-color: #f9f9f9;
-        font-size: 18px;
-      }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 309px;
+    img{
+      width: 550px;
+      height: 100%;
     }
-  }
-  .btn-box{
-    text-align: center;
-    .btn{
+    .info{
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 0;
-      p{
-        margin: 0 25px;
-        width: 30px;
-        height: 4px;
-        background-color: #ccc;
-        cursor: pointer;
-      }
-      .active{
-        background-color: #051520;
-      }
+      box-sizing: border-box;
+      padding: 20px;
+      width: 510px;
+      height: 100%;
+      background-color: #f9f9f9;
+      font-size: 18px;
     }
   }
 }

@@ -7,6 +7,7 @@
 
     <bg-color :img="searchkey.bgimg">
       <y-carousel :list='imgList'></y-carousel>
+      </Carousel>
     </bg-color>
 
     <bg-color>

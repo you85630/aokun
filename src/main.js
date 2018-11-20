@@ -9,6 +9,7 @@ import router from './router'
 import store from './vuex'
 // 重置全局样式
 import 'assets/css/reset.css'
+import 'babel-polyfill'
 
 // 引入iview
 import iView from 'iview'
