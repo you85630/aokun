@@ -1,6 +1,5 @@
 <template>
   <div class="about">
-    <div class="header">什么是翱坤数据库？</div>
     <div class="box">
       <div class="left">
         <!-- <video :src="video.video" v-if="video.play"></video> -->
@@ -88,13 +87,16 @@ export default {
     width: 505px;
     background-color: #f5f5f5;
     ul{
+      width: 100%;
+      height: 373px;
+      overflow-y: auto;
       li{
         margin-bottom: 20px;
         &:last-child{
           margin-bottom: 0;
         }
         h2{
-          font-size: 18px;
+          font-size: 16px;
         }
         .item{
           margin-top: 10px;

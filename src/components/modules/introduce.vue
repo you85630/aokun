@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="header">翱坤数据库中心</div>
     <div class="introduce">
       <div class="left">
       <p>欢迎来到翱坤数据库知识中心！</p>

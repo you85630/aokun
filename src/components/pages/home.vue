@@ -5,12 +5,12 @@
       <index-search :searchkey="searchkey" @on-search="searchHome"></index-search>
     </div>
 
-    <bg-color :img="searchkey.bgimg">
+    <bg-color :img="searchkey.bgimg" :header="header1">
       <y-carousel :list='imgList'></y-carousel>
       </Carousel>
     </bg-color>
 
-    <bg-color>
+    <bg-color :header="header2">
       <y-resource :list="linklist"></y-resource>
     </bg-color>
 
@@ -29,6 +29,12 @@ import subNav from 'components/modules/sub-nav'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      header1: '翱坤数据库',
+      header2: '浏览翱坤数据库资源'
+    }
+  },
   components: {
     indexSearch,
     yCarousel,

@@ -1,14 +1,14 @@
 <template>
   <div class="relation">
     <bg-color>
-      <ul>
-        <li v-for="(li,index) in contoryList" :key="index">
-          <div class="name btn-bg" @click="openText(index)"><Icon :type="li.open?'ios-remove':'ios-add'" />{{li.areaName}}</div>
-          <div class="text" v-if="li.open">
-            <p @click="cdetail(i.id)" v-for="(i,val) in li.data" :key="val" :class="{active:i.id===now}">{{i.name}}</p>
-          </div>
-        </li>
-      </ul>
+      <Collapse accordion v-model="open">
+          <Panel v-for="(li,index) in contoryList" :key="index">
+            {{li.areaName}}
+            <div slot="content" class="content">
+              <p @click="cdetail(i.id,li.area_id)" v-for="(i,val) in li.data" :key="val" :class="{active:i.id===now}">{{i.name}}</p>
+            </div>
+          </Panel>
+      </Collapse>
     </bg-color>
     <div class="contory" v-if="cdetailList.areaName">
       <div class="name">
@@ -30,7 +30,8 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      now: 0
+      now: '0',
+      open: '0'
     }
   },
   computed: {
@@ -46,15 +47,7 @@ export default {
     ]),
     init () {
       this.getContory()
-    },
-    openText (key) {
-      let list = this.contoryList
-      for (const key in list) {
-        if (list.hasOwnProperty(key)) {
-          list[key].open = false
-        }
-      }
-      list[key].open = !list[key].open
+      sessionStorage.removeItem('home')
     },
     cdetail (key) {
       this.now = key
@@ -63,6 +56,7 @@ export default {
   },
   created () {
     this.init()
+    this.cdetail(40000)
   }
 }
 </script>
@@ -70,44 +64,22 @@ export default {
 <style lang="scss" scoped>
 .relation{
   width: 100%;
-  ul{
-    width: 100%;
-    border-top:none;
-    li{
-      width: 100%;
-      .name{
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-        padding: 10px;
-        font-weight: bold;
-        font-size: 16px;
-        cursor: pointer;
-        i{
-          margin-right: 4px;
-          font-weight: bold;
-          font-size: 18px;
-        }
-      }
-      .text{
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-        p {
-          padding: 10px;
-          font-size: 14px;
-          cursor: pointer;
-        }
-        .active{
-          color:#316EC3;
-        }
-      }
+}
+.content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  p{
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    &:hover{
+      color:#316EC3;
     }
+  }
+  .active{
+    color:#316EC3;
   }
 }
 .contory{

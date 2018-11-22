@@ -7,34 +7,54 @@
             <ul>
               <li>
                 <div class="title">昵称：</div>
-                <p><input type="text" placeholder="真实姓名或常用昵称"></p>
+                <p><Input size="large" v-model="register.tel" placeholder="真实姓名或常用昵称" /></p>
               </li>
               <li>
                 <div class="title">手机号：</div>
-                <p><input type="text" placeholder="11位手机号"></p>
+                <p><Input size="large" v-model="register.pasw" placeholder="真实姓名或常用昵称" /></p>
               </li>
               <li>
                 <div class="title">密码：</div>
-                <p><input type="text" placeholder="不少于6位的密码"></p>
+                <p><Input size="large" v-model="register.paswt" placeholder="不少于6位的密码" /></p>
               </li>
               <li>
-                <p><button class="btn-bg">注册</button></p>
+                <p class="center"><Button size="large" type="primary">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button></p>
               </li>
             </ul>
           </div>
         </bg-color>
         <div class="or">- OR -</div>
         <div class="login">
-          <router-link to="/login" class="btn-bg">已有账号登陆</router-link>
-          <p>注册即表示你同意网站的《<router-link to="">服务条款</router-link>》</p>
+          <router-link to="/login">
+            <Button size="large" type="primary">&nbsp;&nbsp;已有账号登陆&nbsp;&nbsp;</Button>
+          </router-link>
+          <p>注册即表示你同意网站的《<span @click="visible=true">服务条款</span>》</p>
         </div>
       </div>
+      <Row type="flex" justify="start">
+        <Col span="24">
+          <Modal footer-hide v-model="visible" title="服务条款">
+              <div class="clause">
+                <p v-for="li in 60" :key="li">这里是文字这里是文字这里是文字这里是文字这里是文字这里是文字</p>
+              </div>
+          </Modal>
+        </Col>
+      </Row>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      visible: false,
+      register: {
+        tel: '',
+        pasw: '',
+        paswt: ''
+      }
+    }
+  }
 }
 </script>
 
@@ -44,14 +64,6 @@ export default {
   width: 780px;
   color: #051520;
   text-align: center;
-  button,
-  a{
-    display: inline-block;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 2px;
-    font-size: 14px;
-  }
   h2{
     display: flex;
     align-items: center;
@@ -71,40 +83,37 @@ export default {
         width: 550px;
         text-align: left;
         .title{
-          margin-bottom: 4px;
-          font-size: 18px;
+          margin-bottom: 6px;
+          font-size: 16px;
         }
-        p{
-          text-align: center;
-          input{
-            box-sizing: border-box;
-            padding: 0 10px;
-            width: 100%;
-            height: 45px;
-            border: 1px solid #eee;
-            border-radius: 2px;
-            font-size: 14px;
-          }
-        }
+      }
+      .center{
+        text-align: center;
       }
     }
   }
   .or{
-    margin: 40px 0;
+    margin: 30px 0;
     font-size: 24px;
   }
   .login{
-    padding-bottom: 40px;
+    padding-bottom: 30px;
+    text-align: center;
     p{
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 14px;
-      a{
+      span{
         margin:0 4px;
         padding: 0;
         background: none;
         color:#2d8cf0;
+        cursor: pointer;
       }
     }
   }
+}
+.clause{
+  height: 60vh;
+  overflow-y: auto;
 }
 </style>

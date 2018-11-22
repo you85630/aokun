@@ -43,6 +43,7 @@ export default {
       this.$emit('go')
     },
     linkTo (key) {
+      sessionStorage.removeItem('home')
       sessionStorage.removeItem('key')
       sessionStorage.removeItem('style')
       let list = this.$store.state.home.linklist
@@ -76,6 +77,7 @@ export default {
 .left{
   display: flex;
   align-items: center;
+  height: 100%;
   .logo{
     margin-right: 48px;
     a{
@@ -96,15 +98,25 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 500px;
-    a{
-      color: #fff;
-      font-size: 18px;
-      opacity: .5;
-    }
-    .router-link-exact-active,
-    .router-link-active{
-      font-weight: bold;
-      opacity: 1;
+    height: 100%;
+    li{
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a{
+        color: #fff;
+        font-size: 18px;
+        opacity: .5;
+        display: flex;
+        transition: all .2s ease-in-out;
+      }
+      .router-link-exact-active,
+      .router-link-active{
+        font-weight: bold;
+        opacity: 1;
+        font-size: 20px;
+      }
     }
   }
 }

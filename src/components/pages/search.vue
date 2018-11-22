@@ -6,7 +6,7 @@
 
     <bg-color>
       <div class="result">
-        <filter-box v-if="more" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
+        <filter-box :select="value" v-if="searchKey.style===-1" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
         <filter-box v-else :showBox="moreLeftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box">
@@ -39,7 +39,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      more: true,
+      value: '',
       searchKey: {
         text: '',
         oragons: '',
@@ -80,85 +80,73 @@ export default {
     ]),
     init () {
       // 默认搜索一次
-      let text = JSON.parse(sessionStorage.getItem('key'))
       let style = JSON.parse(sessionStorage.getItem('style'))
+      let text = JSON.parse(sessionStorage.getItem('key'))
+      let home = JSON.parse(sessionStorage.getItem('home'))
+
+      if (style) {
+        this.searchKey.style = style
+      }
       if (text) {
         this.searchKey.text = text
       }
-      if (style === -1) {
-        this.more = true
-      } else {
-        this.more = false
-      }
-
-      let router = this.$router.currentRoute.query
-      if (router.categry) {
-        if (router.categry === 1100004) {
+      if (home) {
+        if (home.categry === 1100004) {
           this.$router.push('/search/airworthiness')
-        }
-        if (router.categry === 5100002) {
+        } else if (home.categry === 5100002) {
           this.$router.push('/search/relation')
-        }
-        this.searchKey.subCids = router.categry
-        this.searchKey.bigCids = router.classify
-        let list = this.leftNavBox[1].label
-        for (let i = 0; i < list.length; i++) {
-          const element = list[i]
-          element.type = false
-          if (element.id === router.classify) {
-            element.type = true
-          }
+        } else {
+          this.searchKey.subCids = home.categry
+          this.searchKey.bigCids = home.classify
+          // 选中状态
+          this.value = home.name
         }
       }
       this.search(this.searchKey)
-      this.$router.push('/search')
     },
     // 过滤器
     filterSearch (key) {
+      sessionStorage.removeItem('home')
+      this.$router.push('/search')
       let style = JSON.parse(sessionStorage.getItem('style'))
       if (style) {
         if (style === 1) {
+          this.searchKey.style = 1
           if (key.sort === 'oragons') {
             this.searchKey.oragons = key.id
-            this.searchKey.style = 1
-            this.search(this.searchKey)
           }
           if (key.sort === 'cids') {
             this.searchKey.bigCids = key.id
-            this.searchKey.style = 1
-            this.search(this.searchKey)
           }
           if (key.sort === 'status') {
             this.searchKey.status = key.id
-            this.searchKey.style = 1
-            this.search(this.searchKey)
           }
           if (key.sort === 'years') {
             this.searchKey.year = key.id
-            this.searchKey.style = 1
-            this.search(this.searchKey)
           }
         } else {
+          this.searchKey.style = -1
           if (key.sort === 'cids') {
-            this.search({bigCids: key.id, style: -1})
+            this.searchKey.bigCids = key.id
           }
           if (key.sort === 'oragons') {
-            this.search({oragons: key.id, style: -1})
+            this.searchKey.oragons = key.id
           }
         }
       } else {
+        this.searchKey.style = -1
         if (key.sort === 'cids') {
-          this.search({bigCids: key.id, style: -1})
+          this.searchKey.bigCids = key.id
         }
         if (key.sort === 'oragons') {
-          this.search({oragons: key.id, style: -1})
+          this.searchKey.oragons = key.id
         }
       }
+      this.search(this.searchKey)
     },
     // 搜索
     search (key) {
       if (key.style === -1) {
-        this.more = true
         this.searchKey = {
           text: '',
           oragons: '',
@@ -173,9 +161,9 @@ export default {
           page: 1
         }
       } else {
-        this.more = false
+        this.searchKey.style = 1
       }
-
+      sessionStorage.setItem('search', JSON.stringify(key))
       this.searchData(key)
     },
     // 翻页

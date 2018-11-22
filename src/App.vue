@@ -5,7 +5,7 @@
 </template>
 
 <style>
-#app{
+#app {
   min-width: 1180px;
   background-color: #f9f9f9;
 }

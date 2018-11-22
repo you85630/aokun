@@ -4,8 +4,7 @@
       <y-search></y-search>
     </bg-color>
 
-    <bg-color>
-      <div class="header">翱坤帮助资源</div>
+    <bg-color :header="header">
       <div class="box">
         <div class="left">
           <ul>
@@ -22,15 +21,19 @@
               <p>{{li.name}}</p>
             </li>
           </ul>
-          <ul class="issue-box">
-            <li v-for="(li,index) in issueBox" :key="index">
-              <div class="title" @click="li.show=!li.show"><Icon :type="li.show?'ios-remove':'ios-add'" />{{li.title}}</div>
-              <div class="qbox" v-for="(i,val) in li.data" :key="val" v-if="li.show">
-                <p class="title" @click="i.show=!i.show"><Icon :type="i.show?'ios-remove':'ios-add'" />{{i.title}}</p>
-                <p class="content" v-if="i.show">{{i.desc}}</p>
+          <Collapse v-model="open">
+            <Panel v-for="(li,index) in issueBox" :key="index">
+              {{li.title}}
+              <div slot="content">
+                <Collapse v-model="open1">
+                  <Panel v-for="(i,val) in li.data" :key="val" :name="index+'-'+val">
+                    {{i.title}}-{{index+'-'+val}}
+                    <p slot="content">{{i.desc}}</p>
+                  </Panel>
+                </Collapse>
               </div>
-            </li>
-          </ul>
+            </Panel>
+          </Collapse>
         </div>
       </div>
     </bg-color>
@@ -41,6 +44,13 @@
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      open: '0',
+      open1: '0-0',
+      header: '翱坤帮助资源'
+    }
+  },
   computed: {
     ...mapGetters([
       'leftNav',
@@ -115,34 +125,6 @@ export default {
         p{
           margin-top: 10px;
           font-size: 14px;
-        }
-      }
-    }
-    .issue-box{
-      .title{
-        padding: 4px 10px;
-        background-color: #f5f5f5;
-        font-size: 14px;
-        cursor: pointer;
-        i{
-          margin-right: 4px;
-          font-size: 18px;
-        }
-      }
-      li{
-        margin-bottom: 10px;
-        border: 1px solid #eee;
-        &:last-child{
-          margin-bottom: 0;
-        }
-        .qbox{
-          padding: 5px;
-        }
-        .content{
-          padding: 4px;
-          border: 1px solid #eee;
-          border-top: none;
-          font-size: 12px;
         }
       }
     }

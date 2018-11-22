@@ -1,21 +1,9 @@
 <template>
   <div class="airworthiness">
     <bg-color>
-      <table class="table">
-        <tr>
-          <th class="btn-bg" v-for="(li,index) in headline" :key="index">{{li}}</th>
-        </tr>
-        <tr v-for="(tr,index) in shzlList" :key="index">
-          <td>{{tr.no}}</td>
-          <td>{{tr.xzno}}</td>
-          <td>{{tr.title}}</td>
-          <td>{{tr.company}}</td>
-          <td> <a :href="tr.pdflink" target="_blank">{{tr.pdfname}}</a></td>
-          <td>{{tr.time}}</td>
-        </tr>
-      </table>
-      <div class="page" v-if="status">
-        <y-page :page="tablePage" @on-click="nowPage"></y-page>
+      <Table :columns="columns" :data="shzlList"></Table>
+      <div class="page-box">
+        <Page :total="allList" show-elevator @on-change="next" />
       </div>
     </bg-color>
   </div>
@@ -26,22 +14,62 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      status: true,
-      headline: ['指令编号', '修正案号', '标题', '颁发单位', '参考文件', '生效日期']
+      columns: [
+        {
+          title: '指令编号',
+          key: 'no',
+          width: 160,
+          align: 'center'
+
+        },
+        {
+          title: '修正案号',
+          key: 'xzno',
+          width: 110,
+          align: 'center'
+
+        },
+        {
+          title: '标题',
+          key: 'title',
+          tooltip: true
+        },
+        {
+          title: '颁发单位',
+          key: 'company',
+          tooltip: true
+        },
+        {
+          title: '参考文件',
+          key: 'ck_titile',
+          width: 170,
+          align: 'center',
+          render: (h, params) => {
+            return h('div', [
+              h('a', {
+                on: {
+                  'click': () => {
+                    window.open(params.row.ck_href, '_blank')
+                  }
+                }
+              }, params.row.ck_titile)
+            ])
+          }
+        },
+        {
+          title: '生效日期',
+          key: 'time',
+          width: 110,
+          align: 'center'
+        }
+      ]
     }
   },
   computed: {
     ...mapGetters([
       'shzlList',
       'allList'
-    ]),
-    tablePage: function () {
-      let now = {
-        all: Math.ceil(this.allList / 10),
-        active: 1
-      }
-      return now
-    }
+    ])
   },
   methods: {
     ...mapActions([
@@ -49,13 +77,9 @@ export default {
     ]),
     init () {
       this.getShzl(1)
+      sessionStorage.removeItem('home')
     },
-    nowPage (key) {
-      this.tablePage.active = key
-      this.status = false
-      this.$nextTick(function () {
-        this.status = true
-      })
+    next (key) {
       this.getShzl(key)
     }
   },
@@ -68,28 +92,9 @@ export default {
 <style lang="scss" scoped>
 .airworthiness{
   width: 100%;
-  table{
-    width: 100%;
-    background-color: #fff;
-    th,
-    td{
-      padding: 20px 10px;
-      border-bottom: 1px solid #ccc;
-      font-size: 12px;
-    }
-    th{
-      padding: 10px;
-      word-break: keep-all;
-      font-weight: bold;
-      font-size: 14px;
-    }
-  }
-  .page{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  .page-box{
+    text-align: right;
     margin-top: 20px;
-    font-size: 12px;
   }
 }
 </style>

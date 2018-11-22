@@ -36,19 +36,19 @@ export default {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
-    border: 2px solid #051520;
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgba(23, 35, 61, 0.5);
     border-radius: 100%;
     img{
-      width: 80%;
-      height: 80%;
+      width: 90%;
+      height: 90%;
     }
   }
   .name{
-    padding-top: 16px;
+    padding-top: 10px;
     color: #051520;
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 </style>

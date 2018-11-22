@@ -1,7 +1,6 @@
 <template>
   <div class="carousel">
-    <div class="header">翱坤知识库</div>
-    <Carousel loop autoplay v-model="num" dots="outside" arrow="hover" trigger="click">
+    <Carousel loop autoplay v-model="num" :autoplaySpeed="5000" dots="outside" arrow="hover" trigger="click">
       <CarouselItem v-for="(li,index) in list" :key="index">
         <div class="img-box">
           <img :src="li.img" alt="">
@@ -37,6 +36,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 309px;
+    margin-bottom: 10px;
     img{
       width: 550px;
       height: 100%;
@@ -50,7 +50,7 @@ export default {
       width: 510px;
       height: 100%;
       background-color: #f9f9f9;
-      font-size: 18px;
+      font-size: 14px;
     }
   }
 }

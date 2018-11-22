@@ -1,25 +1,45 @@
 <template>
   <div class="details">
     <bg-color>
-      <div class="intro btn-bg">
-        <p><span>名称：</span>{{details.title}}</p>
-        <p><span>分类：</span>{{details.subject?details.subject:'暂无'}}</p>
-        <div class="line">
-          <p><span>大类别：</span>{{details.bigCatagoryName?details.bigCatagoryName:'暂无'}}</p>
-          <p><span>小类别：</span>{{details.subCatagoryName?details.subCatagoryName:'暂无'}}</p>
-        </div>
-        <div class="line">
-          <p><span>办文单位：</span>{{details.company_name?details.company_name:'暂无'}}</p>
-          <p><span>发文日期：</span>{{details.time}}</p>
-        </div>
-        <div class="line">
-          <p><span>文号：</span>{{details.wenhao?details.wenhao:'暂无'}}</p>
-          <p><span>有效期：</span>{{details.status===1?'有效期':'其他'}}</p>
-        </div>
+      <div class="intro">
+        <Row type="flex" justify="space-between" align="middle">
+           <Col>
+            <p><span>名称：</span>{{details.title}}</p>
+          </Col>
+        </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col>
+            <p><span>分类：</span>{{details.subject?details.subject:'暂无'}}</p>
+          </Col>
+        </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col span="10">
+           <p><span>大类别：</span>{{details.bigCatagoryName?details.bigCatagoryName:'暂无'}}</p>
+          </Col>
+          <Col span="10" offset="2">
+            <p><span>小类别：</span>{{details.subCatagoryName?details.subCatagoryName:'暂无'}}</p>
+          </Col>
+        </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col span="10">
+            <p><span>办文单位：</span>{{details.company_name?details.company_name:'暂无'}}</p>
+          </Col>
+          <Col span="10" offset="2">
+            <p><span>发文日期：</span>{{details.time}}</p>
+          </Col>
+        </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col span="10">
+            <p><span>文号：</span>{{details.wenhao?details.wenhao:'暂无'}}</p>
+          </Col>
+          <Col span="10" offset="2">
+            <p><span>有效期：</span>{{details.status===1?'有效期':'其他'}}</p>
+          </Col>
+        </Row>
       </div>
     </bg-color>
-    <div class="info">
-      <iframe id="iframeId" frameborder="no" border="0" :src="details.uri"></iframe>
+    <div class="info" id="info">
+      <iframe frameborder="no" border="0" :src="details.uri"></iframe>
     </div>
   </div>
 </template>
@@ -36,9 +56,8 @@ export default {
   },
   methods: {
     init () {
-      const oIframe = document.getElementById('iframeId')
-      const deviceHeight = document.documentElement.clientHeight
-      oIframe.style.minHeight = deviceHeight + 'px'
+      let windHei = window.outerHeight
+      document.getElementById('info').style.height = windHei + 'px'
     }
   }
 }
@@ -46,13 +65,17 @@ export default {
 
 <style lang="scss" scoped>
 .details{
+  width: 100%;
+  height: 100%;
   background-color: #fff;
 }
 .intro{
-  margin: -20px;
-  padding: 20px;
+  margin: -16px;
+  padding: 16px;
+  background-color: #2d8cf0;
+  color: #fff;
   p{
-    font-size: 16px;
+    font-size: 14px;
     line-height: 2;
     span{
       margin-right: 2px;
@@ -73,8 +96,12 @@ export default {
   padding: 20px 40px;
   padding-top: 0;
   font-size: 14px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   iframe{
     width: 100%;
+    height: 100%;
   }
 }
 .data-none{

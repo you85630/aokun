@@ -4,11 +4,11 @@
       <y-search></y-search>
     </bg-color>
 
-    <bg-color>
+    <bg-color :header="header1">
       <login></login>
     </bg-color>
 
-    <bg-color>
+    <bg-color :header="header2">
       <about :video="videoBox" :list="aboutBox"></about>
     </bg-color>
   </div>
@@ -20,6 +20,12 @@ import about from 'components/modules/about-me'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      header1: '翱坤数据库',
+      header2: '什么是翱坤数据库？'
+    }
+  },
   components: {
     login,
     about

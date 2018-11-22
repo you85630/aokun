@@ -2,7 +2,11 @@
   <div class="item">
     <div class="left">
       <p>{{item.info}}</p>
-      <p><router-link class="btn-bg" :to="item.link">{{item.name}}</router-link></p>
+      <p>
+        <router-link :to="item.link">
+          <Button size="large" type="primary">{{item.name}}</Button>
+        </router-link>
+      </p>
     </div>
     <div class="right">
       <img :src="item.cover" alt="">
@@ -32,12 +36,6 @@ export default {
     height: 265px;
     background-color: #fff;
     p{
-      font-size: 14px;
-    }
-    a{
-      padding: 10px 20px;
-      border: none;
-      border-radius: 2px;
       font-size: 14px;
     }
   }

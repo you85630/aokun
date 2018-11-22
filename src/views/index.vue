@@ -2,7 +2,7 @@
   <div class="index">
     <y-header :nav="navList" :user="user" @go="login" @out="exit"></y-header>
     <div class="container">
-      <router-view/>
+      <router-view />
       <BackTop :bottom="170"></BackTop>
     </div>
     <y-footer :title="title" :footer="footerList" :icon="iconList"></y-footer>
@@ -12,7 +12,6 @@
 <script>
 import yHeader from 'components/common/header'
 import yFooter from 'components/common/footer'
-
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
@@ -43,16 +42,18 @@ export default {
     ])
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
-.index{
+.index {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
-.container{
+
+.container {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 20px;
@@ -60,4 +61,5 @@ export default {
   min-height: 77vh;
   max-width: 1180px;
 }
+
 </style>

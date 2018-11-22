@@ -5,8 +5,8 @@
       <div class="publish">超过{{searchkey.num}}的出版物</div>
       <div class="search-box">
         <div class="search">
-          <Icon class="icon" type="ios-search" />
-          <input type="text" v-model="key" placeholder="输入关键字，作者，产品代码…">
+          <Icon class="icon" type="ios-search-outline" />
+          <input type="text" v-model="key" placeholder="Enter something...">
         </div>
         <div class="btn" @click="search(key)">搜索</div>
       </div>
@@ -64,10 +64,11 @@ export default {
       justify-content: space-between;
       .search{
         position: relative;
+        width: 100%;
         .icon{
           position: absolute;
           top: 10px;
-          left: 10px;
+          left: 12px;
           color: #999;
           font-size: 30px;
         }
@@ -75,7 +76,7 @@ export default {
           box-sizing: border-box;
           padding: 12px;
           padding-left: 50px;
-          width: 750px;
+          width: 100%;
           border: none;
           border-radius: 2px;
           background-color: #fff;
@@ -103,7 +104,7 @@ export default {
     margin-top: 20px;
     a{
       color: #fff;
-      font-size: 24px;
+      font-size: 16px;
     }
   }
 }

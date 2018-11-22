@@ -68,13 +68,11 @@ export default {
       var dest = []
       for (var i = 0; i < key.length; i++) {
         var e = key[i]
-        e.show = false
         if (!map[e.class_id]) {
           dest.push({
             class_id: e.class_id,
             title: e.class_name,
-            data: [e],
-            show: false
+            data: [e]
           })
           map[e.class_id] = e
         } else {
@@ -87,8 +85,6 @@ export default {
           }
         }
       }
-      dest[0].show = true
-      dest[0].data[0].show = true
       state.issueBox = dest
     }
   }

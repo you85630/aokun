@@ -8,7 +8,7 @@
       <div class="middle">
         <router-link v-for="(li,index) in footer" :key="index" :to="li.link">{{li.name}}</router-link>
       </div>
-      <div class="bottom">&copy;{{time}}翱坤数据库，版权所有</div>
+      <div class="bottom">&copy;&nbsp;{{time}}翱坤数据库，版权所有</div>
     </div>
   </div>
 </template>

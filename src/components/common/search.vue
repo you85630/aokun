@@ -194,6 +194,7 @@ export default {
     },
     // 打开高级搜索
     seniorSearch () {
+      sessionStorage.removeItem('home')
       this.key.style = 1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
@@ -233,7 +234,6 @@ export default {
     if (style === 1) {
       this.key.style = style
     }
-
     if (text) {
       this.key.text = text
     }

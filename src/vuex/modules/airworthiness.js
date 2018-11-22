@@ -19,23 +19,17 @@ export default {
   },
   mutations: {
     getShzl: (state, key) => {
-      state.shzlList = key.shzl
-      state.allList = key.count
-      for (const k in state.shzlList) {
-        if (state.shzlList.hasOwnProperty(k)) {
-          const e = state.shzlList[k]
-          let date = new Date(e.date * 1000)
-          let Y = date.getFullYear() + '-'
-          let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-          let D = date.getDate() + ' '
-          e.time = Y + M + D
-          let list = e.ck_titile
-          for (const i in list) {
-            if (list.hasOwnProperty(i)) {
-              const n = list[i]
-              e.pdfname = i
-              e.pdflink = n
-            }
+      if (key) {
+        state.shzlList = key.shzl
+        state.allList = key.count
+        for (const k in state.shzlList) {
+          if (state.shzlList.hasOwnProperty(k)) {
+            const e = state.shzlList[k]
+            let date = new Date(e.date * 1000)
+            let Y = date.getFullYear() + '-'
+            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+            let D = date.getDate() + ' '
+            e.time = Y + M + D
           }
         }
       }

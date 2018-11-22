@@ -1,7 +1,6 @@
 <template>
   <div class="login">
     <div class="msg">
-      <div class="header">翱坤数据库</div>
       <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
     </div>
     <div class="box">
@@ -10,29 +9,31 @@
         <ul>
           <li>
             <span>手机号：</span>
-            <p><input type="text" ></p>
+            <p><Input v-model="user.tel" placeholder="请输入手机号" /></p>
           </li>
           <li>
             <span>密码：</span>
-            <p><input type="text" ></p>
+            <p><Input v-model="user.pasw" placeholder="请输入密码" /></p>
           </li>
           <li>
             <span></span>
             <p>
               <span @click="select=!select" :class="{active:select}"><Icon :type="select?'ios-checkbox':'ios-square'" />记住我</span>
-              <button class="btn-bg">登陆</button>
+              <Button type="primary">&nbsp;登陆&nbsp;</Button>
             </p>
           </li>
           <li>
             <span></span>
-            <p><router-link to="">忘记密码？</router-link></p>
+            <p><router-link to="/register">忘记密码？</router-link></p>
           </li>
         </ul>
       </div>
       <div class="middle">- OR -</div>
       <div class="right">
         <h2>免费注册翱坤数据库账户</h2>
-        <router-link to="/register" class="btn-bg">注册</router-link>
+        <router-link to="/register">
+          <Button type="primary">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -42,7 +43,11 @@
 export default {
   data () {
     return {
-      select: false
+      select: false,
+      user: {
+        tel: '',
+        pasw: ''
+      }
     }
   }
 }
@@ -79,7 +84,7 @@ export default {
       flex-direction: row;
       margin-top: 20px;
       span{
-        width: 100px;
+        width: 90px;
         text-align: left;
         font-size: 14px;
       }
@@ -95,12 +100,6 @@ export default {
           height: 30px;
           border: none;
           background-color: #eee;
-          font-size: 14px;
-        }
-        button{
-          padding: 2px 20px;
-          border: none;
-          border-radius: 2px;
           font-size: 14px;
         }
         span{
@@ -137,11 +136,8 @@ export default {
   width: 300px;
   height: 207px;
   text-align: center;
-  a{
-    margin-top: 30px;
-    padding: 4px 30px;
-    border-radius: 2px;
-    font-size: 14px;
+  h2{
+    margin-bottom: 20px;
   }
 }
 </style>

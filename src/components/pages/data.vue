@@ -4,7 +4,7 @@
       <y-search></y-search>
     </bg-color>
 
-    <bg-color>
+    <bg-color :header="header1">
       <introduce></introduce>
     </bg-color>
 
@@ -26,6 +26,7 @@ export default {
   },
   data () {
     return {
+      header1: '翱坤数据库中心',
       itemList: [
         {
           name: 'CAAC知识中心',
