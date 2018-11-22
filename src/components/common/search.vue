@@ -1,13 +1,22 @@
 <template>
   <div class="search-box">
     <div class="search-simple" v-if="key.style===-1">
-      <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 92%;">
-          <Select v-model="select" slot="prepend" style="width: 80px">
-              <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
-          </Select>
-          <Button slot="append" style="width: 80px; color:#fff;" @click="simpleSearch">搜索</Button>
-      </Input>
-      <p class="advanced" @click="seniorSearch">高级搜索</p>
+      <Row type="flex" justify="center" align="middle">
+        <Col span="19">
+          <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
+              <Select v-model="select" slot="prepend" style="width: 80px">
+                  <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
+              </Select>
+              <Button slot="append" style="width: 80px; color:#fff;" @click="simpleSearch">搜索</Button>
+          </Input>
+        </Col>
+        <Col span="4" offset="1">
+          <div class="refresh">
+            <Button type="success" icon="md-sync" @click="refresh(-1)">重置</Button>
+            <p class="cursor" @click="seniorSearch">高级搜索</p>
+          </div>
+        </Col>
+      </Row>
     </div>
 
     <div class="advanced-search" v-if="key.style===1">
@@ -85,7 +94,7 @@
         </Col>
         <Col span="4" offset="1">
           <div class="refresh">
-            <Button type="success" icon="md-sync" @click="refresh">重置</Button>
+            <Button type="success" icon="md-sync" @click="refresh(1)">重置</Button>
             <p class="cursor" @click="closeSimpleSearch">关闭高级搜索</p>
           </div>
         </Col>
@@ -96,6 +105,7 @@
 
 <script>
 export default {
+  props: ['search'],
   data () {
     return {
       select: '全部',
@@ -111,7 +121,7 @@ export default {
           name: '内容'
         }
       ],
-      key: {
+      key: this.search ? this.search : {
         text: '',
         oragons: '',
         bigCids: '',
@@ -174,10 +184,26 @@ export default {
     },
     // 简单搜索
     simpleSearch () {
-      this.key.style = -1
       this.$emit('on-search', this.key)
       this.$router.push('/search')
-      sessionStorage.setItem('style', JSON.stringify(this.key.style))
+    },
+    // 打开高级搜索
+    seniorSearch () {
+      this.key.style = 1
+      this.$emit('on-search', this.key)
+      this.$router.push('/search')
+
+      let list = this.$store.state.home.leftNavBox[1].label
+      for (const c in list) {
+        if (list.hasOwnProperty(c)) {
+          const element = list[c]
+          element.type = false
+        }
+      }
+    },
+    // 高级搜索
+    advancedSearch () {
+      this.$emit('on-search', this.key)
     },
     // 关闭高级搜索
     closeSimpleSearch () {
@@ -195,28 +221,6 @@ export default {
         page: 1
       }
       this.$emit('on-search', this.key)
-      sessionStorage.setItem('style', JSON.stringify(this.key.style))
-    },
-    // 打开高级搜索
-    seniorSearch () {
-      sessionStorage.removeItem('home')
-      this.key.style = 1
-      this.$emit('on-search', this.key)
-      this.$router.push('/search')
-      sessionStorage.setItem('style', JSON.stringify(this.key.style))
-
-      let list = this.$store.state.home.leftNavBox[1].label
-      for (const c in list) {
-        if (list.hasOwnProperty(c)) {
-          const element = list[c]
-          element.type = false
-        }
-      }
-    },
-    // 高级搜索
-    advancedSearch () {
-      this.key.style = 1
-      this.$emit('on-search', this.key)
     },
     // 获取时间
     changeTimes (key) {
@@ -233,32 +237,9 @@ export default {
       }
     },
     // 重置
-    refresh () {
-      this.key = {
-        text: '',
-        oragons: '',
-        bigCids: '',
-        subCids: '',
-        startTime: '',
-        endTime: '',
-        year: '',
-        status: '',
-        selectid: 1,
-        style: 1,
-        page: 1
-      }
-      this.$emit('on-search', this.key)
-      sessionStorage.setItem('style', JSON.stringify(this.key.style))
-    }
-  },
-  created () {
-    let style = JSON.parse(sessionStorage.getItem('style'))
-    let text = JSON.parse(sessionStorage.getItem('key'))
-    if (style === 1) {
-      this.key.style = style
-    }
-    if (text) {
-      this.key.text = text
+    refresh (style) {
+      this.$router.push('/search')
+      this.$emit('on-refresh', style)
     }
   },
   watch: {
@@ -272,37 +253,26 @@ export default {
   margin: -20px;
   padding: 20px;
   font-size: 14px;
-    .ivu-input-group-append{
-      border: 1px solid #2d8cf0;
-      background-color: #2d8cf0;
+  .ivu-input-group-append{
+    border: 1px solid #2d8cf0;
+    background-color: #2d8cf0;
+  }
+  .advanced-search{
+    .ivu-row-flex{
+      margin-top: 20px;
+      &:first-child{
+        margin-top: 0;
+      }
     }
-}
-.search-simple{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  .advanced{
-    color: #2d8cf0;
-    font-size: 14px;
+  }
+  .cursor{
     cursor: pointer;
   }
-}
-.advanced-search{
-  .ivu-row-flex{
-    margin-top: 20px;
-    &:first-child{
-      margin-top: 0;
-    }
+  .refresh{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
-}
-.cursor{
-  cursor: pointer;
-}
-.refresh{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 </style>

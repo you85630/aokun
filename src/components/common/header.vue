@@ -43,10 +43,8 @@ export default {
       this.$emit('go')
     },
     linkTo (key) {
-      sessionStorage.removeItem('search')
-      sessionStorage.removeItem('home')
-      sessionStorage.removeItem('key')
-      sessionStorage.removeItem('style')
+      sessionStorage.clear()
+
       let list = this.$store.state.home.linklist
       for (let i = 0; i < list.length; i++) {
         const element = list[i]

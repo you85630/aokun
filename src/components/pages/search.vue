@@ -1,12 +1,12 @@
 <template>
-  <div class="search">
+  <div class="search" v-if="status">
     <bg-color>
-      <y-search @on-search="search"></y-search>
+      <y-search :search="searchKey" @on-search="search" @on-refresh="refresh"></y-search>
     </bg-color>
 
     <bg-color>
       <div class="result">
-        <filter-box :select="value" v-if="searchKey.style===-1" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
+        <filter-box :select="selectValue" v-if="searchKey.style===-1" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
         <filter-box v-else :showBox="moreLeftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box">
@@ -24,7 +24,6 @@
             <Page :total="num" show-elevator @on-change="nowPage" />
           </div>
         </div>
-
       </div>
     </bg-color>
   </div>
@@ -39,7 +38,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      value: '',
+      status: true,
+      selectValue: '',
       searchKey: {
         text: '',
         oragons: '',
@@ -65,14 +65,7 @@ export default {
       'moreLeftNavBox',
       'itemList',
       'num'
-    ]),
-    pages: function () {
-      let page = {
-        active: 1,
-        all: Math.ceil(this.num / 10)
-      }
-      return page
-    }
+    ])
   },
   methods: {
     ...mapActions([
@@ -80,16 +73,13 @@ export default {
     ]),
     init () {
       // 默认搜索一次
-      let style = JSON.parse(sessionStorage.getItem('style'))
       let text = JSON.parse(sessionStorage.getItem('key'))
       let home = JSON.parse(sessionStorage.getItem('home'))
 
-      if (style) {
-        this.searchKey.style = style
-      }
       if (text) {
         this.searchKey.text = text
       }
+
       if (home) {
         if (home.categry === 1100004) {
           this.$router.push('/search/airworthiness')
@@ -99,7 +89,7 @@ export default {
           this.searchKey.subCids = home.categry
           this.searchKey.bigCids = home.classify
           // 选中状态
-          this.value = home.name
+          this.selectValue = home.name
         }
       }
       this.search(this.searchKey)
@@ -107,46 +97,55 @@ export default {
     // 过滤器
     filterSearch (key) {
       sessionStorage.removeItem('home')
-      this.$router.push('/search')
-      let style = JSON.parse(sessionStorage.getItem('style'))
-      if (style) {
-        if (style === 1) {
-          this.searchKey.style = 1
-          if (key.sort === 'oragons') {
+      let search = JSON.parse(sessionStorage.getItem('search'))
+      this.searchKey = search
+      if (this.searchKey.style === 1) {
+        switch (key.sort) {
+          case 'oragons':
             this.searchKey.oragons = key.id
-          }
-          if (key.sort === 'cids') {
+            break
+          case 'cids':
             this.searchKey.bigCids = key.id
-          }
-          if (key.sort === 'status') {
+            break
+          case 'status':
             this.searchKey.status = key.id
-          }
-          if (key.sort === 'years') {
+            break
+          case 'years':
             this.searchKey.year = key.id
-          }
-        } else {
-          this.searchKey.style = -1
-          if (key.sort === 'cids') {
-            this.searchKey.bigCids = key.id
-          }
-          if (key.sort === 'oragons') {
-            this.searchKey.oragons = key.id
-          }
+            break
         }
       } else {
-        this.searchKey.style = -1
-        if (key.sort === 'cids') {
-          this.searchKey.bigCids = key.id
-        }
-        if (key.sort === 'oragons') {
-          this.searchKey.oragons = key.id
+        switch (key.sort) {
+          case 'oragons':
+            this.searchKey.oragons = key.id
+            this.searchKey.bigCids = ''
+            break
+          case 'cids':
+            this.searchKey.bigCids = key.id
+            this.searchKey.oragons = ''
+            break
         }
       }
       this.search(this.searchKey)
     },
     // 搜索
     search (key) {
-      if (key.style === -1) {
+      this.searchKey = key
+      sessionStorage.setItem('search', JSON.stringify(key))
+      this.searchData(key)
+    },
+    // 翻页
+    nowPage (key) {
+      let search = JSON.parse(sessionStorage.getItem('search'))
+      search.page = key
+      this.searchData(search)
+    },
+    // 重置
+    refresh (style) {
+      this.status = false
+      this.$nextTick(function () {
+        this.status = true
+        this.selectValue = ''
         this.searchKey = {
           text: '',
           oragons: '',
@@ -157,20 +156,11 @@ export default {
           year: '',
           status: '',
           selectid: 1,
-          style: -1,
+          style: style,
           page: 1
         }
-      } else {
-        this.searchKey.style = 1
-      }
-      sessionStorage.setItem('search', JSON.stringify(key))
-      this.searchData(key)
-    },
-    // 翻页
-    nowPage (key) {
-      let search = JSON.parse(sessionStorage.getItem('search'))
-      search.page = key
-      this.searchData(search)
+        this.search(this.searchKey)
+      })
     }
   },
   created () {

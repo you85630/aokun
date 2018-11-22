@@ -6,7 +6,7 @@
         <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
       </div>
       <div class="filter-list" v-if="!li.type">
-        <RadioGroup vertical v-model="value" @on-change="selectBox">
+        <RadioGroup vertical v-model="selectValue" @on-change="selectBox">
           <Radio v-for="(i, val) in li.label" :key="val" :label="i.name">
             {{i.name}}<span class="num" v-if="i.number">（{{i.number}}）</span>
           </Radio>
@@ -18,10 +18,10 @@
 
 <script>
 export default {
-  props: ['showBox', 'select'],
+  props: ['select', 'showBox'],
   data () {
     return {
-      value: this.select ? this.select : ''
+      selectValue: this.select
     }
   },
   methods: {
