@@ -43,6 +43,7 @@ export default {
       this.$emit('go')
     },
     linkTo (key) {
+      sessionStorage.removeItem('search')
       sessionStorage.removeItem('home')
       sessionStorage.removeItem('key')
       sessionStorage.removeItem('style')

@@ -75,7 +75,7 @@
       </Row>
 
       <Row type="flex" justify="center" align="middle">
-        <Col span="21">
+        <Col span="19">
           <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
               <Select v-model="select" slot="prepend" style="width: 80px">
                   <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
@@ -83,7 +83,12 @@
               <Button slot="append" style="width: 80px; color:#fff;" @click="advancedSearch">搜索</Button>
           </Input>
         </Col>
-        <Col span="2" offset="1"><p class="cursor" @click="closeSimpleSearch">关闭高级搜索</p></Col>
+        <Col span="4" offset="1">
+          <div class="refresh">
+            <Button type="success" icon="md-sync" @click="refresh">重置</Button>
+            <p class="cursor" @click="closeSimpleSearch">关闭高级搜索</p>
+          </div>
+        </Col>
       </Row>
     </div>
   </div>
@@ -226,6 +231,24 @@ export default {
         this.key.bigCids = key[0]
         this.key.subCids = key[1]
       }
+    },
+    // 重置
+    refresh () {
+      this.key = {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        year: '',
+        status: '',
+        selectid: 1,
+        style: 1,
+        page: 1
+      }
+      this.$emit('on-search', this.key)
+      sessionStorage.setItem('style', JSON.stringify(this.key.style))
     }
   },
   created () {
@@ -275,5 +298,11 @@ export default {
 }
 .cursor{
   cursor: pointer;
+}
+.refresh{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
