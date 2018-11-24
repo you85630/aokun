@@ -13,7 +13,7 @@
         <Col span="4" offset="1">
           <div class="refresh">
             <Button type="success" icon="md-sync" @click="refresh(-1)">重置</Button>
-            <p class="cursor" @click="seniorSearch">高级搜索</p>
+            <p class="cursor" @click="refresh(1)">高级搜索</p>
           </div>
         </Col>
       </Row>
@@ -35,7 +35,7 @@
             <Row type="flex" justify="center" align="middle">
               <Col span="4">主体分类：</Col>
               <Col span="20">
-                <Cascader :data="classify" change-on-select @on-change="changeClassify"></Cascader>
+                <Cascader :value="cader" :data="classify" change-on-select @on-change="changeClassify"></Cascader>
               </Col>
             </Row>
          </Col>
@@ -95,7 +95,7 @@
         <Col span="4" offset="1">
           <div class="refresh">
             <Button type="success" icon="md-sync" @click="refresh(1)">重置</Button>
-            <p class="cursor" @click="closeSimpleSearch">关闭高级搜索</p>
+            <p class="cursor" @click="refresh(-1)">关闭高级搜索</p>
           </div>
         </Col>
       </Row>
@@ -120,20 +120,7 @@ export default {
           id: 3,
           name: '内容'
         }
-      ],
-      key: this.search ? this.search : {
-        text: '',
-        oragons: '',
-        bigCids: '',
-        subCids: '',
-        startTime: '',
-        endTime: '',
-        year: '',
-        status: '',
-        selectid: 1,
-        style: -1,
-        page: 1
-      }
+      ]
     }
   },
   computed: {
@@ -170,6 +157,35 @@ export default {
         }
       }
       return now
+    },
+    key: function () {
+      let now = {
+        text: '',
+        oragons: '',
+        bigCids: '',
+        subCids: '',
+        startTime: '',
+        endTime: '',
+        year: '',
+        status: '',
+        selectid: 1,
+        style: -1,
+        page: 1
+      }
+      if (this.search) {
+        now = this.search
+      }
+      return now
+    },
+    cader: function () {
+      let now = []
+      if (this.search.bigCids) {
+        now[0] = this.search.bigCids
+        if (this.search.subCids) {
+          now[1] = this.search.subCids
+        }
+      }
+      return now
     }
   },
   methods: {
@@ -184,42 +200,12 @@ export default {
     },
     // 简单搜索
     simpleSearch () {
+      sessionStorage.setItem('key', JSON.stringify(this.key.text))
       this.$emit('on-search', this.key)
       this.$router.push('/search')
-    },
-    // 打开高级搜索
-    seniorSearch () {
-      this.key.style = 1
-      this.$emit('on-search', this.key)
-      this.$router.push('/search')
-
-      let list = this.$store.state.home.leftNavBox[1].label
-      for (const c in list) {
-        if (list.hasOwnProperty(c)) {
-          const element = list[c]
-          element.type = false
-        }
-      }
     },
     // 高级搜索
     advancedSearch () {
-      this.$emit('on-search', this.key)
-    },
-    // 关闭高级搜索
-    closeSimpleSearch () {
-      this.key = {
-        text: '',
-        oragons: '',
-        bigCids: '',
-        subCids: '',
-        startTime: '',
-        endTime: '',
-        year: '',
-        status: '',
-        selectid: 1,
-        style: -1,
-        page: 1
-      }
       this.$emit('on-search', this.key)
     },
     // 获取时间

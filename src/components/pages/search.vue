@@ -100,30 +100,28 @@ export default {
       let search = JSON.parse(sessionStorage.getItem('search'))
       this.searchKey = search
       if (this.searchKey.style === 1) {
-        switch (key.sort) {
-          case 'oragons':
-            this.searchKey.oragons = key.id
-            break
-          case 'cids':
-            this.searchKey.bigCids = key.id
-            break
-          case 'status':
-            this.searchKey.status = key.id
-            break
-          case 'years':
-            this.searchKey.year = key.id
-            break
+        if (key.sort === 'oragons') {
+          this.searchKey.oragons = key.id
+        }
+        if (key.sort === 'cids') {
+          this.searchKey.bigCids = key.id
+        }
+        if (key.sort === 'status') {
+          this.searchKey.status = key.id
+        }
+        if (key.sort === 'years') {
+          this.searchKey.year = key.id
         }
       } else {
-        switch (key.sort) {
-          case 'oragons':
-            this.searchKey.oragons = key.id
-            this.searchKey.bigCids = ''
-            break
-          case 'cids':
-            this.searchKey.bigCids = key.id
-            this.searchKey.oragons = ''
-            break
+        if (key.sort === 'oragons') {
+          this.searchKey.oragons = key.id
+          this.searchKey.bigCids = ''
+          this.searchKey.subCids = ''
+        }
+        if (key.sort === 'cids') {
+          this.searchKey.bigCids = key.id
+          this.searchKey.oragons = ''
+          this.searchKey.subCids = ''
         }
       }
       this.search(this.searchKey)
@@ -146,6 +144,7 @@ export default {
       this.$nextTick(function () {
         this.status = true
         this.selectValue = ''
+        sessionStorage.removeItem('home')
         this.searchKey = {
           text: '',
           oragons: '',

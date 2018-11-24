@@ -107,13 +107,13 @@ export default {
           align-items: center;
           flex-direction: row;
           cursor: pointer;
-
           user-select: none;
           i{
             margin-top: -2px;
-            margin-right: 4px;
-            color: #eee;
-            font-size: 18px;
+            margin-right: 6px;
+            color: #fff;
+            font-size: 14px;
+            border: 1px solid #999;
           }
         }
         a{
