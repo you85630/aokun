@@ -144,6 +144,7 @@ export default {
       this.$nextTick(function () {
         this.status = true
         this.selectValue = ''
+        sessionStorage.removeItem('key')
         sessionStorage.removeItem('home')
         this.searchKey = {
           text: '',

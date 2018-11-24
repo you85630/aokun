@@ -110,10 +110,9 @@ export default {
           user-select: none;
           i{
             margin-top: -2px;
-            margin-right: 6px;
-            color: #fff;
-            font-size: 14px;
-            border: 1px solid #999;
+            margin-right: 4px;
+            font-size: 16px;
+            color: #ccc;
           }
         }
         a{
