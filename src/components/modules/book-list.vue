@@ -6,9 +6,7 @@
         <ul>
           <li v-for="(i,index) in li.list" :key="index">
             <p>{{i.title}}</p>
-            <router-link to="/help">
-              <Button type="primary">Learn More</Button>
-            </router-link>
+              <Button type="primary" @click="linkTo(i)">Learn More</Button>
           </li>
         </ul>
       </div>
@@ -18,7 +16,12 @@
 
 <script>
 export default {
-  props: ['list']
+  props: ['list'],
+  methods: {
+    linkTo (key) {
+      this.$router.push({path: '/learn/news', query: {id: key.id}})
+    }
+  }
 }
 </script>
 
@@ -36,17 +39,17 @@ export default {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      margin-top: 20px;
+      margin-top: 10px;
       li{
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: space-around;
+        margin-right: 89px;
         width: 210px;
         height: 285px;
         background-color: #f5f5f5;
-        margin-right: 14px;
-        &:nth-child(5n){
+        &:nth-child(4n){
           margin-right: 0;
         }
         p{

@@ -2,29 +2,12 @@ import Vue from 'vue'
 import 'babel-polyfill'
 import Vuex from 'vuex'
 
-import login from './modules/login'
-import home from './modules/home'
-import search from './modules/search'
-import learn from './modules/learn'
-import help from './modules/help'
-import airworthiness from './modules/airworthiness'
-import relation from './modules/relation'
-import forget from './modules/forget'
-
+import modules from './modules'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  namespaced: true,
-  modules: {
-    login,
-    home,
-    search,
-    learn,
-    help,
-    airworthiness,
-    relation,
-    forget
-  },
+  modules,
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     navList: [
       {

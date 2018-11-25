@@ -1,10 +1,6 @@
 <template>
   <div class="learn-more">
-    <bg-color :header="header1">
-      <slide :list="imgList"></slide>
-    </bg-color>
-
-    <bg-color :header="header2">
+    <bg-color :header="header">
       <slide :list="imgList"></slide>
     </bg-color>
 
@@ -26,8 +22,7 @@ export default {
   },
   data () {
     return {
-      header1: '翱坤知识库',
-      header2: '翱坤知识库',
+      header: '翱坤知识库',
       imgList: [
         {
           img: 'http://pi2nvcrkg.bkt.clouddn.com/1.jpeg',

@@ -14,6 +14,7 @@ const airworthiness = () => import('components/pages/airworthiness')
 const relation = () => import('components/pages/relation')
 const learn = () => import('components/pages/learn')
 const forget = () => import('components/pages/forget')
+const news = () => import('components/pages/news')
 
 const router = new Router({
   mode: 'history',
@@ -111,7 +112,15 @@ const router = new Router({
           component: forget,
           meta: {
             requireAuth: true,
-            title: '忘记密码'
+            title: '修改密码'
+          }
+        }, {
+          path: '/learn/news',
+          name: 'news',
+          component: news,
+          meta: {
+            requireAuth: true,
+            title: '知识'
           }
         }
       ]

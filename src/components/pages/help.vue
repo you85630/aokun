@@ -27,7 +27,7 @@
               <div slot="content">
                 <Collapse v-model="open1">
                   <Panel v-for="(i,val) in li.data" :key="val" :name="index+'-'+val">
-                    {{i.title}}-{{index+'-'+val}}
+                    {{i.title}}
                     <p slot="content">{{i.desc}}</p>
                   </Panel>
                 </Collapse>

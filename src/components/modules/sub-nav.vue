@@ -1,11 +1,11 @@
 <template>
   <div class="sub-nav">
-    <router-link class="nav" v-for="(li,index) in list" :key="index" :to="li.link">
+    <div class="nav" v-for="(li,index) in list" :key="index" @click="linkTo(li.link)">
       <div class="icon">
         <img :src="li.icon" alt="">
       </div>
       <div class="name">{{li.name}}</div>
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
       type: Array, // String, Number, Boolean, Function, Object, Array
       required: true,
       default: null
+    }
+  },
+  methods: {
+    linkTo (key) {
+      window.open(key, '_blank')
     }
   }
 }
