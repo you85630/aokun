@@ -3,32 +3,39 @@
       <div class="register">
         <h2>注册</h2>
         <bg-color>
-          <div class="form">
-            <ul>
-              <li>
+          <div class="form-box">
+            <Form ref="user" :model="user" :rules="userForm">
+              <FormItem prop="name">
                 <div class="title">昵称：</div>
-                <p><Input size="large" v-model="register.tel" placeholder="真实姓名或常用昵称" /></p>
-              </li>
-              <li>
-                <div class="title">手机号：</div>
-                <p><Input size="large" v-model="register.pasw" placeholder="真实姓名或常用昵称" /></p>
-              </li>
-              <li>
+                <Input type="text" v-model="user.name" placeholder="请输入不少于4位的昵称" />
+              </FormItem>
+              <FormItem prop="pwd">
                 <div class="title">密码：</div>
-                <p><Input size="large" v-model="register.paswt" placeholder="不少于6位的密码" /></p>
-              </li>
-              <li>
-                <p class="center"><Button size="large" type="primary">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button></p>
-              </li>
-            </ul>
+                <Input type="password" v-model="user.pwd" placeholder="请输入不少于6位的密码" />
+              </FormItem>
+              <FormItem prop="tel">
+                <div class="title">手机号：</div>
+                <div class="tel-box">
+                  <Input type="text" v-model="user.tel" placeholder="请输入手机号码" />
+                  <Button type="primary" :disabled="user.tel.length!==11" @click="getCodes(user.tel)">获取验证码</Button>
+                </div>
+              </FormItem>
+              <FormItem prop="code" v-if="code">
+                <div class="title">验证码：</div>
+                <Input type="text" v-model="user.code" placeholder="请输入验证码" />
+              </FormItem>
+              <FormItem>
+                <Button size="large" type="primary" @click="register('user')">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button>
+              </FormItem>
+            </Form>
           </div>
         </bg-color>
-        <div class="or">- OR -</div>
         <div class="login">
+          <div class="or">- OR -</div>
           <router-link to="/login">
             <Button size="large" type="primary">&nbsp;&nbsp;已有账号登陆&nbsp;&nbsp;</Button>
           </router-link>
-          <p>注册即表示你同意网站的《<span @click="visible=true">服务条款</span>》</p>
+          <!-- <p>注册即表示你同意网站的《<span @click="visible=true">服务条款</span>》</p> -->
         </div>
       </div>
       <Row type="flex" justify="start">
@@ -44,15 +51,74 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       visible: false,
-      register: {
+      code: false,
+      user: {
+        name: '',
+        pwd: '',
         tel: '',
-        pasw: '',
-        paswt: ''
+        code: ''
+      },
+      userForm: {
+        name: [
+          { required: true, message: '请输入不少于4位的昵称', trigger: 'blur' }
+        ],
+        pwd: [
+          { required: true, message: '请输入不少于6位的密码', trigger: 'blur' },
+          { type: 'string', min: 6, message: '请输入不少于6位的密码', trigger: 'blur' }
+        ],
+        tel: [
+          { required: true, message: '请输入不少于11位的手机号码', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' }
+        ]
       }
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'Message'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'getCode',
+      'getRegister'
+    ]),
+    // 获取验证码
+    getCodes (tel) {
+      this.code = true
+      this.getCode(tel)
+      setTimeout(() => {
+        if (this.Message.status) {
+          this.$Message.success('已发送至手机，请注意查收')
+        } else {
+          this.$Message.error(this.Message.msg)
+        }
+      }, 200)
+    },
+    // 注册
+    register (name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.getRegister(this.user)
+          setTimeout(() => {
+            if (this.Message.status) {
+              this.$Message.success('注册成功，即将跳转至登录页')
+              setTimeout(() => {
+                this.$router.push('/login')
+              }, 2000)
+            } else {
+              this.$Message.error(this.Message.msg)
+            }
+          }, 200)
+        }
+      })
     }
   }
 }
@@ -68,37 +134,36 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0;
+    padding-bottom: 20px;
     width: 100%;
     font-weight: normal;
     font-size: 24px;
   }
-  .form{
-    padding: 20px;
-    background-color: #fff;
-    ul{
-      li{
-        margin: 0 auto;
-        margin-bottom: 20px;
-        width: 550px;
-        text-align: left;
-        .title{
-          margin-bottom: 6px;
-          font-size: 16px;
-        }
-      }
-      .center{
-        text-align: center;
+  .form-box{
+    padding: 0 20%;
+    padding-top: 24px;
+    .title{
+      text-align: left;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .tel-box{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      .ivu-input-wrapper{
+        width: 70%;
       }
     }
-  }
-  .or{
-    margin: 30px 0;
-    font-size: 24px;
   }
   .login{
     padding-bottom: 30px;
     text-align: center;
+    .or{
+      margin: 30px 0;
+      font-size: 24px;
+    }
     p{
       margin-top: 30px;
       font-size: 14px;

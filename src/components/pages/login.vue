@@ -4,19 +4,19 @@
       <y-search></y-search>
     </bg-color>
 
-    <bg-color :header="header1">
-      <login></login>
+    <bg-color :header="header1" v-if="!User.name">
+      <login-box @on-login="logIn"></login-box>
     </bg-color>
 
     <bg-color :header="header2">
-      <about :video="videoBox" :list="aboutBox"></about>
+      <about-box :video="videoBox" :list="aboutBox"></about-box>
     </bg-color>
   </div>
 </template>
 
 <script>
-import login from 'components/modules/login'
-import about from 'components/modules/about-me'
+import loginBox from 'components/modules/login'
+import aboutBox from 'components/modules/about-me'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
@@ -27,20 +27,38 @@ export default {
     }
   },
   components: {
-    login,
-    about
+    loginBox,
+    aboutBox
   },
   computed: {
     ...mapGetters([
       'videoBox',
-      'aboutBox'
+      'aboutBox',
+      'User'
     ])
   },
   methods: {
     ...mapActions([
+      'login',
       'getStudy',
       'searchData'
-    ])
+    ]),
+    logIn (key) {
+      if (key.tel === '') {
+        this.$Message.error('手机号码不能为空')
+      }
+      if (key.pwd === '') {
+        this.$Message.error('密码不能为空')
+      }
+      if (key.tel && key.pwd) {
+        this.login(key)
+        sessionStorage.setItem('remember', JSON.stringify(key))
+        this.show = false
+        this.$nextTick(function () {
+          this.show = true
+        })
+      }
+    }
   },
   created () {
     this.getStudy()

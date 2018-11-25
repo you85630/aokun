@@ -69,9 +69,11 @@ export default {
   },
   methods: {
     ...mapActions([
-      'searchData'
+      'searchData',
+      'getMoreSearch'
     ]),
     init () {
+      this.getMoreSearch()
       // 默认搜索一次
       let text = JSON.parse(sessionStorage.getItem('key'))
       let home = JSON.parse(sessionStorage.getItem('home'))

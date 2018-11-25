@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import 'babel-polyfill'
 import Vuex from 'vuex'
-import router from 'router'
 
 import login from './modules/login'
 import home from './modules/home'
@@ -43,9 +42,6 @@ export default new Vuex.Store({
         link: '/help'
       }
     ],
-    user: {
-      name: ''
-    },
     title: '您的移动工程资源目标',
     iconList: ['ios-analytics', 'md-aperture', 'md-baseball', 'ios-cloud-circle'],
     footerList: [
@@ -89,33 +85,9 @@ export default new Vuex.Store({
   },
   getters: {
     navList: state => state.navList,
-    user: state => state.user,
     title: state => state.title,
     iconList: state => state.iconList,
     footerList: state => state.footerList,
     sublist: state => state.sublist
-  },
-  actions: {
-    exit ({commit}) {
-      commit('exit')
-    },
-    login ({commit}) {
-      commit('login')
-    }
-  },
-  mutations: {
-    exit (state) {
-      this.user = {}
-    },
-    login (state) {
-      router.push('/login')
-    },
-    timestampToTime (timestamp) {
-      let date = new Date(timestamp * 1000)
-      let Y = date.getFullYear() + '-'
-      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      return Y + M + D
-    }
   }
 })

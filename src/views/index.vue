@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <y-header :nav="navList" :user="user" @go="login" @out="exit"></y-header>
+    <y-header :nav="navList" :user="User" @out="exitOut"></y-header>
     <div class="container">
       <router-view />
       <BackTop :bottom="170"></BackTop>
@@ -21,12 +21,11 @@ export default {
   mounted () {
     this.getResource()
     this.getCompany()
-    this.getMoreSearch()
   },
   computed: {
     ...mapGetters([
+      'User',
       'navList',
-      'user',
       'title',
       'iconList',
       'footerList'
@@ -34,12 +33,21 @@ export default {
   },
   methods: {
     ...mapActions([
-      'exit',
-      'login',
       'getResource',
       'getCompany',
-      'getMoreSearch'
-    ])
+      'exit',
+      'login'
+    ]),
+    exitOut () {
+      this.exit()
+      sessionStorage.removeItem('User')
+    }
+  },
+  created () {
+    let user = JSON.parse(sessionStorage.getItem('User'))
+    if (user) {
+      this.login(user)
+    }
   }
 }
 

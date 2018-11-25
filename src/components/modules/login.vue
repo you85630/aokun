@@ -13,13 +13,15 @@
           </li>
           <li>
             <span>密码：</span>
-            <p><Input v-model="user.pasw" placeholder="请输入密码" /></p>
+            <p><Input type="password" v-model="user.pwd" placeholder="请输入密码" /></p>
           </li>
           <li>
             <span></span>
             <p>
-              <span @click="select=!select" :class="{active:select}"><Icon :type="select?'ios-checkbox':'ios-square'" />记住我</span>
-              <Button type="primary">&nbsp;登陆&nbsp;</Button>
+              <span @click="user.select=!user.select" :class="{active:user.select}">
+                <Icon :type="user.select?'ios-checkbox':'ios-square'" />记住我
+              </span>
+              <Button type="primary" @click="login(user)">&nbsp;登陆&nbsp;</Button>
             </p>
           </li>
           <li>
@@ -43,11 +45,22 @@
 export default {
   data () {
     return {
-      select: false,
       user: {
         tel: '',
-        pasw: ''
+        pwd: '',
+        select: false
       }
+    }
+  },
+  methods: {
+    login (user) {
+      this.$emit('on-login', user)
+    }
+  },
+  created () {
+    let remember = JSON.parse(sessionStorage.getItem('remember'))
+    if (remember) {
+      this.user = remember
     }
   }
 }

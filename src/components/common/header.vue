@@ -25,26 +25,17 @@
 
 <script>
 export default {
-  props: {
-    nav: {
-      type: Array, // String, Number, Boolean, Function, Object, Array
-      required: true,
-      default: null
-    },
-    user: {
-      type: Object
-    }
-  },
+  props: ['nav', 'user'],
   methods: {
     exit () {
       this.$emit('out')
     },
     login () {
-      this.$emit('go')
+      this.$router.push('/login')
     },
     linkTo (key) {
-      sessionStorage.clear()
-
+      sessionStorage.removeItem('key')
+      sessionStorage.removeItem('search')
       let list = this.$store.state.home.linklist
       for (let i = 0; i < list.length; i++) {
         const element = list[i]
