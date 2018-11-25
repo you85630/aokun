@@ -9,6 +9,7 @@ import learn from './modules/learn'
 import help from './modules/help'
 import airworthiness from './modules/airworthiness'
 import relation from './modules/relation'
+import forget from './modules/forget'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     learn,
     help,
     airworthiness,
-    relation
+    relation,
+    forget
   },
   state: {
     navList: [

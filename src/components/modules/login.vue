@@ -26,7 +26,7 @@
           </li>
           <li>
             <span></span>
-            <p><router-link to="/register">忘记密码？</router-link></p>
+            <p><router-link to="/forget">忘记密码？</router-link></p>
           </li>
         </ul>
       </div>

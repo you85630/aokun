@@ -13,6 +13,7 @@ const details = () => import('components/pages/details')
 const airworthiness = () => import('components/pages/airworthiness')
 const relation = () => import('components/pages/relation')
 const learn = () => import('components/pages/learn')
+const forget = () => import('components/pages/forget')
 
 const router = new Router({
   // mode: 'history',
@@ -73,14 +74,6 @@ const router = new Router({
             title: '帮助'
           }
         }, {
-          path: '/register',
-          name: 'register',
-          component: register,
-          meta: {
-            requireAuth: true,
-            title: '注册'
-          }
-        }, {
           path: '/search/details',
           name: 'details',
           component: details,
@@ -103,6 +96,22 @@ const router = new Router({
           meta: {
             requireAuth: true,
             title: '双边关系'
+          }
+        }, {
+          path: '/register',
+          name: 'register',
+          component: register,
+          meta: {
+            requireAuth: true,
+            title: '注册'
+          }
+        }, {
+          path: '/forget',
+          name: 'forget',
+          component: forget,
+          meta: {
+            requireAuth: true,
+            title: '忘记密码'
           }
         }
       ]
