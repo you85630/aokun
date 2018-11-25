@@ -2,14 +2,11 @@
   <div class="about">
     <div class="box">
       <div class="left">
-        <!-- <video :src="video.video" v-if="video.play"></video> -->
-        <div class="video" v-if="video.play">
-          <iframe frameborder="0" allowFullScreen="true" :src="video.video" ></iframe>
-        </div>
-        <div class="play" v-else>
-          <img :src="video.cover" alt="">
-          <Icon type="md-arrow-dropright-circle" @click="Play" />
-        </div>
+          <video-player
+                class="video-player vjs-custom-skin"
+                ref="videoPlayer"
+                :playsinline="true"
+                :options="playerOptions" />
       </div>
       <div class="right">
         <ul>
@@ -29,6 +26,24 @@
 <script>
 export default {
   props: ['list', 'video'],
+  data () {
+    return {
+      playerOptions: {
+        autoplay: false,
+        preload: 'auto',
+        sources: [{
+          type: 'video/mp4',
+          src: this.video.video // url地址
+        }],
+        poster: this.video.cover // 封面
+      }
+    }
+  },
+  computed: {
+    player () {
+      return this.$refs.videoPlayer.player
+    }
+  },
   methods: {
     Play () {
       this.video.play = !this.video.play
@@ -40,56 +55,23 @@ export default {
 <style lang="scss" scoped>
 .box{
   display: flex;
+  align-items: center;
   flex-direction: row;
   margin-top: 10px;
   .left{
-    .video{
-      width: 640px;
-      height: 373px;
-      iframe{
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .play{
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 640px;
-      height: 373px;
-      &::after{
-        position: absolute;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        content: '';
-        opacity: .2;
-      }
-      img{
-        width: 100%;
-        height: 100%;
-      }
-      i{
-        position: absolute;
-        z-index: 2;
-        color: #FFFFFF;
-        font-size: 80px;
-        cursor: pointer;
-      }
-    }
+    width: 640px;
+    height: 373px;
   }
   .right{
+    box-sizing: border-box;
     margin-left: 35px;
     padding: 20px;
     width: 505px;
     background-color: #f5f5f5;
     ul{
+      overflow-y: auto;
       width: 100%;
       height: 373px;
-      overflow-y: auto;
       li{
         margin-bottom: 20px;
         &:last-child{
@@ -121,4 +103,5 @@ export default {
     }
   }
 }
+
 </style>

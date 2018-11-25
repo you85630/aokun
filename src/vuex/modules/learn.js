@@ -2,49 +2,82 @@ import api from 'assets/js/api'
 
 export default {
   state: {
-    videoBox: {
-      play: false,
-      video: 'https://v.qq.com/txp/iframe/player.html?vid=e07857p9nxw',
-      cover: 'http://pbsbjhfvy.bkt.clouddn.com/img-4.jpeg'
-    },
-    aboutBox: []
+    bookList: [
+      {
+        title: '标题2',
+        list: [
+          {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }
+        ]
+      }, {
+        title: '标题2',
+        list: [
+          {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }, {
+            name: '111',
+            link: ''
+          }
+        ]
+      }
+    ]
   },
   getters: {
-    videoBox: state => state.videoBox,
-    aboutBox: state => state.aboutBox
+    bookList: state => state.bookList
   },
   actions: {
-    getStudy: ({ commit }, key) => {
-      let URL = '/study'
+    getBookList ({commit}) {
+      let URL = '/learn'
       api.get(URL).then((res) => {
-        commit('getStudy', res.data)
+        commit('getBookList', res.data)
       })
     }
   },
   mutations: {
-    getStudy: (state, key) => {
+    getBookList (state, key) {
       var map = {}
       var dest = []
       for (var i = 0; i < key.length; i++) {
         var e = key[i]
         if (!map[e.class_id]) {
           dest.push({
-            class_id: e.class_id,
-            class_name: e.class_name,
-            data: [e]
+            id: e.class_id,
+            title: e.class_name,
+            list: [e]
           })
           map[e.class_id] = e
         } else {
           for (var j = 0; j < dest.length; j++) {
             var dj = dest[j]
-            if (dj.class_id === e.class_id) {
-              dj.data.push(e)
+            if (dj.id === e.class_id) {
+              dj.list.push({
+                title: e.title,
+                id: e.id
+              })
               break
             }
           }
         }
       }
-      state.aboutBox = dest
+      state.bookList = dest
     }
   }
 }

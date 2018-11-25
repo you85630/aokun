@@ -16,8 +16,15 @@ import 'iview/dist/styles/iview.css'
 import moduleBox from 'components/common/modulebox'
 // 全局事件
 import utils from './assets/js/utils.js'
+
+// 引入视频播放器
+import VueVideoPlayer from 'vue-video-player'
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
 Vue.use(iView)
 Vue.use(moduleBox)
+Vue.use(VueVideoPlayer)
+
 Vue.prototype.utils = utils
 Vue.config.productionTip = false
 // 全局加载进度条

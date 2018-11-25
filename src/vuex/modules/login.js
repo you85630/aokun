@@ -4,14 +4,27 @@ export default {
   state: {
     status: true,
     Message: {},
-    User: {}
+    User: {},
+    videoBox: {
+      video: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+      cover: 'http://pi2nvcrkg.bkt.clouddn.com/1.jpeg'
+    },
+    aboutBox: []
   },
   getters: {
     status: state => state.status,
     Message: state => state.Message,
-    User: state => state.User
+    User: state => state.User,
+    videoBox: state => state.videoBox,
+    aboutBox: state => state.aboutBox
   },
   actions: {
+    getStudy: ({ commit }, key) => {
+      let URL = '/study'
+      api.get(URL).then((res) => {
+        commit('getStudy', res.data)
+      })
+    },
     // 获取验证码
     getCode: ({ commit }, key) => {
       let URL = '/code/' + key
@@ -47,6 +60,30 @@ export default {
     }
   },
   mutations: {
+    getStudy: (state, key) => {
+      var map = {}
+      var dest = []
+      for (var i = 0; i < key.length; i++) {
+        var e = key[i]
+        if (!map[e.class_id]) {
+          dest.push({
+            class_id: e.class_id,
+            class_name: e.class_name,
+            data: [e]
+          })
+          map[e.class_id] = e
+        } else {
+          for (var j = 0; j < dest.length; j++) {
+            var dj = dest[j]
+            if (dj.class_id === e.class_id) {
+              dj.data.push(e)
+              break
+            }
+          }
+        }
+      }
+      state.aboutBox = dest
+    },
     // 获取验证码
     getCode: (state, key) => {
       if (key.result === 'success') {

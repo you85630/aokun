@@ -16,7 +16,7 @@ const learn = () => import('components/pages/learn')
 const forget = () => import('components/pages/forget')
 
 const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
