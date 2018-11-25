@@ -17,7 +17,7 @@ const forget = () => import('components/pages/forget')
 const news = () => import('components/pages/news')
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',

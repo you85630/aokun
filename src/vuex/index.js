@@ -48,11 +48,11 @@ export default new Vuex.Store({
       {
         name: '首页',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-2.png',
-        link: 'http://www.aerotech.site/plus/list.php?tid=1'
+        link: ''
       }, {
         name: '关于我们',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-1.png',
-        link: ''
+        link: 'http://www.aerotech.site/plus/list.php?tid=1'
       }, {
         name: '新闻动态',
         icon: 'http://p7qasncyc.bkt.clouddn.com/icon-3.png',

@@ -20,7 +20,11 @@ export default {
   },
   methods: {
     linkTo (key) {
-      window.open(key, '_blank')
+      if (key) {
+        window.open(key, '_blank')
+      } else {
+        this.$router.push('/home')
+      }
     }
   }
 }
