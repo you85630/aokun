@@ -1,10 +1,7 @@
 <template>
   <div class="footer">
     <div class="main">
-      <div class="top">
-        <div class="slogan">{{title}}</div>
-        <div class="iconList"><Icon class="icon" v-for="(li,index) in icon" :key="index" :type="li" /></div>
-      </div>
+      <div class="slogan">{{title}}</div>
       <div class="middle">
         <router-link v-for="(li,index) in footer" :key="index" :to="li.link">{{li.name}}</router-link>
       </div>
@@ -15,23 +12,7 @@
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true,
-      default: null
-    },
-    icon: {
-      type: Array, // String, Number, Boolean, Function, Object, Array
-      required: true,
-      default: null
-    },
-    footer: {
-      type: Array,
-      required: true,
-      default: null
-    }
-  },
+  props: ['title', 'footer'],
   computed: {
     time: function () {
       let now = new Date().getFullYear()
@@ -52,19 +33,9 @@ export default {
     padding: 20px;
     width: 1180px;
     background-color: #051520;
-  }
-}
-.top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #5f6a72;
-  .slogan{
-    font-size: 18px;
-  }
-  .icon{
-    margin-left: 20px;
-    font-size: 24px;
+    .slogan{
+      font-size: 18px;
+    }
   }
 }
 .middle{

@@ -1,10 +1,10 @@
 <template>
   <div class="carousel">
     <Carousel loop autoplay v-model="num" :autoplaySpeed="5000" dots="outside" arrow="hover" trigger="click">
-      <CarouselItem v-for="(li,index) in list" :key="index">
+      <CarouselItem v-for="li in list" :key="li.id">
         <div class="img-box">
-          <img :src="li.img" alt="">
-          <div class="info">{{li.info}}</div>
+          <img :src="li.pic" alt="">
+          <div class="info">{{li.desc}}</div>
         </div>
       </CarouselItem>
     </Carousel>

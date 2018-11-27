@@ -86,33 +86,34 @@ export default {
     },
     // 获取验证码
     getCode: (state, key) => {
-      if (key.result === 'success') {
-        state.Message.status = true
-      } else {
+      state.Message = {}
+      if (key.result) {
         state.Message.status = false
-        state.Message.msg = '手机号码错误'
+        state.Message.msg = key.result
+      } else {
+        state.Message.status = true
       }
     },
     // 注册
     getRegister: (state, key) => {
-      switch (key.result) {
-        case 'code error':
-          state.Message.status = false
-          state.Message.msg = '验证码错误'
-          break
-        case 'tel error':
-          state.Message.status = false
-          state.Message.msg = '手机号码错误'
-          break
-        default:
-          state.Message.status = true
+      state.Message = {}
+      if (key.result) {
+        state.Message.status = false
+        state.Message.msg = key.result
+      } else {
+        state.Message.status = true
       }
     },
     // 登录
     login: (state, key) => {
-      if (key) {
+      state.Message = {}
+      if (key.result) {
         state.User = key
         sessionStorage.setItem('User', JSON.stringify(key))
+        state.Message.status = false
+        state.Message.msg = key.result
+      } else {
+        state.Message.status = true
       }
     },
     // 退出

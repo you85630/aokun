@@ -65,17 +65,20 @@ export default {
       },
       userForm: {
         name: [
-          { required: true, message: '请输入不少于4位的昵称', trigger: 'blur' }
+          { required: true, message: '请输入不少于4位的昵称', trigger: 'blur' },
+          { type: 'string', min: 4, message: '请输入不少于4位的昵称', trigger: 'blur' }
         ],
         pwd: [
           { required: true, message: '请输入不少于6位的密码', trigger: 'blur' },
           { type: 'string', min: 6, message: '请输入不少于6位的密码', trigger: 'blur' }
         ],
         tel: [
-          { required: true, message: '请输入不少于11位的手机号码', trigger: 'blur' }
+          { required: true, message: '请输入不少于11位的手机号码', trigger: 'blur' },
+          { type: 'string', min: 11, message: '请输入不少于11位的手机号码', trigger: 'blur' }
         ],
         code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' }
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { type: 'string', min: 4, message: '请输入验证码', trigger: 'blur' }
         ]
       }
     }

@@ -2,52 +2,24 @@ import api from 'assets/js/api'
 
 export default {
   state: {
-    bookList: [
-      {
-        title: '标题2',
-        list: [
-          {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }
-        ]
-      }, {
-        title: '标题2',
-        list: [
-          {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }, {
-            name: '111',
-            link: ''
-          }
-        ]
-      }
-    ]
+    bookList: [],
+    learnImgList: []
   },
   getters: {
-    bookList: state => state.bookList
+    bookList: state => state.bookList,
+    learnImgList: state => state.learnImgList
   },
   actions: {
     getBookList ({commit}) {
       let URL = '/learn'
       api.get(URL).then((res) => {
         commit('getBookList', res.data)
+      })
+    },
+    getImgList ({commit}) {
+      let URL = '/learnpic'
+      api.get(URL).then((res) => {
+        commit('getImgList', res.data)
       })
     }
   },
@@ -78,6 +50,11 @@ export default {
         }
       }
       state.bookList = dest
+    },
+    getImgList (state, key) {
+      if (key) {
+        state.learnImgList = key
+      }
     }
   }
 }

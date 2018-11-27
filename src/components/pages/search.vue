@@ -90,6 +90,7 @@ export default {
         } else {
           this.searchKey.subCids = home.categry
           this.searchKey.bigCids = home.classify
+          this.searchKey.oragons = home.oragons
           // 选中状态
           this.selectValue = home.name
         }

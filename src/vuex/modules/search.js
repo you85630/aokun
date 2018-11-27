@@ -59,6 +59,42 @@ export default {
       api.get(URL).then((res) => {
         commit('searchData', res.data)
       })
+    },
+    // 高级搜索
+    getMoreSearch: ({ commit }) => {
+      let data = {
+        page: 1,
+        oragons: -1,
+        bigCids: -1,
+        subCids: -1,
+        all: -1,
+        title: -1,
+        content: -1,
+        company: -1,
+        year: -1,
+        status: -1,
+        startTime: -1,
+        endTime: -1,
+        style: 1
+      }
+
+      let URL = '/fsearch' +
+            '/' + data.page +
+            '/' + data.oragons +
+            '/' + data.bigCids +
+            '/' + data.subCids +
+            '/' + data.title +
+            '/' + data.content +
+            '/' + data.all +
+            '/' + data.year +
+            '/' + data.status +
+            '/' + data.company +
+            '/' + data.startTime +
+            '/' + data.endTime +
+            '/' + data.style
+      api.get(URL).then((res) => {
+        commit('getMoreSearch', res.data)
+      })
     }
   },
 
@@ -72,13 +108,27 @@ export default {
         for (const e in state.itemList) {
           if (state.itemList.hasOwnProperty(e)) {
             const element = state.itemList[e]
-            let date = new Date(element.postTime * 1000)
-            let Y = date.getFullYear() + '-'
-            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-            let D = date.getDate() + ' '
-            let time = Y + M + D
-            element.time = time
             element.organ = element.organ.toUpperCase()
+            let time = ''
+            let etime = ''
+            // 开始时间
+            if (element.postTime) {
+              let date = new Date(element.postTime * 1000)
+              let Y = date.getFullYear() + '-'
+              let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+              let D = date.getDate() + ' '
+              time = Y + M + D
+            }
+            if (element.TerminationDate) {
+              // 结束时间
+              let date1 = new Date(element.TerminationDate * 1000)
+              let Y1 = date1.getFullYear() + '-'
+              let M1 = (date1.getMonth() + 1 < 10 ? '0' + (date1.getMonth() + 1) : date1.getMonth() + 1) + '-'
+              let D1 = date1.getDate() + ' '
+              etime = Y1 + M1 + D1
+            }
+            element.time = time
+            element.etime = etime
           }
         }
 
@@ -159,6 +209,92 @@ export default {
             }
           ]
         }
+      }
+    },
+    // 高级搜索
+    getMoreSearch: (state, key) => {
+      state.moreSearch = {
+        orangsList: {},
+        cidsList: {},
+        statusList: {},
+        yearsList: {}
+      }
+      let orangsList = []
+      let cidsList = []
+      let statusList = []
+      let yearsList = []
+      if (key) {
+        for (const a in key.orangs) {
+          if (key.orangs.hasOwnProperty(a)) {
+            const element = key.orangs[a]
+            orangsList.push({
+              id: element.organ,
+              name: element.name,
+              number: element.c,
+              sort: 'orangs'
+            })
+          }
+        }
+        for (const a in key.cids) {
+          if (key.cids.hasOwnProperty(a)) {
+            const element = key.cids[a]
+            cidsList.push({
+              id: element.bigCatagoryId,
+              name: element.name,
+              number: element.c,
+              sort: 'cids'
+            })
+          }
+        }
+
+        for (const b in key.status) {
+          if (key.status.hasOwnProperty(b)) {
+            const element = key.status[b]
+            statusList.push({
+              id: element.status,
+              name: element.name,
+              number: element.c,
+              sort: 'status'
+            })
+          }
+        }
+
+        for (const c in key.years) {
+          if (key.years.hasOwnProperty(c)) {
+            const element = key.years[c]
+            yearsList.push({
+              id: element.year,
+              name: element.year,
+              number: element.c,
+              sort: 'years'
+            })
+          }
+        }
+        state.moreSearch = {
+          orangsList,
+          cidsList,
+          statusList,
+          yearsList
+        }
+        state.moreLeftNavBox = [
+          {
+            title: '明航组织',
+            type: false,
+            label: orangsList
+          }, {
+            title: '主体分类',
+            type: false,
+            label: cidsList
+          }, {
+            title: '文档有效期',
+            type: false,
+            label: statusList
+          }, {
+            title: '文档年份',
+            type: false,
+            label: yearsList
+          }
+        ]
       }
     }
   }

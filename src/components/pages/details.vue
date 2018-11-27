@@ -8,24 +8,35 @@
           </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
-           <Col>
-            <p><span>分类：</span>{{details.subject?details.subject:'暂无'}}</p>
+           <Col span="10">
+              <p><span>SUBJECT：</span>{{details.subject?details.subject:'暂无'}}</p>
+          </Col>
+           <Col span="10" offset="2">
+              <p><span>办文单位：</span>{{details.company_name?details.company_name:'暂无'}}</p>
           </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
            <Col span="10">
-           <p><span>大类别：</span>{{details.bigCatagoryName?details.bigCatagoryName:'暂无'}}</p>
+           <p><span>大分类：</span>{{details.bigCatagoryName?details.bigCatagoryName:'暂无'}}</p>
           </Col>
           <Col span="10" offset="2">
-            <p><span>小类别：</span>{{details.subCatagoryName?details.subCatagoryName:'暂无'}}</p>
+            <p><span>小分类：</span>{{details.subCatagoryName?details.subCatagoryName:'暂无'}}</p>
           </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
            <Col span="10">
-            <p><span>办文单位：</span>{{details.company_name?details.company_name:'暂无'}}</p>
+            <p><span>发文日期：</span>{{details.time?details.time:'暂无'}}</p>
           </Col>
           <Col span="10" offset="2">
-            <p><span>发文日期：</span>{{details.time}}</p>
+            <p><span>结束日期：</span>{{details.etime?details.etime:'暂无'}}</p>
+          </Col>
+        </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col span="10">
+            <p><span>章节号：</span>{{details.section?details.section:'暂无'}}</p>
+          </Col>
+          <Col span="10" offset="2">
+            <p><span>AMDT：</span>{{details.amdt?details.amdt:'暂无'}}</p>
           </Col>
         </Row>
         <Row type="flex" justify="space-between" align="middle">
@@ -48,7 +59,7 @@
 export default {
   data () {
     return {
-      details: JSON.parse(sessionStorage.getItem('item'))
+      details: JSON.parse(sessionStorage.getItem('item')) ? JSON.parse(sessionStorage.getItem('item')) : {}
     }
   },
   mounted () {

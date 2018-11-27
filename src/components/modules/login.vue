@@ -55,6 +55,11 @@ export default {
   methods: {
     login (user) {
       this.$emit('on-login', user)
+      this.user = {
+        tel: '',
+        pwd: '',
+        select: false
+      }
     }
   },
   created () {

@@ -35,7 +35,7 @@ const router = new Router({
             title: '首页'
           }
         }, {
-          path: '/search/',
+          path: '/search',
           name: 'search',
           component: search,
           meta: {

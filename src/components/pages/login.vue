@@ -34,7 +34,8 @@ export default {
     ...mapGetters([
       'videoBox',
       'aboutBox',
-      'User'
+      'User',
+      'Message'
     ])
   },
   methods: {
@@ -46,17 +47,20 @@ export default {
     logIn (key) {
       if (key.tel === '') {
         this.$Message.error('手机号码不能为空')
-      }
-      if (key.pwd === '') {
+      } if (key.pwd === '') {
         this.$Message.error('密码不能为空')
-      }
-      if (key.tel && key.pwd) {
+      } else {
         this.login(key)
-        sessionStorage.setItem('remember', JSON.stringify(key))
-        this.show = false
-        this.$nextTick(function () {
-          this.show = true
-        })
+        if (this.Message.status) {
+          this.$Message.success('登录成功')
+          sessionStorage.setItem('remember', JSON.stringify(key))
+          this.show = false
+          this.$nextTick(function () {
+            this.show = true
+          })
+        } else {
+          this.$Message.error(this.Message.msg)
+        }
       }
     }
   },

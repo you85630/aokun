@@ -48,12 +48,14 @@ export default {
         margin-right: 89px;
         width: 210px;
         height: 285px;
-        background-color: #f5f5f5;
+        background: url('./../../assets/img/book.jpeg') 0 0 no-repeat;
+        background-size: cover;
         &:nth-child(4n){
           margin-right: 0;
         }
         p{
           font-size: 14px;
+          color: #fff;
         }
       }
     }

@@ -27,23 +27,19 @@ export default {
   },
   mutations: {
     getForget: (state, key) => {
-      if (key.result === 'tel error') {
+      state.alertMsg = {}
+      if (key.result) {
         state.alertMsg.status = false
-        state.alertMsg.msg = '手机号码错误'
+        state.alertMsg.msg = key.result
       } else {
         state.alertMsg.status = true
       }
     },
     getPwd: (state, key) => {
-      if (key.result === 'tel error') {
+      state.alertMsg = {}
+      if (key.result) {
         state.alertMsg.status = false
-        state.alertMsg.msg = '手机号码错误'
-      } else if (key.result === 'code error') {
-        state.alertMsg.status = false
-        state.alertMsg.msg = '验证码错误'
-      } else if (key.result === 'status error') {
-        state.alertMsg.status = false
-        state.alertMsg.msg = '状态错误'
+        state.alertMsg.msg = key.result
       } else {
         state.alertMsg.status = true
       }

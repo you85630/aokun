@@ -1,22 +1,30 @@
 <template>
   <div class="item">
     <div class="left">
-      <p>{{item.info}}</p>
-      <p>
-        <router-link :to="item.link">
-          <Button size="large" type="primary">{{item.name}}</Button>
-        </router-link>
-      </p>
+      <p>{{item.desc}}</p>
+      <p><Button size="large" type="primary" @click="linkTo(item)">{{item.title}}</Button></p>
     </div>
     <div class="right">
-      <img :src="item.cover" alt="">
+      <img :src="item.pic" alt="">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['item']
+  props: ['item'],
+  methods: {
+    linkTo (key) {
+      let router = this.$router
+
+      let home = {
+        oragons: key.url,
+        name: key.url.toUpperCase()
+      }
+      sessionStorage.setItem('home', JSON.stringify(home))
+      router.push({name: 'search'})
+    }
+  }
 }
 </script>
 

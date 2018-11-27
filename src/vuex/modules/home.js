@@ -16,80 +16,65 @@ export default {
       cidsList: {},
       statusList: {},
       yearsList: {}
-    }
+    },
+    sublist: [],
+    Footer: {}
   },
   getters: {
     searchkey: state => state.searchkey,
     imgList: state => state.imgList,
     linklist: state => state.linklist,
     leftNavBox: state => state.leftNavBox,
-    moreSearch: state => state.moreSearch
+    moreSearch: state => state.moreSearch,
+    sublist: state => state.sublist,
+    Footer: state => state.Footer
   },
   actions: {
+    // 获取首页搜索背景
     getImg: ({ commit }) => {
       let URL = '/adone'
       api.get(URL).then((res) => {
         commit('getImg', res.data)
       })
     },
-
+    // 获取首页轮播图
     getiImgList: ({ commit }) => {
       let URL = '/adtwo'
       api.get(URL).then((res) => {
         commit('getiImgList', res.data)
       })
     },
-
+    // 获取资源库信息
     getResource: ({ commit }, key) => {
       let URL = '/category'
       api.get(URL).then((res) => {
         commit('getResource', res.data)
       })
     },
+    // 发文单位
     getCompany: ({ commit }, key) => {
       let URL = '/company'
       api.get(URL).then((res) => {
         commit('getCompany', res.data)
       })
     },
-    getMoreSearch: ({ commit }) => {
-      let data = {
-        page: 1,
-        oragons: -1,
-        bigCids: -1,
-        subCids: -1,
-        all: -1,
-        title: -1,
-        content: -1,
-        company: -1,
-        year: -1,
-        status: -1,
-        startTime: -1,
-        endTime: -1,
-        style: 1
-      }
-
-      let URL = '/fsearch' +
-        '/' + data.page +
-        '/' + data.oragons +
-        '/' + data.bigCids +
-        '/' + data.subCids +
-        '/' + data.title +
-        '/' + data.content +
-        '/' + data.all +
-        '/' + data.year +
-        '/' + data.status +
-        '/' + data.company +
-        '/' + data.startTime +
-        '/' + data.endTime +
-        '/' + data.style
+    // 副导航
+    getSublist: ({ commit }, key) => {
+      let URL = '/subList'
       api.get(URL).then((res) => {
-        commit('getMoreSearch', res.data)
+        commit('getSublist', res.data)
+      })
+    },
+    // 获取页脚信息
+    getFooter ({commit}) {
+      let URL = '/footer'
+      api.get(URL).then((res) => {
+        commit('getFooter', res.data)
       })
     }
-
   },
   mutations: {
+    // 获取首页搜索背景
     getImg: (state, key) => {
       for (const e in key) {
         if (key.hasOwnProperty(e)) {
@@ -102,7 +87,7 @@ export default {
         }
       }
     },
-
+    // 获取首页轮播图
     getiImgList: (state, key) => {
       state.imgList = []
       for (const e in key) {
@@ -118,7 +103,7 @@ export default {
         }
       }
     },
-
+    // 获取资源库信息
     getResource: (state, key) => {
       let list = []
       for (const k in key) {
@@ -188,91 +173,12 @@ export default {
         }
       }
     },
-    // 高级搜索
-    getMoreSearch: (state, key) => {
-      state.moreSearch = {
-        orangsList: {},
-        cidsList: {},
-        statusList: {},
-        yearsList: {}
-      }
-      let orangsList = []
-      let cidsList = []
-      let statusList = []
-      let yearsList = []
-      if (key) {
-        for (const a in key.orangs) {
-          if (key.orangs.hasOwnProperty(a)) {
-            const element = key.orangs[a]
-            orangsList.push({
-              id: element.organ,
-              name: element.name,
-              number: element.c,
-              sort: 'orangs'
-            })
-          }
-        }
-        for (const a in key.cids) {
-          if (key.cids.hasOwnProperty(a)) {
-            const element = key.cids[a]
-            cidsList.push({
-              id: element.bigCatagoryId,
-              name: element.name,
-              number: element.c,
-              sort: 'cids'
-            })
-          }
-        }
-
-        for (const b in key.status) {
-          if (key.status.hasOwnProperty(b)) {
-            const element = key.status[b]
-            statusList.push({
-              id: element.status,
-              name: element.name,
-              number: element.c,
-              sort: 'status'
-            })
-          }
-        }
-
-        for (const c in key.years) {
-          if (key.years.hasOwnProperty(c)) {
-            const element = key.years[c]
-            yearsList.push({
-              id: element.year,
-              name: element.year,
-              number: element.c,
-              sort: 'years'
-            })
-          }
-        }
-        state.moreSearch = {
-          orangsList,
-          cidsList,
-          statusList,
-          yearsList
-        }
-        state.moreLeftNavBox = [
-          {
-            title: '明航组织',
-            type: false,
-            label: orangsList
-          }, {
-            title: '主体分类',
-            type: false,
-            label: cidsList
-          }, {
-            title: '文档有效期',
-            type: false,
-            label: statusList
-          }, {
-            title: '文档年份',
-            type: false,
-            label: yearsList
-          }
-        ]
-      }
+    // 副导航
+    getSublist: (state, key) => {
+      state.sublist = key.sublist
+    },
+    getFooter (state, key) {
+      state.Footer = key.footer
     }
   }
 }

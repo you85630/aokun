@@ -52,7 +52,8 @@ export default {
   methods: {
     ...mapActions([
       'getImg',
-      'getiImgList'
+      'getiImgList',
+      'getSublist'
     ]),
     searchHome (key) {
       sessionStorage.setItem('key', JSON.stringify(key))
@@ -62,6 +63,7 @@ export default {
   created () {
     this.getImg()
     this.getiImgList()
+    this.getSublist()
   }
 }
 </script>

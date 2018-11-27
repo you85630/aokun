@@ -1,7 +1,7 @@
 <template>
   <div class="learn-more">
     <bg-color :header="header">
-      <slide :list="imgList"></slide>
+      <slide :list="learnImgList"></slide>
     </bg-color>
 
     <bg-color>
@@ -22,36 +22,24 @@ export default {
   },
   data () {
     return {
-      header: '翱坤知识库',
-      imgList: [
-        {
-          img: 'http://pi2nvcrkg.bkt.clouddn.com/1.jpeg',
-          info: '啦啦啦啦',
-          link: ''
-        }, {
-          img: 'http://pi2nvcrkg.bkt.clouddn.com/2.jpeg',
-          info: '啦啦啦啦',
-          link: ''
-        }, {
-          img: 'http://pi2nvcrkg.bkt.clouddn.com/3.jpeg',
-          info: '啦啦啦啦',
-          link: ''
-        }
-      ]
+      header: '翱坤知识库'
     }
   },
   computed: {
     ...mapGetters([
-      'bookList'
+      'bookList',
+      'learnImgList'
     ])
   },
   methods: {
     ...mapActions([
-      'getBookList'
+      'getBookList',
+      'getImgList'
     ])
   },
   created () {
     this.getBookList()
+    this.getImgList()
   }
 }
 </script>

@@ -5,7 +5,7 @@
       <router-view />
       <BackTop :bottom="170"></BackTop>
     </div>
-    <y-footer :title="title" :footer="footerList" :icon="iconList"></y-footer>
+    <y-footer :title="Footer.title" :footer="Footer.list"></y-footer>
   </div>
 </template>
 
@@ -14,27 +14,53 @@ import yHeader from 'components/common/header'
 import yFooter from 'components/common/footer'
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      navList: [
+        {
+          id: '',
+          name: ' 首页',
+          link: '/home'
+        }, {
+          id: '',
+          name: '搜索',
+          link: '/search'
+        }, {
+          id: '',
+          name: '数据',
+          link: '/data'
+        }, {
+          id: '',
+          name: '学习',
+          link: '/learn'
+        }, {
+          id: '',
+          name: '帮助',
+          link: '/help'
+        }
+      ]
+    }
+  },
   components: {
     yHeader,
     yFooter
   },
   mounted () {
-    this.getResource()
+    this.getFooter()
     this.getCompany()
+    this.getResource()
   },
   computed: {
     ...mapGetters([
       'User',
-      'navList',
-      'title',
-      'iconList',
-      'footerList'
+      'Footer'
     ])
   },
   methods: {
     ...mapActions([
       'getResource',
       'getCompany',
+      'getFooter',
       'exit',
       'login'
     ]),

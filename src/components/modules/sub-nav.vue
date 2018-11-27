@@ -40,6 +40,7 @@ export default {
 .nav{
   width: 20%;
   text-align: center;
+  cursor: pointer;
   .icon{
     display: flex;
     align-items: center;
