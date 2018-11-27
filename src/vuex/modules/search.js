@@ -4,12 +4,19 @@ export default {
   state: {
     num: 0,
     itemList: [],
-    moreLeftNavBox: []
+    moreLeftNavBox: [],
+    moreSearch: {
+      orangsList: {},
+      cidsList: {},
+      statusList: {},
+      yearsList: {}
+    }
   },
   getters: {
     num: state => state.num,
     itemList: state => state.itemList,
-    moreLeftNavBox: state => state.moreLeftNavBox
+    moreLeftNavBox: state => state.moreLeftNavBox,
+    moreSearch: state => state.moreSearch
   },
   actions: {
     // 搜索

@@ -11,12 +11,6 @@ export default {
     linklist: [],
     companyList: [],
     leftNavBox: [],
-    moreSearch: {
-      orangsList: {},
-      cidsList: {},
-      statusList: {},
-      yearsList: {}
-    },
     sublist: [],
     Footer: {}
   },
@@ -25,7 +19,6 @@ export default {
     imgList: state => state.imgList,
     linklist: state => state.linklist,
     leftNavBox: state => state.leftNavBox,
-    moreSearch: state => state.moreSearch,
     sublist: state => state.sublist,
     Footer: state => state.Footer
   },

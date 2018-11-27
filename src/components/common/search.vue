@@ -125,7 +125,7 @@ export default {
   },
   computed: {
     Filterlist: function () {
-      return this.$store.state.home.moreSearch
+      return this.$store.state.search.moreSearch
     },
     companyList: function () {
       return this.$store.state.home.companyList
