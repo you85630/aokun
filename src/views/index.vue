@@ -81,9 +81,6 @@ export default {
 
 <style lang="scss" scoped>
 .index {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
 }
 
@@ -91,9 +88,8 @@ export default {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 20px;
-  min-width: 1180px;
+  width: 1180px;
   min-height: 77vh;
-  max-width: 1180px;
 }
 
 </style>
