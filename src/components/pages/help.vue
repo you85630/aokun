@@ -17,8 +17,10 @@
         <div class="right">
           <ul class="help-tips">
             <li v-for="(li,index) in helpTips" :key="index">
-              <img :src="li.img" alt="">
-              <p>{{li.name}}</p>
+              <router-link :to='li.link'>
+                <img :src="li.img" alt="">
+                <p>{{li.name}}</p>
+              </router-link>
             </li>
           </ul>
           <Collapse v-model="open">
@@ -125,6 +127,7 @@ export default {
         p{
           margin-top: 10px;
           font-size: 14px;
+          color: #515a6e;
         }
       }
     }

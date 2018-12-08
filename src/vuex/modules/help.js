@@ -7,13 +7,16 @@ export default {
     helpTips: [
       {
         name: '搜索',
-        img: 'http://www.aerok.com.cn/icons/icon-05.png'
+        img: 'http://www.aerok.com.cn/icons/icon-05.png',
+        link: '/search'
       }, {
         name: '视频教程',
-        img: 'http://www.aerok.com.cn/icons/icon-07.png'
+        img: 'http://www.aerok.com.cn/icons/icon-07.png',
+        link: '/login#video'
       }, {
         name: '用户指南',
-        img: 'http://www.aerok.com.cn/icons/icon-08.png'
+        img: 'http://www.aerok.com.cn/icons/icon-08.png',
+        link: '/data'
       }
     ]
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about" id="video">
     <div class="box">
       <div class="left">
           <video-player
