@@ -23,7 +23,7 @@
       <Row type="flex" justify="space-between" align="middle">
          <Col span="10">
             <Row type="flex" align="middle">
-                <Col span="5">明航组织：</Col>
+                <Col span="5">民航组织：</Col>
                 <Col span="19">
                   <Select v-model="key.oragons" clearable>
                     <Option v-for="i in Filterlist.orangsList" :value="i.id" :key="i.name">{{ i.name }}</Option>

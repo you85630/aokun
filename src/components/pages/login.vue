@@ -40,6 +40,7 @@ export default {
   methods: {
     ...mapActions([
       'login',
+      'loginInfo',
       'getStudy',
       'searchData',
       'getVideoBox'
@@ -69,6 +70,7 @@ export default {
   created () {
     this.getStudy()
     this.getVideoBox()
+    this.loginInfo()
   }
 }
 </script>

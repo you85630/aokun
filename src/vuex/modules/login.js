@@ -6,14 +6,16 @@ export default {
     Message: {},
     User: {},
     videoBox: {},
-    aboutBox: []
+    aboutBox: [],
+    loginInfoMsg: ''
   },
   getters: {
     status: state => state.status,
     Message: state => state.Message,
     User: state => state.User,
     videoBox: state => state.videoBox,
-    aboutBox: state => state.aboutBox
+    aboutBox: state => state.aboutBox,
+    loginInfoMsg: state => state.loginInfoMsg
   },
   actions: {
     getStudy: ({ commit }, key) => {
@@ -55,6 +57,12 @@ export default {
 
       api.get(URL).then((res) => {
         commit('login', res.data)
+      })
+    },
+    loginInfo: ({ commit }, key) => {
+      let URL = '/logininfo'
+      api.get(URL).then((res) => {
+        commit('loginInfo', res.data)
       })
     },
     // 退出
@@ -121,6 +129,10 @@ export default {
         state.Message.status = false
         state.Message.msg = key.result
       }
+    },
+    // 登录后信息
+    loginInfo: (state, key) => {
+      state.loginInfoMsg = key
     },
     // 退出
     exit: (state, key) => {

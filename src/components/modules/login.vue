@@ -1,6 +1,6 @@
 <template>
 <div v-if="User">
-    <div class="login" v-if="!User.name">
+    <div class="login-aokun" v-if="!User.name">
       <div class="msg">
         <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
       </div>
@@ -40,12 +40,9 @@
         </div>
       </div>
     </div>
-    <div class="user" v-else>
-      <p>尊敬的<span>{{User.name}}</span>，欢迎登录翱坤数据库，您将可以在本网站检索与浏览适航与安全信息。</p>
-      <p>另外，上海翱坤可为客户提供定制化的数据库建设和部署服务，协助打造专属、私密的本地数据库。</p>
-      <p>同时提供专业高效的创新性解决方案，来协助客户应对在航空产品设计与制造过程中面临的适航与安全领域的挑战，以打造更安全、更经济的航空产品。您可以联系我们获取更详细的信息。</p>
-      <p>联系方式：<a href="mailto:service@aerok.com.cn">service@aerok.com.cn</a>，或者拨打电话：021-XXXXXXXX</p>
-
+    <div class="user-aokun" v-else>
+      <p>尊敬的<span>{{User.name}}</span></p>
+      <div v-html="loginInfoMsg"></div>
     </div>
 </div>
 </template>
@@ -64,7 +61,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'User'
+      'User',
+      'loginInfoMsg'
     ])
   },
   methods: {
@@ -86,8 +84,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.login{
+<style lang="scss">
+.login-aokun{
   .msg{
     p{
       font-size: 14px;
@@ -103,76 +101,76 @@ export default {
       font-size: 14px;
     }
   }
-}
-.middle{
-  margin: 0 10px;
-  font-size: 18px;
-}
-.left{
-  ul{
-    margin-left: 20px;
-    li{
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      margin-top: 20px;
-      span{
-        width: 90px;
-        text-align: left;
-        font-size: 14px;
-      }
-      p{
+  .middle{
+    margin: 0 10px;
+    font-size: 18px;
+  }
+  .left{
+    ul{
+      margin-left: 20px;
+      li{
         display: flex;
+        align-items: center;
         flex-direction: row;
-        justify-content: space-between;
-        width: 240px;
-        input{
-          box-sizing: border-box;
-          padding: 0 10px;
-          width: 100%;
-          height: 30px;
-          border: none;
-          background-color: #eee;
+        margin-top: 20px;
+        span{
+          width: 90px;
+          text-align: left;
           font-size: 14px;
         }
-        span{
+        p{
           display: flex;
-          align-items: center;
           flex-direction: row;
-          cursor: pointer;
-          user-select: none;
-          i{
-            margin-top: -2px;
-            margin-right: 4px;
-            font-size: 16px;
-            color: #ccc;
+          justify-content: space-between;
+          width: 240px;
+          input{
+            box-sizing: border-box;
+            padding: 0 10px;
+            width: 100%;
+            height: 30px;
+            border: none;
+            background-color: #eee;
+            font-size: 14px;
+          }
+          span{
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            user-select: none;
+            i{
+              margin-top: -2px;
+              margin-right: 4px;
+              font-size: 16px;
+              color: #ccc;
+            }
+          }
+          a{
+            font-size: 14px;
           }
         }
-        a{
-          font-size: 14px;
-        }
-      }
-      .active{
-        color: #2d8cf0;
-        i{
+        .active{
           color: #2d8cf0;
+          i{
+            color: #2d8cf0;
+          }
         }
       }
     }
   }
-}
-.right{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 300px;
-  height: 207px;
-  text-align: center;
-  h2{
-    margin-bottom: 20px;
+  .right{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 207px;
+    text-align: center;
+    h2{
+      margin-bottom: 20px;
+    }
   }
 }
-.user{
+.user-aokun{
   p{
     line-height: 2;
     font-size: 14px;

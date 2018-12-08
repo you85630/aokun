@@ -33,14 +33,19 @@ export default {
       }
     },
     playerOptions () {
-      let video = {
-        autoplay: false,
-        preload: 'auto',
-        sources: [{
-          type: 'video/mp4',
-          src: this.video.vurl // url地址
-        }],
-        poster: this.video.vpic // 封面
+      let video
+      if (this.video.vurl) {
+        video = {
+          autoplay: false,
+          preload: 'auto',
+          sources: [{
+            type: 'video/mp4',
+            src: this.video.vurl // url地址
+          }],
+          poster: this.video.vpic // 封面
+        }
+      } else {
+        video = {}
       }
       return video
     }

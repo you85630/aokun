@@ -1,5 +1,10 @@
 <template>
   <div class="learn-more">
+
+    <bg-color>
+      <y-search></y-search>
+    </bg-color>
+
     <bg-color :header="header">
       <slide :list="learnImgList"></slide>
     </bg-color>
