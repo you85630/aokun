@@ -10,27 +10,25 @@
           <ul>
             <li v-for="(li,index) in leftNav" :key="index">
               <h2>{{li.title}}</h2>
-              <p v-for="(i,val) in li.data" :key="val">{{i.title}}</p>
+              <p v-for="(i,val) in li.data" :key="val" @click="openAsk(index,val)">{{i.title}}</p>
             </li>
           </ul>
         </div>
         <div class="right">
           <ul class="help-tips">
-            <li v-for="(li,index) in helpTips" :key="index">
-              <router-link :to='li.link'>
+            <li v-for="(li,index) in helpTips" :key="index" @click="openLearn(li)">
                 <img :src="li.img" alt="">
                 <p>{{li.name}}</p>
-              </router-link>
             </li>
           </ul>
           <Collapse v-model="open">
-            <Panel v-for="(li,index) in issueBox" :key="index">
+            <Panel v-for="(li,index) in leftNav" :key="index">
               {{li.title}}
               <div slot="content">
                 <Collapse v-model="open1">
                   <Panel v-for="(i,val) in li.data" :key="val" :name="index+'-'+val">
                     {{i.title}}
-                    <p slot="content">{{i.desc}}</p>
+                    <div slot="content" v-html="i.content"></div>
                   </Panel>
                 </Collapse>
               </div>
@@ -48,35 +46,37 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      open: '0',
-      open1: '0-0',
+      open: '',
+      open1: '',
       header: '翱坤帮助资源'
     }
   },
   computed: {
     ...mapGetters([
       'leftNav',
-      'helpTips',
-      'issueBox'
+      'helpTips'
     ])
   },
   methods: {
     ...mapActions([
-      'getHelp',
-      'getAsk'
+      'getHelp'
     ]),
-    openText (key) {
-      let list = this.issueBox
-      list[key].show = !list[key].show
+    openAsk (i, k) {
+      this.open = i.toString()
+      this.open1 = i.toString() + '-' + k.toString()
     },
-    openVal (i, k) {
-      let list = this.issueBox
-      list[i].data[k].show = !list[i].data[k].show
+    openLearn (key) {
+      let list = this.leftNav
+      for (let i = 0; i < list.length; i++) {
+        const element = list[i].class_id
+        if (element === key.class_id) {
+          this.open = i.toString()
+        }
+      }
     }
   },
   created () {
     this.getHelp()
-    this.getAsk()
   }
 }
 </script>
@@ -119,6 +119,7 @@ export default {
       padding: 30px 80px;
       li{
         text-align: center;
+        cursor: pointer;
         img{
           width: 90px;
           height: 90px;
