@@ -5,10 +5,7 @@ export default {
     status: true,
     Message: {},
     User: {},
-    videoBox: {
-      video: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
-      cover: 'http://pi2nvcrkg.bkt.clouddn.com/1.jpeg'
-    },
+    videoBox: {},
     aboutBox: []
   },
   getters: {
@@ -23,6 +20,12 @@ export default {
       let URL = '/study'
       api.get(URL).then((res) => {
         commit('getStudy', res.data)
+      })
+    },
+    getVideoBox: ({ commit }, key) => {
+      let URL = '/vadc'
+      api.get(URL).then((res) => {
+        commit('getVideoBox', res.data)
       })
     },
     // 获取验证码
@@ -83,6 +86,9 @@ export default {
         }
       }
       state.aboutBox = dest
+    },
+    getVideoBox: (state, key) => {
+      state.videoBox = key[0]
     },
     // 获取验证码
     getCode: (state, key) => {

@@ -8,9 +8,7 @@
       <introduce :msg="introduceData"></introduce>
     </bg-color>
 
-    <bg-color>
-        <data-item v-for="(li,index) in dataItemList" :key="index" :item="li"></data-item>
-    </bg-color>
+    <data-item v-for="(li,index) in dataItemList" :key="index" :item="li"></data-item>
   </div>
 </template>
 

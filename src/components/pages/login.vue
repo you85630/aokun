@@ -41,7 +41,8 @@ export default {
     ...mapActions([
       'login',
       'getStudy',
-      'searchData'
+      'searchData',
+      'getVideoBox'
     ]),
     logIn (key) {
       if (key.tel === '') {
@@ -67,6 +68,7 @@ export default {
   },
   created () {
     this.getStudy()
+    this.getVideoBox()
   }
 }
 </script>

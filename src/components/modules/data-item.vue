@@ -1,13 +1,15 @@
 <template>
-  <div class="item">
-    <div class="left">
-      <div class="info" v-html="item.desc"></div>
-      <p><Button size="large" style="width:80px" type="primary" @click="linkTo(item)">{{item.title}}</Button></p>
+  <bg-color>
+    <div class="item">
+      <div class="left">
+        <div class="info" v-html="item.desc"></div>
+        <p><Button size="large" style="width:80px" type="primary" @click="linkTo(item)">{{item.title}}</Button></p>
+      </div>
+      <div class="right">
+        <img :src="item.pic" alt="">
+      </div>
     </div>
-    <div class="right">
-      <img :src="item.pic" alt="">
-    </div>
-  </div>
+  </bg-color>
 </template>
 
 <script>
@@ -33,7 +35,6 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-top: 20px;
   .left{
     display:flex;
     flex-direction:column;

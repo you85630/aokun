@@ -6,7 +6,7 @@
                 class="video-player vjs-custom-skin"
                 ref="videoPlayer"
                 :playsinline="true"
-                :options="playerOptions" />
+                :options="playerOptions()" />
       </div>
       <div class="right">
         <ul>
@@ -26,32 +26,23 @@
 <script>
 export default {
   props: ['list', 'video'],
-  data () {
-    return {
-      playerOptions: {
-        autoplay: false,
-        preload: 'auto',
-        sources: [{
-          type: 'video/mp4',
-          src: this.video.video // url地址
-        }],
-        poster: this.video.cover // 封面
-      }
-    }
-  },
-  computed: {
-    player () {
-      return this.$refs.videoPlayer.player
-    }
-  },
   methods: {
-    Play () {
-      this.video.play = !this.video.play
-    },
     linkTo (item) {
       if (!item.desc) {
         this.$router.push({path: '/learn/news', query: {id: item.id}})
       }
+    },
+    playerOptions () {
+      let video = {
+        autoplay: false,
+        preload: 'auto',
+        sources: [{
+          type: 'video/mp4',
+          src: this.video.vurl // url地址
+        }],
+        poster: this.video.vpic // 封面
+      }
+      return video
     }
   }
 }
