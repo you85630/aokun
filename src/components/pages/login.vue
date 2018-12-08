@@ -4,7 +4,7 @@
       <y-search></y-search>
     </bg-color>
 
-    <bg-color :header="header1" v-if="!User.name">
+    <bg-color :header="header1">
       <login-box @on-login="logIn"></login-box>
     </bg-color>
 
@@ -34,7 +34,6 @@ export default {
     ...mapGetters([
       'videoBox',
       'aboutBox',
-      'User',
       'Message'
     ])
   },
@@ -51,16 +50,18 @@ export default {
         this.$Message.error('密码不能为空')
       } else {
         this.login(key)
-        if (this.Message.status) {
-          this.$Message.success('登录成功')
-          sessionStorage.setItem('remember', JSON.stringify(key))
-          this.show = false
-          this.$nextTick(function () {
-            this.show = true
-          })
-        } else {
-          this.$Message.error(this.Message.msg)
-        }
+        setTimeout(() => {
+          if (this.Message.status) {
+            this.$Message.success('登录成功')
+            if (key.select) {
+              sessionStorage.setItem('remember', JSON.stringify(key))
+            } else {
+              sessionStorage.removeItem('remember')
+            }
+          } else {
+            this.$Message.error(this.Message.msg)
+          }
+        }, 200)
       }
     }
   },

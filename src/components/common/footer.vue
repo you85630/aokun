@@ -3,7 +3,7 @@
     <div class="main">
       <div class="slogan">{{title}}</div>
       <div class="middle">
-        <router-link v-for="(li,index) in footer" :key="index" :to="li.link">{{li.name}}</router-link>
+        <a :href="li.link" target="_blank" v-for="(li,index) in footer" :key="index"><img :src="li.icon" alt=""></a>
       </div>
       <div class="bottom">&copy;&nbsp;{{time}}上海翱坤，版权所有</div>
     </div>
@@ -41,12 +41,14 @@ export default {
 .middle{
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 20px 0;
   width: 70%;
   a{
-    color: #5f6a72;
-    font-size: 14px;
+    margin-right: 20px;
+    img{
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 .bottom{

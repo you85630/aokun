@@ -5,7 +5,7 @@
     </bg-color>
 
     <bg-color :header="header1">
-      <introduce></introduce>
+      <introduce :msg="introduceData"></introduce>
     </bg-color>
 
     <bg-color>
@@ -31,16 +31,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'dataItemList'
+      'dataItemList',
+      'introduceData'
     ])
   },
   methods: {
     ...mapActions([
-      'getItemList'
+      'getItemList',
+      'getIntroduce'
     ])
   },
   created () {
     this.getItemList()
+    this.getIntroduce()
   }
 }
 </script>

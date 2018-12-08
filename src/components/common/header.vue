@@ -14,7 +14,7 @@
         </ul>
       </div>
       <div class="right" v-if="user.name">
-        <p>{{user.name}}</p>
+        <router-link to="/login">{{user.name}}</router-link>
         <p class="gap">|</p>
         <p @click="exit">退出</p>
       </div>
@@ -116,6 +116,9 @@ export default {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  a{
+    color: #fff;
+  }
   i {
     margin-right: 6px;
     color: #fff;

@@ -107,13 +107,13 @@ export default {
     // 登录
     login: (state, key) => {
       state.Message = {}
-      if (key.result) {
+      if (key.name) {
+        state.Message.status = true
         state.User = key
         sessionStorage.setItem('User', JSON.stringify(key))
+      } else {
         state.Message.status = false
         state.Message.msg = key.result
-      } else {
-        state.Message.status = true
       }
     },
     // 退出

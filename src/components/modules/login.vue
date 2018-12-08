@@ -1,47 +1,57 @@
 <template>
-  <div class="login">
-    <div class="msg">
-      <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
-    </div>
-    <div class="box">
-      <div class="left">
-        <h2>已经注册？请登录：</h2>
-        <ul>
-          <li>
-            <span>手机号：</span>
-            <p><Input v-model="user.tel" placeholder="请输入手机号" /></p>
-          </li>
-          <li>
-            <span>密码：</span>
-            <p><Input type="password" v-model="user.pwd" placeholder="请输入密码" /></p>
-          </li>
-          <li>
-            <span></span>
-            <p>
-              <span @click="user.select=!user.select" :class="{active:user.select}">
-                <Icon :type="user.select?'ios-checkbox':'ios-square'" />记住我
-              </span>
-              <Button type="primary" @click="login(user)">&nbsp;登录&nbsp;</Button>
-            </p>
-          </li>
-          <li>
-            <span></span>
-            <p><router-link to="/forget">忘记密码？</router-link></p>
-          </li>
-        </ul>
+<div v-if="User">
+    <div class="login" v-if="!User.name">
+      <div class="msg">
+        <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
       </div>
-      <div class="middle">- OR -</div>
-      <div class="right">
-        <h2>免费注册翱坤数据库账户</h2>
-        <router-link to="/register">
-          <Button type="primary">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button>
-        </router-link>
+      <div class="box">
+        <div class="left">
+          <h2>已经注册？请登录：</h2>
+          <ul>
+            <li>
+              <span>手机号：</span>
+              <p><Input v-model="user.tel" placeholder="请输入手机号" /></p>
+            </li>
+            <li>
+              <span>密码：</span>
+              <p><Input type="password" v-model="user.pwd" placeholder="请输入密码" /></p>
+            </li>
+            <li>
+              <span></span>
+              <p>
+                <span @click="user.select=!user.select" :class="{active:user.select}">
+                  <Icon :type="user.select?'ios-checkbox':'ios-square'" />记住我
+                </span>
+                <Button type="primary" @click="login(user)">&nbsp;登录&nbsp;</Button>
+              </p>
+            </li>
+            <li>
+              <span></span>
+              <p><router-link to="/forget">忘记密码？</router-link></p>
+            </li>
+          </ul>
+        </div>
+        <div class="middle">- OR -</div>
+        <div class="right">
+          <h2>免费注册翱坤数据库账户</h2>
+          <router-link to="/register">
+            <Button type="primary">&nbsp;&nbsp;注册&nbsp;&nbsp;</Button>
+          </router-link>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="user" v-else>
+      <p>尊敬的<span>{{User.name}}</span>，欢迎登录翱坤数据库，您将可以在本网站检索与浏览适航与安全信息。</p>
+      <p>另外，上海翱坤可为客户提供定制化的数据库建设和部署服务，协助打造专属、私密的本地数据库。</p>
+      <p>同时提供专业高效的创新性解决方案，来协助客户应对在航空产品设计与制造过程中面临的适航与安全领域的挑战，以打造更安全、更经济的航空产品。您可以联系我们获取更详细的信息。</p>
+      <p>联系方式：<a href="mailto:service@aerok.com.cn">service@aerok.com.cn</a>，或者拨打电话：021-XXXXXXXX</p>
+
+    </div>
+</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -52,9 +62,14 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'User'
+    ])
+  },
   methods: {
-    login (user) {
-      this.$emit('on-login', user)
+    login (key) {
+      this.$emit('on-login', key)
       this.user = {
         tel: '',
         pwd: '',
@@ -155,6 +170,15 @@ export default {
   text-align: center;
   h2{
     margin-bottom: 20px;
+  }
+}
+.user{
+  p{
+    line-height: 2;
+    font-size: 14px;
+    span{
+      font-weight: bold;
+    }
   }
 }
 </style>

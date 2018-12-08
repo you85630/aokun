@@ -32,7 +32,7 @@ const router = new Router({
           component: home,
           meta: {
             requireAuth: true,
-            title: '首页'
+            title: '翱坤首页'
           }
         }, {
           path: '/search',
@@ -40,7 +40,7 @@ const router = new Router({
           component: search,
           meta: {
             requireAuth: true,
-            title: '搜索'
+            title: '翱坤搜索'
           }
         }, {
           path: '/data',
@@ -48,7 +48,7 @@ const router = new Router({
           component: data,
           meta: {
             requireAuth: true,
-            title: '数据'
+            title: '翱坤数据'
           }
         }, {
           path: '/login',
@@ -56,7 +56,7 @@ const router = new Router({
           component: login,
           meta: {
             requireAuth: true,
-            title: '登录'
+            title: '翱坤登录'
           }
         }, {
           path: '/learn',
@@ -64,7 +64,7 @@ const router = new Router({
           component: learn,
           meta: {
             requireAuth: true,
-            title: '学习'
+            title: '翱坤学习'
           }
         }, {
           path: '/help',
@@ -72,7 +72,7 @@ const router = new Router({
           component: help,
           meta: {
             requireAuth: true,
-            title: '帮助'
+            title: '翱坤帮助'
           }
         }, {
           path: '/search/details',
@@ -88,7 +88,7 @@ const router = new Router({
           component: airworthiness,
           meta: {
             requireAuth: true,
-            title: '适航指令'
+            title: '翱坤 | 适航指令'
           }
         }, {
           path: '/search/relation',
@@ -96,7 +96,7 @@ const router = new Router({
           component: relation,
           meta: {
             requireAuth: true,
-            title: '双边关系'
+            title: '翱坤 | 双边关系'
           }
         }, {
           path: '/register',
@@ -104,7 +104,7 @@ const router = new Router({
           component: register,
           meta: {
             requireAuth: true,
-            title: '注册'
+            title: '注册翱坤'
           }
         }, {
           path: '/forget',
@@ -120,7 +120,7 @@ const router = new Router({
           component: news,
           meta: {
             requireAuth: true,
-            title: '知识'
+            title: '翱坤学习 | 知识'
           }
         }
       ]

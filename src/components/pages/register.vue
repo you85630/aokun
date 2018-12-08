@@ -9,6 +9,14 @@
                 <div class="title">昵称：</div>
                 <Input type="text" v-model="user.name" placeholder="请输入不少于4位的昵称" />
               </FormItem>
+              <FormItem>
+                <div class="title">单位：</div>
+                <Input type="text" v-model="user.unit" placeholder="请输入单位" />
+              </FormItem>
+              <FormItem>
+                <div class="title">职务：</div>
+                <Input type="text" v-model="user.position" placeholder="请输入职务" />
+              </FormItem>
               <FormItem prop="pwd">
                 <div class="title">密码：</div>
                 <Input type="password" v-model="user.pwd" placeholder="请输入不少于6位的密码" />
@@ -59,6 +67,8 @@ export default {
       code: false,
       user: {
         name: '',
+        unit: '',
+        position: '',
         pwd: '',
         tel: '',
         code: ''

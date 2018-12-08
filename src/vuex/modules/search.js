@@ -198,7 +198,7 @@ export default {
           }
           state.moreLeftNavBox = [
             {
-              title: '明航组织',
+              title: '民航组织',
               type: false,
               label: orangsList
             }, {
@@ -206,7 +206,7 @@ export default {
               type: false,
               label: cidsList
             }, {
-              title: '文档有效期',
+              title: '文档有效性',
               type: false,
               label: statusList
             }, {

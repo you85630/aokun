@@ -15,7 +15,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      header: '新闻'
+      header: '学习'
     }
   },
   computed: {
