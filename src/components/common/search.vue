@@ -3,7 +3,7 @@
     <div class="search-simple" v-if="key.style===-1">
       <Row type="flex" justify="center" align="middle">
         <Col span="19">
-          <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
+          <Input v-model="key.text" size="large" placeholder="输入 适航规章 咨询通告 管理程序" style="width: 100%;">
               <Select v-model="select" slot="prepend" style="width: 80px">
                   <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
               </Select>
@@ -85,7 +85,7 @@
 
       <Row type="flex" justify="center" align="middle">
         <Col span="19">
-          <Input v-model="key.text" size="large" placeholder="Enter something..." style="width: 100%;">
+          <Input v-model="key.text" size="large" placeholder="输入 适航规章 咨询通告 管理程序" style="width: 100%;">
               <Select v-model="select" slot="prepend" style="width: 80px">
                   <Option v-for="(li,index) in rangeList" :key="index" :value="li.name">{{li.name}}</Option>
               </Select>
@@ -256,8 +256,8 @@ export default {
   }
   .refresh{
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
   }
 }
