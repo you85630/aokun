@@ -131,7 +131,7 @@ export default {
       }
       state.linklist = list
       state.leftNavBox = [{
-        title: '明航组织',
+        title: '民航组织',
         type: false,
         label: [
           {

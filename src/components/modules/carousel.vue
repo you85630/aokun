@@ -4,7 +4,7 @@
       <CarouselItem v-for="(li,index) in list" :key="index">
         <div class="img-box">
           <img :src="li.img" alt="">
-          <div class="info">{{li.info}}</div>
+          <div class="info"><a :href="li.link" target="_blank">{{li.info}}</a></div>
         </div>
       </CarouselItem>
     </Carousel>
@@ -51,6 +51,9 @@ export default {
       height: 100%;
       background-color: #f9f9f9;
       font-size: 14px;
+      a{
+        color: #515a6e;
+      }
     }
   }
 }

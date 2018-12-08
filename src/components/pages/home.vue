@@ -31,7 +31,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      header1: '翱坤数据库',
+      header1: '适航管理当局',
       header2: '浏览翱坤数据库资源'
     }
   },

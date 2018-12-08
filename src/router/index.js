@@ -56,7 +56,7 @@ const router = new Router({
           component: login,
           meta: {
             requireAuth: true,
-            title: '登陆'
+            title: '登录'
           }
         }, {
           path: '/learn',

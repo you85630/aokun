@@ -2,11 +2,11 @@
   <div class="index-search">
     <div class="slogan">{{searchkey.slogan}}</div>
     <div class="search-now">
-      <div class="publish">超过{{searchkey.num}}的出版物</div>
+      <div class="publish">{{searchkey.num}}</div>
       <div class="search-box">
         <div class="search">
           <Icon class="icon" type="ios-search-outline" />
-          <input type="text" v-model="key" placeholder="Enter something...">
+          <input type="text" v-model="key" placeholder="输入 适航规章 咨询通告 管理程序">
         </div>
         <div class="btn" @click="search(key)">搜索</div>
       </div>

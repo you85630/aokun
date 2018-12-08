@@ -21,7 +21,7 @@
               <span @click="user.select=!user.select" :class="{active:user.select}">
                 <Icon :type="user.select?'ios-checkbox':'ios-square'" />记住我
               </span>
-              <Button type="primary" @click="login(user)">&nbsp;登陆&nbsp;</Button>
+              <Button type="primary" @click="login(user)">&nbsp;登录&nbsp;</Button>
             </p>
           </li>
           <li>
