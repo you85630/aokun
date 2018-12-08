@@ -13,7 +13,7 @@
           <li v-for="(li,index) in list" :key="index">
             <h2>{{li.class_name}}</h2>
             <div class="item" v-for="(i,val) in li.data" :key="val">
-              <div class="title"><Icon type="md-bookmark" />{{i.title}}</div>
+              <div class="title" @click="linkTo(i)"><Icon type="md-bookmark" />{{i.title}}</div>
               <p>{{i.desc}}</p>
             </div>
           </li>
@@ -47,6 +47,11 @@ export default {
   methods: {
     Play () {
       this.video.play = !this.video.play
+    },
+    linkTo (item) {
+      if (!item.desc) {
+        this.$router.push({path: '/learn/news', query: {id: item.id}})
+      }
     }
   }
 }
@@ -88,6 +93,7 @@ export default {
             flex-direction: row;
             color: #2d8cf0;
             font-size: 14px;
+            cursor: pointer;
             i{
               margin-right: 4px;
               font-size: 16px;

@@ -1,9 +1,11 @@
 <template>
   <div class="footer">
     <div class="main">
-      <div class="slogan">{{title}}</div>
-      <div class="middle">
-        <a :href="li.link" target="_blank" v-for="(li,index) in footer" :key="index"><img :src="li.icon" alt=""></a>
+      <div class="slogan-box">
+        <div class="slogan">{{title}}</div>
+        <div class="middle">
+          <a :href="li.link" target="_blank" v-for="(li,index) in footer" :key="index"><img :src="li.icon" alt=""></a>
+        </div>
       </div>
       <div class="bottom">&copy;&nbsp;{{time}}上海翱坤，版权所有</div>
     </div>
@@ -33,21 +35,29 @@ export default {
     padding: 20px;
     width: 1180px;
     background-color: #051520;
-    .slogan{
-      font-size: 18px;
-    }
   }
 }
-.middle{
+.slogan-box{
+  width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 20px 0;
-  width: 70%;
-  a{
-    margin-right: 20px;
-    img{
-      width: 24px;
-      height: 24px;
+  justify-content: space-between;
+  .slogan{
+    font-size: 18px;
+  }
+  .middle{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px 0;
+    width: 70%;
+    a{
+      margin-left: 20px;
+      img{
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 }
