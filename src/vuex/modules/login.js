@@ -1,4 +1,5 @@
 import api from 'assets/js/api'
+import VueCookie from 'vue-cookie'
 
 export default {
   state: {
@@ -103,33 +104,22 @@ export default {
     // 获取验证码
     getCode: (state, key) => {
       state.Message = {}
-      if (key.result) {
-        state.Message.status = false
-        state.Message.msg = key.result
-      } else {
-        state.Message.status = true
-      }
+      state.Message = key
     },
     // 注册
     getRegister: (state, key) => {
       state.Message = {}
-      if (key.result) {
-        state.Message.status = false
-        state.Message.msg = key.result
-      } else {
-        state.Message.status = true
-      }
+      state.Message = key
     },
     // 登录
     login: (state, key) => {
       state.Message = {}
       if (key.name) {
-        state.Message.status = true
         state.User = key
-        this._vm.VueCookie.set('AOKUN-USER', JSON.stringify(key))
+        state.Message.detail = true
+        VueCookie.set('AOKUN-USER', JSON.stringify(key))
       } else {
-        state.Message.status = false
-        state.Message.msg = key.result
+        state.Message = key
       }
     },
     // 登录后信息
@@ -139,7 +129,7 @@ export default {
     // 退出
     exit: (state, key) => {
       state.User = {}
-      this._vm.VueCookie.delete('AOKUN-USER')
+      VueCookie.delete('AOKUN-USER')
     }
   }
 }

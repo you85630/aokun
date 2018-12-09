@@ -53,7 +53,7 @@ export default {
       } else {
         this.login(key)
         setTimeout(() => {
-          if (this.Message.status) {
+          if (this.Message.detail) {
             this.$Message.success('登录成功')
             if (key.select) {
               this.VueCookie.set('AOKUN-REMEMBER', JSON.stringify(key))

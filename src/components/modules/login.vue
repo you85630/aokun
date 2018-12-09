@@ -1,29 +1,29 @@
 <template>
 <div v-if="User">
-    <div class="login-aokun" v-if="!User.name">
-      <div class="msg">
+    <div class="login-aokun-box" v-if="!User.name">
+      <div class="msg-box">
         <p>没有翱坤数据库帐户？注册是免费的，让您有机会根据您的独特需求定制翱坤数据库平台。创建个人项目文件夹，最喜欢的出版物以便快速访问，进行个人注释等等。立即注册！</p>
       </div>
-      <div class="box">
-        <div class="left">
+      <div class="box-aokun">
+        <div class="left-box">
           <h2>已经注册？请登录：</h2>
           <ul>
             <li>
               <span>手机号：</span>
-              <p><Input v-model="user.tel" placeholder="请输入手机号" /></p>
+              <div><Input v-model="user.tel" placeholder="请输入手机号" /></div>
             </li>
             <li>
               <span>密码：</span>
-              <p><Input type="password" v-model="user.pwd" placeholder="请输入密码" /></p>
+              <div><Input type="password" v-model="user.pwd" placeholder="请输入密码" /></div>
             </li>
             <li>
               <span></span>
-              <p>
-                <span @click="user.select=!user.select" :class="{active:user.select}">
+              <div>
+                <p @click="user.select=!user.select" :class="{active:user.select}">
                   <Icon :type="user.select?'ios-checkbox':'ios-square'" />记住我
-                </span>
+                </p>
                 <Button type="primary" @click="login(user)">&nbsp;登录&nbsp;</Button>
-              </p>
+              </div>
             </li>
             <li>
               <span></span>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="user-aokun" v-else>
+    <div class="user-aokun-box" v-else>
       <p>尊敬的<span>{{User.name}}</span></p>
       <div v-html="loginInfoMsg"></div>
     </div>
@@ -84,14 +84,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.login-aokun{
-  .msg{
+<style lang="scss">
+.login-aokun-box{
+  .msg-box{
     p{
       font-size: 14px;
     }
   }
-  .box{
+  .box-aokun{
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -105,7 +105,7 @@ export default {
     margin: 0 10px;
     font-size: 18px;
   }
-  .left{
+  .left-box{
     ul{
       margin-left: 20px;
       li{
@@ -118,7 +118,7 @@ export default {
           text-align: left;
           font-size: 14px;
         }
-        p{
+        div{
           display: flex;
           flex-direction: row;
           justify-content: space-between;
@@ -132,7 +132,7 @@ export default {
             background-color: #eee;
             font-size: 14px;
           }
-          span{
+          p{
             display: flex;
             align-items: center;
             flex-direction: row;
@@ -171,7 +171,7 @@ export default {
     }
   }
 }
-.user-aokun{
+.user-aokun-box{
   p{
     font-size: 14px;
     line-height: 2;

@@ -92,12 +92,12 @@ export default {
         if (this.forget.tel !== '') {
           this.getForget(this.forget)
           setTimeout(() => {
-            if (this.alertMsg.status) {
-              this.$Message.success('已发送至手机，请注意查收')
+            if (this.alertMsg.detail) {
+              this.$Message.success(this.alertMsg.result)
             } else {
-              this.$Message.error(this.alertMsg.msg)
+              this.$Message.error(this.alertMsg.result)
             }
-          }, 200)
+          }, 1000)
         }
       }
       if (this.current === 2) {
@@ -108,15 +108,15 @@ export default {
         if (this.forget.pwd !== '') {
           this.getPwd(this.forget)
           setTimeout(() => {
-            if (this.alertMsg.status) {
+            if (this.alertMsg.detail) {
               this.$Message.success('修改成功，即将跳转至登录页')
               setTimeout(() => {
                 this.$router.push('/login')
-              }, 2000)
+              }, 1000)
             } else {
-              this.$Message.error(this.alertMsg.msg)
+              this.$Message.error(this.alertMsg.result)
             }
-          }, 200)
+          }, 1000)
         }
       }
     },

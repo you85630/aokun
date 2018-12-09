@@ -28,21 +28,11 @@ export default {
   mutations: {
     getForget: (state, key) => {
       state.alertMsg = {}
-      if (key.result) {
-        state.alertMsg.status = false
-        state.alertMsg.msg = key.result
-      } else {
-        state.alertMsg.status = true
-      }
+      state.alertMsg = key
     },
     getPwd: (state, key) => {
       state.alertMsg = {}
-      if (key.result) {
-        state.alertMsg.status = false
-        state.alertMsg.msg = key.result
-      } else {
-        state.alertMsg.status = true
-      }
+      state.alertMsg = key
     }
   }
 }
