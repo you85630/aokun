@@ -57,10 +57,11 @@ export default {
       margin: 4px 0;
       padding: 4px 10px;
       border-radius: 2px;
+      background-color: #2d8cf0;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+      color: #fff;
       font-weight: bold;
       cursor: pointer;
-      background-color: #2d8cf0;
-      color: #fff;
       i{
         font-size: 20px;
       }
@@ -71,11 +72,11 @@ export default {
     }
     .filter-list{
       display: flex;
-      flex-direction: column;
-      max-height: 50vh;
       overflow-y: auto;
-      padding-left: 10px;
+      flex-direction: column;
       box-sizing: border-box;
+      padding-left: 10px;
+      max-height: 50vh;
       .num{
         color: #2d8cf0;
       }

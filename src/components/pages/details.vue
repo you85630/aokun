@@ -49,7 +49,7 @@
         </Row>
       </div>
     </bg-color>
-    <bg-color class="info" id="info">
+    <bg-color class="info" id="bdIframe">
       <iframe frameborder="no" border="0" :src="details.uri"></iframe>
     </bg-color>
   </div>
@@ -67,8 +67,9 @@ export default {
   },
   methods: {
     init () {
-      let windHei = window.outerHeight
-      document.getElementById('info').style.height = windHei + 'px'
+      const oIframe = document.getElementById('bdIframe')
+      const deviceHeight = document.documentElement.clientHeight
+      oIframe.style.height = (Number(deviceHeight) - 380) + 'px'
     }
   }
 }
@@ -100,6 +101,7 @@ export default {
   }
 }
 .info{
+  position: relative;
   box-sizing: border-box;
   margin-bottom: 20px;
   padding: 20px 40px;
