@@ -22,7 +22,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      header1: '翱坤数据库',
+      header1: '登录/注册翱坤数据库',
       header2: '什么是翱坤数据库？'
     }
   },
@@ -56,9 +56,9 @@ export default {
           if (this.Message.status) {
             this.$Message.success('登录成功')
             if (key.select) {
-              sessionStorage.setItem('remember', JSON.stringify(key))
+              this.VueCookie.set('AOKUN-REMEMBER', JSON.stringify(key))
             } else {
-              sessionStorage.removeItem('remember')
+              this.VueCookie.delete('AOKUN-REMEMBER')
             }
           } else {
             this.$Message.error(this.Message.msg)

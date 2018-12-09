@@ -34,8 +34,8 @@ export default {
       this.$router.push('/login')
     },
     linkTo (key) {
-      sessionStorage.removeItem('key')
-      sessionStorage.removeItem('search')
+      this.VueCookie.delete('AOKUN-KEY')
+      this.VueCookie.delete('AOKUN-SEARCH')
       let list = this.$store.state.home.linklist
       for (let i = 0; i < list.length; i++) {
         const element = list[i]
@@ -90,22 +90,22 @@ export default {
     width: 500px;
     height: 100%;
     li{
-      height: 100%;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      height: 100%;
       a{
+        display: flex;
         color: #fff;
         font-size: 18px;
         opacity: .5;
-        display: flex;
         transition: all .2s ease-in-out;
       }
       .router-link-exact-active,
       .router-link-active{
         font-weight: bold;
-        opacity: 1;
         font-size: 20px;
+        opacity: 1;
       }
     }
   }

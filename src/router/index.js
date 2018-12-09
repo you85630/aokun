@@ -128,18 +128,8 @@ const router = new Router({
   ]
 })
 
-// 验证 token，存在才跳转
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
-  // let login = sessionStorage.getItem('login')
-  // if (to.meta.requireAuth) {
-  //   if (!login) {
-  //     next({
-  //       path: '/login',
-  //       query: { redirect: to.fullPath }
-  //     })
-  //   }
-  // }
   next()
 })
 

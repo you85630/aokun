@@ -3,10 +3,12 @@
     <div class="box">
       <div class="left">
           <video-player
+                v-if="video.vurl"
                 class="video-player vjs-custom-skin"
                 ref="videoPlayer"
                 :playsinline="true"
                 :options="playerOptions()" />
+          <div class="none-video" v-else></div>
       </div>
       <div class="right">
         <ul>
@@ -33,19 +35,14 @@ export default {
       }
     },
     playerOptions () {
-      let video
-      if (this.video.vurl) {
-        video = {
-          autoplay: false,
-          preload: 'auto',
-          sources: [{
-            type: 'video/mp4',
-            src: this.video.vurl // url地址
-          }],
-          poster: this.video.vpic // 封面
-        }
-      } else {
-        video = {}
+      let video = {
+        autoplay: false,
+        preload: 'auto',
+        sources: [{
+          type: 'video/mp4',
+          src: this.video.vurl ? this.video.vurl : '' // url地址
+        }],
+        poster: this.video.vpic ? this.video.vpic : '' // 封面
       }
       return video
     }
@@ -62,6 +59,11 @@ export default {
   .left{
     width: 640px;
     height: 373px;
+    .none-video{
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+    }
   }
   .right{
     box-sizing: border-box;

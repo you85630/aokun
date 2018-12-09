@@ -47,7 +47,7 @@ export default {
     ]),
     init () {
       this.getContory()
-      sessionStorage.removeItem('home')
+      this.VueCookie.delete('AOKUN-HOME')
     },
     cdetail (key) {
       this.now = key
@@ -67,8 +67,8 @@ export default {
 }
 .content{
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   flex-wrap: wrap;
   p{
     padding: 10px;

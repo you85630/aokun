@@ -66,11 +66,11 @@ export default {
     ]),
     exitOut () {
       this.exit()
-      sessionStorage.removeItem('User')
+      this.VueCookie.delete('AOKUN-USER')
     }
   },
   created () {
-    let user = JSON.parse(sessionStorage.getItem('User'))
+    let user = JSON.parse(this.VueCookie.get('AOKUN-USER'))
     if (user) {
       this.login(user)
     }
@@ -88,8 +88,8 @@ export default {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 20px;
-  width: 1180px;
   min-height: 77vh;
+  width: 1180px;
 }
 
 </style>

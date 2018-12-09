@@ -4,7 +4,7 @@
       <CarouselItem v-for="(li,index) in list" :key="index">
         <div class="img-box">
           <img :src="li.img" alt="">
-          <div class="info"><a :href="li.link" target="_blank">{{li.info}}</a></div>
+          <div class="info" v-html="li.info"></div>
         </div>
       </CarouselItem>
     </Carousel>

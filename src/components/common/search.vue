@@ -200,7 +200,7 @@ export default {
     },
     // 简单搜索
     simpleSearch () {
-      sessionStorage.setItem('key', JSON.stringify(this.key.text))
+      this.VueCookie.set('AOKUN-KEY', JSON.stringify(this.key.text))
       this.$emit('on-search', this.key)
       this.$router.push('/search')
     },

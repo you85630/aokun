@@ -26,7 +26,7 @@ export default {
         classify: item.id,
         name: item.name
       }
-      sessionStorage.setItem('home', JSON.stringify(home))
+      this.VueCookie.set('AOKUN-HOME', JSON.stringify(home))
       router.push({name: 'search'})
     }
   }

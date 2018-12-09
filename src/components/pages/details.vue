@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <bg-color>
+    <bg-color color="#2d8cf0">
       <div class="intro">
         <Row type="flex" justify="space-between" align="middle">
            <Col>
@@ -49,9 +49,9 @@
         </Row>
       </div>
     </bg-color>
-    <div class="info" id="info">
+    <bg-color class="info" id="info">
       <iframe frameborder="no" border="0" :src="details.uri"></iframe>
-    </div>
+    </bg-color>
   </div>
 </template>
 
@@ -59,7 +59,7 @@
 export default {
   data () {
     return {
-      details: JSON.parse(sessionStorage.getItem('item')) ? JSON.parse(sessionStorage.getItem('item')) : {}
+      details: JSON.parse(this.VueCookie.get('AOKUN-ITEM')) ? JSON.parse(this.VueCookie.get('AOKUN-ITEM')) : {}
     }
   },
   mounted () {
@@ -78,12 +78,8 @@ export default {
 .details{
   width: 100%;
   height: 100%;
-  background-color: #fff;
 }
 .intro{
-  margin: -16px;
-  padding: 16px;
-  background-color: #2d8cf0;
   color: #fff;
   p{
     font-size: 14px;
@@ -104,12 +100,13 @@ export default {
   }
 }
 .info{
+  box-sizing: border-box;
+  margin-bottom: 20px;
   padding: 20px 40px;
-  padding-top: 0;
-  font-size: 14px;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  background-color: #fff;
+  font-size: 14px;
   iframe{
     width: 100%;
     height: 100%;

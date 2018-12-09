@@ -76,7 +76,7 @@ export default {
     }
   },
   created () {
-    let remember = JSON.parse(sessionStorage.getItem('remember'))
+    let remember = JSON.parse(this.VueCookie.get('AOKUN-REMEMBER'))
     if (remember) {
       this.user = remember
     }
@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login-aokun{
   .msg{
     p{
@@ -137,12 +137,13 @@ export default {
             align-items: center;
             flex-direction: row;
             cursor: pointer;
+
             user-select: none;
             i{
               margin-top: -2px;
               margin-right: 4px;
-              font-size: 16px;
               color: #ccc;
+              font-size: 16px;
             }
           }
           a{
@@ -172,8 +173,8 @@ export default {
 }
 .user-aokun{
   p{
-    line-height: 2;
     font-size: 14px;
+    line-height: 2;
     span{
       font-weight: bold;
     }

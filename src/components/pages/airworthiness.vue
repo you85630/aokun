@@ -77,7 +77,7 @@ export default {
     ]),
     init () {
       this.getShzl(1)
-      sessionStorage.removeItem('home')
+      this.VueCookie.delete('AOKUN-HOME')
     },
     next (key) {
       this.getShzl(key)
@@ -93,8 +93,8 @@ export default {
 .airworthiness{
   width: 100%;
   .page-box{
-    text-align: right;
     margin-top: 20px;
+    text-align: right;
   }
 }
 </style>

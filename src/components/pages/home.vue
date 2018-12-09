@@ -56,7 +56,7 @@ export default {
       'getSublist'
     ]),
     searchHome (key) {
-      sessionStorage.setItem('key', JSON.stringify(key))
+      this.VueCookie.set('AOKUN-KEY', JSON.stringify(key))
       this.$router.push('/search')
     }
   },

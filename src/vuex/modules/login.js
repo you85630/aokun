@@ -124,7 +124,7 @@ export default {
       if (key.name) {
         state.Message.status = true
         state.User = key
-        sessionStorage.setItem('User', JSON.stringify(key))
+        this._vm.VueCookie.set('AOKUN-USER', JSON.stringify(key))
       } else {
         state.Message.status = false
         state.Message.msg = key.result
@@ -137,7 +137,7 @@ export default {
     // 退出
     exit: (state, key) => {
       state.User = {}
-      sessionStorage.removeItem('User')
+      this._vm.VueCookie.delete('AOKUN-USER')
     }
   }
 }

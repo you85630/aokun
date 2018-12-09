@@ -4,7 +4,7 @@
       <CarouselItem v-for="li in list" :key="li.id">
         <div class="img-box">
           <img :src="li.pic" alt="">
-          <div class="info">{{li.desc}}</div>
+          <div class="info" v-html="li.desc"></div>
         </div>
       </CarouselItem>
     </Carousel>

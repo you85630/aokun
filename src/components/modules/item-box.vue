@@ -22,10 +22,10 @@ export default {
   props: ['item'],
   methods: {
     linkTo (item) {
-      sessionStorage.removeItem(item)
+      this.VueCookie.delete('AOKUN-ITEM')
       let router = this.$router
       router.push('/search/details')
-      sessionStorage.setItem('item', JSON.stringify(item))
+      this.VueCookie.set('AOKUN-ITEM', JSON.stringify(item))
     }
   }
 }
@@ -54,8 +54,8 @@ export default {
         font-size: 14px;
       }
       .title{
-        cursor: pointer;
         color: #2d8cf0;
+        cursor: pointer;
       }
     }
   }

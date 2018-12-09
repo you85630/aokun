@@ -75,8 +75,8 @@ export default {
     init () {
       this.getMoreSearch()
       // 默认搜索一次
-      let text = JSON.parse(sessionStorage.getItem('key'))
-      let home = JSON.parse(sessionStorage.getItem('home'))
+      let text = JSON.parse(this.VueCookie.get('AOKUN-KEY'))
+      let home = JSON.parse(this.VueCookie.get('AOKUN-HOME'))
 
       if (text) {
         this.searchKey.text = text
@@ -99,8 +99,8 @@ export default {
     },
     // 过滤器
     filterSearch (key) {
-      sessionStorage.removeItem('home')
-      let search = JSON.parse(sessionStorage.getItem('search'))
+      this.VueCookie.delete('AOKUN-HOME')
+      let search = JSON.parse(this.VueCookie.get('AOKUN-SEARCH'))
       this.searchKey = search
       if (this.searchKey.style === 1) {
         if (key.sort === 'oragons') {
@@ -132,12 +132,12 @@ export default {
     // 搜索
     search (key) {
       this.searchKey = key
-      sessionStorage.setItem('search', JSON.stringify(key))
+      this.VueCookie.set('AOKUN-SEARCH', JSON.stringify(key))
       this.searchData(key)
     },
     // 翻页
     nowPage (key) {
-      let search = JSON.parse(sessionStorage.getItem('search'))
+      let search = JSON.parse(this.VueCookie.get('AOKUN-SEARCH'))
       search.page = key
       this.searchData(search)
     },
@@ -147,8 +147,8 @@ export default {
       this.$nextTick(function () {
         this.status = true
         this.selectValue = ''
-        sessionStorage.removeItem('key')
-        sessionStorage.removeItem('home')
+        this.VueCookie.delete('AOKUN-KEY')
+        this.VueCookie.delete('AOKUN-HOME')
         this.searchKey = {
           text: '',
           oragons: '',

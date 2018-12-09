@@ -23,7 +23,7 @@ export default {
         oragons: key.url,
         name: key.url.toUpperCase()
       }
-      sessionStorage.setItem('home', JSON.stringify(home))
+      this.VueCookie.set('AOKUN-HOME', JSON.stringify(home))
       router.push({name: 'search'})
     }
   }
