@@ -43,7 +43,9 @@ export default {
         '/' + key.tel +
         '/' + key.name +
         '/' + key.pwd +
-        '/' + key.code
+        '/' + key.code +
+        '/' + key.comp +
+        '/' + key.job
 
       api.get(URL).then((res) => {
         commit('getRegister', res.data)

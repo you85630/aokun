@@ -11,11 +11,11 @@
               </FormItem>
               <FormItem>
                 <div class="title">单位：</div>
-                <Input type="text" v-model="user.unit" placeholder="请输入单位" />
+                <Input type="text" v-model="user.comp" placeholder="请输入单位" />
               </FormItem>
               <FormItem>
                 <div class="title">职务：</div>
-                <Input type="text" v-model="user.position" placeholder="请输入职务" />
+                <Input type="text" v-model="user.job" placeholder="请输入职务" />
               </FormItem>
               <FormItem prop="pwd">
                 <div class="title">密码：</div>
@@ -67,11 +67,11 @@ export default {
       code: false,
       user: {
         name: '',
-        unit: '',
-        position: '',
         pwd: '',
         tel: '',
-        code: ''
+        code: '',
+        comp: '',
+        job: ''
       },
       userForm: {
         name: [
