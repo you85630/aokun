@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://api.aerok.com.cn'
+axios.defaults.baseURL = 'http://api.aerok.com.cn'
 axios.defaults.timeout = 5000
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
