@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <div class="introduce">
-      <div class="left" v-html="msg">
-        <div v-html="msg"></div>
-    </div>
-    <div class="right">
+  <div class="introduce-page-box">
+    <div class="introduce-left" v-html="msg"></div>
+    <div class="introduce-right">
       <router-link to="/learn">了解关于翱坤数据库的更多信息</router-link>
-    </div>
     </div>
   </div>
 </template>
@@ -17,13 +13,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.introduce{
+<style lang="scss">
+.introduce-page-box{
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  .left{
+  .introduce-left{
     width: 74%;
     font-size: 14px;
     p{
@@ -38,7 +34,7 @@ export default {
       }
     }
   }
-  .right{
+  .introduce-right{
     a{
       padding: 10px 20px;
       border: none;
