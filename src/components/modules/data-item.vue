@@ -3,7 +3,7 @@
     <div class="item">
       <div class="left">
         <div class="info" v-html="item.desc"></div>
-        <p><Button size="large" style="width:80px" type="primary" @click="linkTo(item)">{{item.title}}</Button></p>
+        <p><Button size="large" type="primary" @click="linkTo(item)">{{item.title}}</Button></p>
       </div>
       <div class="right">
         <img :src="item.pic" alt="">
@@ -38,14 +38,18 @@ export default {
   .left{
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:center;
     box-sizing: border-box;
-    padding: 60px 20px;
+    padding: 0 20px;
     width: 460px;
     height: 265px;
     background-color: #fff;
     p{
-      font-size: 14px;
+      button{
+        width:80px;
+        font-size: 14px;
+        margin-top: 10px;
+      }
     }
     .info{
       font-size: 14px;

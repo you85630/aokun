@@ -56,6 +56,9 @@ export default {
         p{
           font-size: 14px;
           color: #fff;
+          width: 80%;
+          margin: 0 auto;
+          text-align: center;
         }
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="news">
+  <div class="news-page">
     <bg-color :header="header">
         <Breadcrumb>
             <BreadcrumbItem>{{news.class_name}}</BreadcrumbItem>
@@ -38,11 +38,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.news{
+<style lang="scss">
+.news-page{
   font-size: 14px;
   .content{
     margin-top: 10px;
+    table{
+      width: auto;
+      margin: 0 auto;
+    }
   }
 }
 </style>
