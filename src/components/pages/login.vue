@@ -34,7 +34,7 @@ export default {
     ...mapGetters([
       'videoBox',
       'aboutBox',
-      'Message'
+      'loginMessage'
     ])
   },
   methods: {
@@ -53,7 +53,7 @@ export default {
       } else {
         this.login(key)
         setTimeout(() => {
-          if (this.Message.detail) {
+          if (this.loginMessage.detail) {
             this.$Message.success('登录成功')
             if (key.select) {
               this.VueCookie.set('AOKUN-REMEMBER', JSON.stringify(key))
@@ -61,7 +61,7 @@ export default {
               this.VueCookie.delete('AOKUN-REMEMBER')
             }
           } else {
-            this.$Message.error(this.Message.msg)
+            this.$Message.error(this.loginMessage.result)
           }
         }, 200)
       }

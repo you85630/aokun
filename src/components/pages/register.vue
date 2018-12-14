@@ -95,7 +95,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'Message'
+      'codeMessage',
+      'registerMessage'
     ])
   },
   methods: {
@@ -108,12 +109,12 @@ export default {
       this.code = true
       this.getCode(tel)
       setTimeout(() => {
-        if (this.Message.detail) {
-          this.$Message.success(this.Message.result)
+        if (this.codeMessage.detail) {
+          this.$Message.success(this.codeMessage.result)
         } else {
-          this.$Message.error(this.Message.result)
+          this.$Message.error(this.codeMessage.result)
         }
-      }, 1000)
+      }, 200)
     },
     // 注册
     register (name) {
@@ -121,15 +122,15 @@ export default {
         if (valid) {
           this.getRegister(this.user)
           setTimeout(() => {
-            if (this.Message.detail) {
+            if (this.registerMessage.detail) {
               this.$Message.success('注册成功，即将跳转至登录页')
               setTimeout(() => {
                 this.$router.push('/login')
               }, 2000)
             } else {
-              this.$Message.error(this.Message.result)
+              this.$Message.error(this.registerMessage.result)
             }
-          }, 1000)
+          }, 200)
         }
       })
     }

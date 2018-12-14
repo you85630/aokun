@@ -47,6 +47,11 @@
             <p><span>有效期：</span>{{details.status===1?'有效期':'其他'}}</p>
           </Col>
         </Row>
+        <Row type="flex" justify="space-between" align="middle">
+           <Col span="10">
+            <p><span>部号：</span>{{details.part?details.part:'暂无'}}</p>
+          </Col>
+        </Row>
       </div>
     </bg-color>
     <bg-color class="info" id="bdIframe">

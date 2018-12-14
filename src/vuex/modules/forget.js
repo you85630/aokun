@@ -2,10 +2,12 @@ import api from 'assets/js/api'
 
 export default {
   state: {
-    alertMsg: {}
+    alertMsg: {},
+    forgetMsg: {}
   },
   getters: {
-    alertMsg: state => state.alertMsg
+    alertMsg: state => state.alertMsg,
+    forgetMsg: state => state.forgetMsg
   },
   actions: {
     getForget: ({ commit }, key) => {
@@ -27,8 +29,8 @@ export default {
   },
   mutations: {
     getForget: (state, key) => {
-      state.alertMsg = {}
-      state.alertMsg = key
+      state.forgetMsg = {}
+      state.forgetMsg = key
     },
     getPwd: (state, key) => {
       state.alertMsg = {}

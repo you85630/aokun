@@ -63,7 +63,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'alertMsg'
+      'alertMsg',
+      'forgetMsg'
     ]),
     nowShow: function () {
       let now = true
@@ -92,10 +93,10 @@ export default {
         if (this.forget.tel !== '') {
           this.getForget(this.forget)
           setTimeout(() => {
-            if (this.alertMsg.detail) {
-              this.$Message.success(this.alertMsg.result)
+            if (this.forgetMsg.detail) {
+              this.$Message.success(this.forgetMsg.result)
             } else {
-              this.$Message.error(this.alertMsg.result)
+              this.$Message.error(this.forgetMsg.result)
             }
           }, 1000)
         }
