@@ -10,18 +10,26 @@
         <filter-box v-else :showBox="moreLeftNavBox" @on-click="filterSearch"></filter-box>
 
         <div class="result-box">
-          <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
-          <div class="page-box" v-if="num">
-            <Page :total="num" show-elevator @on-change="nowPage" />
-          </div>
-          <div class="item-box">
-            <item-box v-for="(li,index) in itemList" :key="index" :item="li" v-if="num"></item-box>
-            <div v-if="!num" class="data-none">
-              <p>暂无数据</p>
+          <div v-if='SpinShow'>
+            <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
+            <div class="page-box" v-if="num">
+              <Page :total="num" show-elevator @on-change="nowPage" />
+            </div>
+            <div class="item-box">
+              <item-box v-for="(li,index) in itemList" :key="index" :item="li" v-if="num"></item-box>
+              <div v-if="!num" class="data-none">
+                <p>暂无数据</p>
+              </div>
+            </div>
+            <div class="page-box" v-if="num">
+              <Page :total="num" show-elevator @on-change="nowPage" />
             </div>
           </div>
-          <div class="page-box" v-if="num">
-            <Page :total="num" show-elevator @on-change="nowPage" />
+          <div class="spin-box" v-else>
+            <Spin fix>
+              <Icon type="ios-loading" size=18 class="spin-box-load"></Icon>
+              <div>Loading</div>
+            </Spin>
           </div>
         </div>
       </div>
@@ -52,7 +60,8 @@ export default {
         selectid: 1,
         style: -1,
         page: 1
-      }
+      },
+      SpinShow: true
     }
   },
   components: {
@@ -134,6 +143,10 @@ export default {
       this.searchKey = key
       this.VueCookie.set('AOKUN-SEARCH', JSON.stringify(key))
       this.searchData(key)
+      this.SpinShow = false
+      setTimeout(() => {
+        this.SpinShow = true
+      }, 500)
     },
     // 翻页
     nowPage (key) {
@@ -209,5 +222,17 @@ export default {
   height: 240px;
   color: #ccc;
   font-size: 16px;
+}
+.spin-box-load{
+    animation: spin-box 1s linear infinite;
+}
+@keyframes spin-box {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+}
+.spin-box{
+    height: 100%;
+    position: relative;
 }
 </style>
