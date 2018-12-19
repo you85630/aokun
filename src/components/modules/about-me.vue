@@ -38,6 +38,8 @@ export default {
       let video = {
         autoplay: false,
         preload: 'auto',
+        aspectRatio: '16:10',
+        fluid: true,
         sources: [{
           type: 'video/mp4',
           src: this.video.vurl ? this.video.vurl : '' // url地址
