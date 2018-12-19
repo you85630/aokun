@@ -3,6 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import 'babel-polyfill'
+
+// 支持seo
+import MetaInfo from 'vue-meta-info'
 // 引入路由
 import router from './router'
 // 引入vuex
@@ -28,6 +31,7 @@ import 'vue-video-player/src/custom-theme.css'
 Vue.use(iView)
 Vue.use(moduleBox)
 Vue.use(VueVideoPlayer)
+Vue.use(MetaInfo)
 
 Vue.prototype.utils = utils
 Vue.prototype.VueCookie = VueCookie

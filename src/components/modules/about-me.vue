@@ -57,8 +57,13 @@ export default {
   flex-direction: row;
   margin-top: 10px;
   .left{
+    position: relative;
     width: 640px;
     height: 373px;
+    .video-player{
+      width: 100%;
+      height: 100%;
+    }
     .none-video{
       width: 100%;
       height: 100%;
