@@ -56,9 +56,9 @@ export default {
           if (this.loginMessage.detail) {
             this.$Message.success('登录成功')
             if (key.select) {
-              this.VueCookie.set('AOKUN-REMEMBER', JSON.stringify(key))
+              localStorage.setItem('AOKUN-REMEMBER', JSON.stringify(key))
             } else {
-              this.VueCookie.delete('AOKUN-REMEMBER')
+              localStorage.removeItem('AOKUN-REMEMBER')
             }
           } else {
             this.$Message.error(this.loginMessage.result)

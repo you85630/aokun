@@ -76,7 +76,7 @@ export default {
     }
   },
   created () {
-    let remember = JSON.parse(this.VueCookie.get('AOKUN-REMEMBER'))
+    let remember = JSON.parse(localStorage.getItem('AOKUN-REMEMBER'))
     if (remember) {
       this.user = remember
     }
