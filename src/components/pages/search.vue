@@ -1,33 +1,65 @@
 <template>
-  <div class="search" v-if="status">
+  <div class="search"
+       v-if="status">
     <bg-color>
-      <y-search :search="searchKey" @on-search="search" @on-refresh="refresh"></y-search>
+      <y-search :search="searchKey"
+                @on-search="search"
+                @on-refresh="refresh"></y-search>
     </bg-color>
 
     <bg-color>
       <div class="result">
-        <filter-box :select="selectValue" v-if="searchKey.style===-1" :showBox="leftNavBox" @on-click="filterSearch"></filter-box>
-        <filter-box v-else :showBox="moreLeftNavBox" @on-click="filterSearch"></filter-box>
+        <div v-if="gaoji==-1">
+          <filter-box :select="selectValue"
+                      v-if="searchKey.style===-1"
+                      :showBox="leftNavBox"
+                      @on-click="filterSearch"></filter-box>
+          <filter-box v-else
+                      :showBox="moreLeftNavBox"
+                      @on-click="filterSearch"></filter-box>
+        </div>
+        <div v-else>
+          <filter-box-adv :select="selectValue"
+                          v-if="searchKey.style===-1"
+                          :showBox="leftNavBox"
+                          @on-click="filterSearch"></filter-box-adv>
+          <filter-box-adv v-else
+                          :showBox="moreLeftNavBox"
+                          @on-click="filterSearch"></filter-box-adv>
+        </div>
 
         <div class="result-box">
           <div v-if='SpinShow'>
             <div class="title">搜索结果：（<span>{{num}}</span>）</span></div>
-            <div class="page-box" v-if="num">
-              <Page :total="num" show-elevator @on-change="nowPage" />
+            <div class="page-box"
+                 v-if="num">
+              <Page :total="num"
+                    show-elevator
+                    @on-change="nowPage" />
             </div>
             <div class="item-box">
-              <item-box v-for="(li,index) in itemList" :key="index" :item="li" v-if="num"></item-box>
-              <div v-if="!num" class="data-none">
+              <item-box v-for="(li,index) in itemList"
+                        :key="index"
+                        :item="li"
+                        v-if="num"></item-box>
+              <div v-if="!num"
+                   class="data-none">
                 <p>暂无数据</p>
               </div>
             </div>
-            <div class="page-box" v-if="num">
-              <Page :total="num" show-elevator @on-change="nowPage" />
+            <div class="page-box"
+                 v-if="num">
+              <Page :total="num"
+                    show-elevator
+                    @on-change="nowPage" />
             </div>
           </div>
-          <div class="spin-box" v-else>
+          <div class="spin-box"
+               v-else>
             <Spin fix>
-              <Icon type="ios-loading" size=18 class="spin-box-load"></Icon>
+              <Icon type="ios-loading"
+                    size=18
+                    class="spin-box-load"></Icon>
               <div>Loading</div>
             </Spin>
           </div>
@@ -39,6 +71,7 @@
 
 <script>
 import filterBox from 'components/modules/filter-box'
+import filterBoxAdv from 'components/modules/filter-box-adv'
 import itemBox from 'components/modules/item-box'
 
 import { mapGetters, mapActions } from 'vuex'
@@ -47,6 +80,7 @@ export default {
   data () {
     return {
       status: true,
+      gaoji: -1,
       selectValue: '',
       searchKey: {
         text: '',
@@ -66,21 +100,14 @@ export default {
   },
   components: {
     filterBox,
+    filterBoxAdv,
     itemBox
   },
   computed: {
-    ...mapGetters([
-      'leftNavBox',
-      'moreLeftNavBox',
-      'itemList',
-      'num'
-    ])
+    ...mapGetters(['leftNavBox', 'moreLeftNavBox', 'itemList', 'num'])
   },
   methods: {
-    ...mapActions([
-      'searchData',
-      'getMoreSearch'
-    ]),
+    ...mapActions(['searchData', 'getMoreSearch']),
     init () {
       this.getMoreSearch()
       // 默认搜索一次
@@ -111,6 +138,7 @@ export default {
       this.VueCookie.delete('AOKUN-HOME')
       let search = JSON.parse(this.VueCookie.get('AOKUN-SEARCH'))
       this.searchKey = search
+
       if (this.searchKey.style === 1) {
         if (key.sort === 'oragons') {
           this.searchKey.oragons = key.id
@@ -125,19 +153,18 @@ export default {
           this.searchKey.year = key.id
         }
       } else {
-        if (key.sort === 'oragons') {
-          this.searchKey.oragons = key.id
-          this.searchKey.bigCids = ''
-          this.searchKey.subCids = ''
-        }
-        if (key.sort === 'cids') {
-          this.searchKey.bigCids = key.id
-          this.searchKey.oragons = ''
-          this.searchKey.subCids = ''
+        for (var searchType in key) {
+          if (searchType === '0') {
+            this.searchKey.oragons = key[searchType].join(',')
+          }
+          if (searchType === '1') {
+            this.searchKey.bigCids = key[searchType].join(',')
+          }
         }
       }
       this.search(this.searchKey)
     },
+
     // 搜索
     search (key) {
       this.searchKey = key
@@ -156,6 +183,7 @@ export default {
     },
     // 重置
     refresh (style) {
+      this.gaoji = style
       this.status = false
       this.$nextTick(function () {
         this.status = true
@@ -186,34 +214,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search{
-  .result{
+.search {
+  .result {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 }
-.result-box{
+.result-box {
   box-sizing: border-box;
   width: 100%;
-  .title{
+  .title {
     display: flex;
     align-items: center;
     flex-direction: row;
     font-size: 14px;
-    span{
+    span {
       margin: 0 4px;
     }
   }
 }
-.page-box{
+.page-box {
   margin: 12px 0;
   text-align: center;
 }
-.item-box{
+.item-box {
   position: relative;
 }
-.data-none{
+.data-none {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -223,16 +251,22 @@ export default {
   color: #ccc;
   font-size: 16px;
 }
-.spin-box-load{
-    animation: spin-box 1s linear infinite;
+.spin-box-load {
+  animation: spin-box 5s linear infinite;
 }
 @keyframes spin-box {
-    from { transform: rotate(0deg);}
-    50%  { transform: rotate(180deg);}
-    to   { transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-.spin-box{
-    height: 100%;
-    position: relative;
+.spin-box {
+  height: 100%;
+  position: relative;
 }
 </style>

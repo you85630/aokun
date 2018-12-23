@@ -1,17 +1,25 @@
 <template>
-  <div class="filter-box">
-    <div class="filter" v-for="(li,index) in showBox" :key="index">
-      <div class="filter-title" @click="li.type=!li.type">
+  <div class="filter-box2">
+    <div class="filter"
+         v-for="(li,index) in showBox"
+         :key="index">
+      <div class="filter-title"
+           @click="li.type=!li.type">
         <p>{{li.title}}</p>
-        <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'"/>
+        <Icon :type="li.type?'md-arrow-dropright':'md-arrow-dropdown'" />
       </div>
-      <div class="filter-list" v-if="!li.type" style="width:100%;">
-        <CheckboxGroup v-model="checkedNames[index]" @click="clickMe">
-          <Checkbox v-for="(i, val) in li.label" :key="val" :label="i.id">
-            {{i.name}}
-            <span class="num" v-if="i.number">（{{i.number}}）</span>
-          </Checkbox>
-        </CheckboxGroup>
+      <div class="filter-list"
+           v-if="!li.type">
+        <RadioGroup vertical
+                    v-model="selectValue"
+                    @on-change="selectBox">
+          <Radio v-for="(i, val) in li.label"
+                 :key="val"
+                 :label="i.name">
+            {{i.name}}<span class="num"
+                  v-if="i.number">（{{i.number}}）</span>
+          </Radio>
+        </RadioGroup>
       </div>
     </div>
   </div>
@@ -22,14 +30,7 @@ export default {
   props: ['select', 'showBox'],
   data () {
     return {
-      selectValue: this.select,
-      checkedNames: {}
-    }
-  },
-  watch: {
-    checkedNames: {
-      deep: true,
-      handler: 'clickMe'
+      selectValue: this.select
     }
   },
   methods: {
@@ -46,17 +47,13 @@ export default {
         }
       }
       this.$emit('on-click', now)
-    },
-    clickMe () {
-      var that = this
-      this.$emit('on-click', that.checkedNames)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.filter-box {
+.filter-box2 {
   box-sizing: border-box;
   margin-right: 30px;
   width: 300px;
@@ -94,16 +91,5 @@ export default {
       }
     }
   }
-}
-.ivu-checkbox-group{
-  width: 100%;
-  box-sizing: border-box;
-}
-.ivu-checkbox-group-item{
-  width: 100%;
-  box-sizing: border-box;
-  height: 30px;
-  line-height: 30px;
-  margin: 0;
 }
 </style>
