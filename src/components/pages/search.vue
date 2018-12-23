@@ -92,9 +92,9 @@ export default {
       }
 
       if (home) {
-        if (home.categry === 1100004) {
+        if (home.categry === '1100004') {
           this.$router.push('/search/airworthiness')
-        } else if (home.categry === 5100002) {
+        } else if (home.categry === '5100002') {
           this.$router.push('/search/relation')
         } else {
           this.searchKey.subCids = home.categry
