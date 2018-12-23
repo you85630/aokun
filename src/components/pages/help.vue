@@ -17,7 +17,7 @@
         <div class="right">
           <ul class="help-tips">
             <li v-for="(li,index) in helpTips" :key="index" @click="openLearn(li)">
-                <img :src="li.img" alt="">
+                <div class="icon"><img :src="li.img" alt=""></div>
                 <p>{{li.name}}</p>
             </li>
           </ul>
@@ -120,10 +120,20 @@ export default {
       li{
         text-align: center;
         cursor: pointer;
-        img{
+        .icon{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
           width: 90px;
           height: 90px;
-          border-radius: 100px;
+          border: 1px solid rgba($color: #000000, $alpha: .4);
+          border-radius: 100%;
+          img{
+            width: 90%;
+            height: 90%;
+            border-radius: 100%;
+          }
         }
         p{
           margin-top: 10px;

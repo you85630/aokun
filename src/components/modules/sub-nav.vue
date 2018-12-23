@@ -48,11 +48,12 @@ export default {
     margin: 0 auto;
     width: 90px;
     height: 90px;
-    border: 1px solid rgba(23, 35, 61, 0.5);
+    border: 1px solid rgba($color: #000000, $alpha: .4);
     border-radius: 100%;
     img{
       width: 90%;
       height: 90%;
+      border-radius: 100%;
     }
   }
   .name{
